@@ -46,12 +46,12 @@ Mở **Giới thiệu** cạnh bộ chọn ngôn ngữ để xem thông tin và 
 - **Khởi động trực tiếp động cơ (DOL)** có START/STOP, tiếp điểm tự giữ và tác động quá tải.
 - **Khởi động sao–tam giác động cơ** dùng động cơ sáu đầu dây. Mạch mẫu chạy sao 3 giây, ngắt 0,25 giây rồi chuyển sang tam giác. Hai contactor sao và tam giác có liên động.
 - **Điều khiển bơm theo mức nước** có phao và công tắc AUTO/MAN/OFF.
-- **OU-101 · Biến tần** mô phỏng nhánh AC3 với LS H100, lệnh chạy và phản hồi chạy/lỗi. Biến tần hiển thị tần số đầu ra (Hz) và tốc độ đồng bộ ước tính (vòng/phút) theo số cực cài trong Thuộc tính.
-- **OU-101 · SCR** mô phỏng hai nhánh gia nhiệt HT-1 (60 kW) và HT-2 (6 kW), có lệnh chạy và phản hồi lỗi riêng.
+- **DEMO-01 · Biến tần** mô phỏng nhánh AC3 với LS H100, lệnh chạy và phản hồi chạy/lỗi. Biến tần hiển thị tần số đầu ra (Hz) và tốc độ đồng bộ ước tính (vòng/phút) theo số cực cài trong Thuộc tính.
+- **DEMO-01 · SCR** mô phỏng hai nhánh gia nhiệt HT-1 (60 kW) và HT-2 (6 kW), có lệnh chạy và phản hồi lỗi riêng.
 
 Sau khi mở mẫu, dùng **Chạy** để thao tác hoặc **Kiểm thử → Chạy tất cả** để kiểm tra trình tự. Chọn **Lưu** để lưu dự án mẫu vào tệp riêng. Các mẫu Sump Pit, Smoke Exhaust, áp suất nước và ATS cũng có sẵn trong **Mạch mẫu**.
 
-[Hướng dẫn thao tác và đối chiếu bản vẽ OU-101](docs/MACH-MAU-OU-101.md)
+[Hướng dẫn thao tác và đối chiếu bản vẽ DEMO-01](docs/MACH-MAU-DEMO-01.md)
 
 ## Mô phỏng và kiểm thử
 

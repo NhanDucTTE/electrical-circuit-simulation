@@ -51,7 +51,7 @@
   - **BOM (Bảng kê vật tư):** Mở cửa sổ thống kê vật tư thiết bị và xuất file CSV Excel.
   - **Sự cố (Faults):** Bảng tiêm sự cố cưỡng bức (Mất pha L1/L2/L3, Đảo pha, Thấp áp, Reset).
   - Xuất bản vẽ: Xuất PDF độ nét cao, Xuất DWG mở bằng AutoCAD.
-  - **Mạch mẫu** mở các mạch khởi động trực tiếp, sao–tam giác, bơm theo mức nước, Sump Pit, Smoke Exhaust, điều khiển áp suất, tủ ATS và hai mẫu biến tần/SCR của tủ OU-101. [Hướng dẫn OU-101](MACH-MAU-OU-101.md)
+  - **Mạch mẫu** mở các mạch khởi động trực tiếp, sao–tam giác, bơm theo mức nước, Sump Pit, Smoke Exhaust, điều khiển áp suất, tủ ATS và hai mẫu biến tần/SCR của tủ DEMO-01. [Hướng dẫn DEMO-01](MACH-MAU-DEMO-01.md)
   - Điều khiển mô phỏng: Chạy (`Run`), Tạm dừng (`Pause`), Từng bước (`Step`), Đặt lại (`Reset`), Tốc độ mô phỏng (0.5x, 1x, 2x, 5x).
   - Thao tác: Hoàn tác (`Ctrl+Z`), Làm lại (`Ctrl+Y`), Xóa phần tử (`Delete`).
   - Que đo mạch: Bật que đo Vôn kế (V) và Ampe kế (A).

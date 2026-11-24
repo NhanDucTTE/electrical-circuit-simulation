@@ -1,14 +1,14 @@
-# Mạch mẫu OU-101
+# Mạch mẫu DEMO-01
 
-Mở **Mạch mẫu** và chọn một trong hai mục **OU-101**. Mỗi mẫu mở ở tab riêng. Mở **Kiểm thử → Chạy tất cả** để xem trình tự và kết quả từng bước.
+Mở **Mạch mẫu** và chọn một trong hai mục **DEMO-01**. Mỗi mẫu mở ở tab riêng. Mở **Kiểm thử → Chạy tất cả** để xem trình tự và kết quả từng bước.
 
-| Nhánh | Thiết bị trên mô hình | Hồ sơ Q25-6123-20 Rev.A, 16/04/2026 |
+| Nhánh | Thiết bị trên mô hình | Hồ sơ DEMO-ELEC-001 Rev.A, 16/04/2026 |
 | --- | --- | --- |
-| AC3, DX-OHU-101 IU | Biến tần LS H100 18,5 kW, MC1, tải 16,34 kW qua XP1 | Tờ 201 và 302, trang PDF 10 và 12 |
+| AC3, AHU-DEMO-01 IU | Biến tần LS H100 18,5 kW, MC1, tải 16,34 kW qua XP1 | Tờ 201 và 302, trang PDF 10 và 12 |
 | AC4, HT-1 | SCR-2 Hanyoung TPR-3SL130H 130 A, MC2, gia nhiệt 60 kW qua XP2 | Tờ 201 và 303, trang PDF 10 và 13 |
 | AC5, HT-2 | SCR-3 Hanyoung TPR-3SL040H 40 A, MC3, gia nhiệt 6 kW qua XP3 | Tờ 201 và 304, trang PDF 10 và 14 |
 
-Danh mục thiết bị nằm ở tờ 006, trang PDF 6 của `21. OU-101 (Rev.A 20260416).pdf`. Mã biến tần AC3 là `LSLV0185H100-4COFN`. Bỏ chọn thiết bị trên sơ đồ để xem **Hồ sơ tham chiếu** và **Nội dung cần xác nhận** trong bảng Thuộc tính. [Danh mục H100 của LS Electric](https://www.ls-electric.com/upload/customer/download/d67d85a7-6722-44a1-84e5-5c19099fdc67/H100_E_181018.pdf)
+Danh mục thiết bị nằm ở tờ 006, trang PDF 6 của `21. DEMO-01 (Rev.A 20260416).pdf`. Mã biến tần AC3 là `LSLV0185H100-4COFN`. Bỏ chọn thiết bị trên sơ đồ để xem **Hồ sơ tham chiếu** và **Nội dung cần xác nhận** trong bảng Thuộc tính. [Danh mục H100 của LS Electric](https://www.ls-electric.com/upload/customer/download/d67d85a7-6722-44a1-84e5-5c19099fdc67/H100_E_181018.pdf)
 
 ## Biến tần AC3
 

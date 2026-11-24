@@ -1,0 +1,500 @@
+{
+  "version": 1,
+  "name": "Điều khiển áp suất nước · PT1 / PIC1",
+  "devices": [
+    {
+      "id": "primary",
+      "type": "source-ac",
+      "tag": "AC1",
+      "x": 70,
+      "y": 90,
+      "params": {
+        "orientation": "horizontal",
+        "domain": "AC220"
+      }
+    },
+    {
+      "id": "isolated",
+      "type": "transformer-ac",
+      "tag": "TR1",
+      "x": 300,
+      "y": 90,
+      "params": {
+        "orientation": "horizontal",
+        "inputDomain": "AC220",
+        "domain": "AC110"
+      }
+    },
+    {
+      "id": "supply",
+      "type": "source-dc",
+      "tag": "DC1",
+      "x": 70,
+      "y": 370,
+      "params": {
+        "orientation": "horizontal",
+        "domain": "DC24"
+      }
+    },
+    {
+      "id": "pt",
+      "type": "pressure-sensys",
+      "tag": "PT1",
+      "x": 350,
+      "y": 320,
+      "params": {
+        "orientation": "horizontal",
+        "pressureBar": 0
+      }
+    },
+    {
+      "id": "pic",
+      "type": "controller-e5ec",
+      "tag": "PIC1",
+      "x": 630,
+      "y": 220,
+      "params": {
+        "orientation": "horizontal",
+        "inputMode": "4–20 mA",
+        "action": "direct",
+        "setpoint": 5,
+        "hysteresis": 0.5,
+        "scaleMin": 0,
+        "scaleMax": 10,
+        "alarmHigh": 8,
+        "alarmLow": 2
+      }
+    },
+    {
+      "id": "light",
+      "type": "lamp",
+      "tag": "HL1",
+      "x": 905,
+      "y": 90,
+      "params": {
+        "orientation": "vertical",
+        "domain": "AC110",
+        "lampMark": "G",
+        "lampColor": "#53c876",
+        "blink": false,
+        "operatingCurrentA": 0.02
+      }
+    },
+    {
+      "id": "junction-line",
+      "type": "junction",
+      "x": 400,
+      "y": 82,
+      "tag": "X1-L",
+      "params": {}
+    },
+    {
+      "id": "junction-return",
+      "type": "junction",
+      "x": 395,
+      "y": 98,
+      "tag": "X2-N",
+      "params": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "w1",
+      "from": {
+        "device": "primary",
+        "pin": "L"
+      },
+      "to": {
+        "device": "isolated",
+        "pin": "L"
+      },
+      "label": "L",
+      "points": []
+    },
+    {
+      "id": "w2",
+      "from": {
+        "device": "primary",
+        "pin": "N"
+      },
+      "to": {
+        "device": "isolated",
+        "pin": "N"
+      },
+      "label": "N",
+      "points": []
+    },
+    {
+      "id": "w3",
+      "from": {
+        "device": "junction-line",
+        "pin": "J"
+      },
+      "to": {
+        "device": "pic",
+        "pin": "L"
+      },
+      "label": "110L",
+      "points": [
+        {
+          "x": 450,
+          "y": 82
+        },
+        {
+          "x": 450,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "id": "w4",
+      "from": {
+        "device": "junction-return",
+        "pin": "J"
+      },
+      "to": {
+        "device": "pic",
+        "pin": "N"
+      },
+      "label": "110N",
+      "points": [
+        {
+          "x": 420,
+          "y": 98
+        },
+        {
+          "x": 420,
+          "y": 204
+        }
+      ]
+    },
+    {
+      "id": "w5",
+      "from": {
+        "device": "supply",
+        "pin": "+"
+      },
+      "to": {
+        "device": "pt",
+        "pin": "+"
+      },
+      "label": "+24",
+      "points": []
+    },
+    {
+      "id": "w6",
+      "from": {
+        "device": "pt",
+        "pin": "-"
+      },
+      "to": {
+        "device": "pic",
+        "pin": "A"
+      },
+      "label": "I+",
+      "points": []
+    },
+    {
+      "id": "w7",
+      "from": {
+        "device": "pic",
+        "pin": "B"
+      },
+      "to": {
+        "device": "supply",
+        "pin": "-"
+      },
+      "label": "0V",
+      "points": [
+        {
+          "x": 545,
+          "y": 236
+        },
+        {
+          "x": 545,
+          "y": 390
+        },
+        {
+          "x": 155,
+          "y": 390
+        },
+        {
+          "x": 155,
+          "y": 378
+        }
+      ]
+    },
+    {
+      "id": "w8",
+      "from": {
+        "device": "junction-line",
+        "pin": "J"
+      },
+      "to": {
+        "device": "pic",
+        "pin": "3"
+      },
+      "label": "OUT1",
+      "points": [
+        {
+          "x": 400,
+          "y": 15
+        },
+        {
+          "x": 760,
+          "y": 15
+        },
+        {
+          "x": 760,
+          "y": 180
+        }
+      ]
+    },
+    {
+      "id": "w9",
+      "from": {
+        "device": "pic",
+        "pin": "4"
+      },
+      "to": {
+        "device": "light",
+        "pin": "A1"
+      },
+      "label": "HL1",
+      "points": [
+        {
+          "x": 800,
+          "y": 196
+        },
+        {
+          "x": 800,
+          "y": 20
+        },
+        {
+          "x": 905,
+          "y": 20
+        }
+      ]
+    },
+    {
+      "id": "w10",
+      "from": {
+        "device": "light",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "junction-return",
+        "pin": "J"
+      },
+      "label": "110N",
+      "points": [
+        {
+          "x": 905,
+          "y": 430
+        },
+        {
+          "x": 395,
+          "y": 430
+        }
+      ]
+    },
+    {
+      "id": "w11",
+      "from": {
+        "device": "isolated",
+        "pin": "X1"
+      },
+      "to": {
+        "device": "junction-line",
+        "pin": "J"
+      },
+      "label": "",
+      "points": [
+        {
+          "x": 380,
+          "y": 82
+        }
+      ]
+    },
+    {
+      "id": "w12",
+      "from": {
+        "device": "isolated",
+        "pin": "X2"
+      },
+      "to": {
+        "device": "junction-return",
+        "pin": "J"
+      },
+      "label": "",
+      "points": [
+        {
+          "x": 380,
+          "y": 98
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "pressure-cycle",
+      "name": "Vòng 4–20 mA và ngõ ra OUT1",
+      "verification": "verified",
+      "reference": "Mạch minh họa · Sensys 0–10 bar / 4–20 mA, E5EC ở chế độ ON/OFF tác động thuận, điểm đặt 5 bar.",
+      "initialDescription": "AC1 và DC1 bật. TR1 cấp 110 VAC cho PIC1 và đèn HL1.",
+      "initial": [],
+      "steps": [
+        {
+          "label": "Áp suất 0 bar",
+          "actions": [
+            {
+              "device": "pt",
+              "key": "pressureBar",
+              "value": 0
+            }
+          ],
+          "expect": [
+            {
+              "device": "pt",
+              "key": "currentMa",
+              "value": 4
+            },
+            {
+              "device": "pic",
+              "key": "pv",
+              "value": 0
+            },
+            {
+              "device": "pic",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "light",
+              "key": "active",
+              "value": false
+            }
+          ]
+        },
+        {
+          "label": "Áp suất 5.5 bar",
+          "actions": [
+            {
+              "device": "pt",
+              "key": "pressureBar",
+              "value": 5.5
+            }
+          ],
+          "expect": [
+            {
+              "device": "pt",
+              "key": "currentMa",
+              "value": 12.8
+            },
+            {
+              "device": "pic",
+              "key": "pv",
+              "value": 5.5
+            },
+            {
+              "device": "pic",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "light",
+              "key": "active",
+              "value": true
+            }
+          ]
+        },
+        {
+          "label": "Áp suất 10 bar",
+          "actions": [
+            {
+              "device": "pt",
+              "key": "pressureBar",
+              "value": 10
+            }
+          ],
+          "expect": [
+            {
+              "device": "pt",
+              "key": "currentMa",
+              "value": 20
+            },
+            {
+              "device": "pic",
+              "key": "pv",
+              "value": 10
+            },
+            {
+              "device": "pic",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "light",
+              "key": "active",
+              "value": true
+            }
+          ]
+        },
+        {
+          "label": "Áp suất 1 bar",
+          "actions": [
+            {
+              "device": "pt",
+              "key": "pressureBar",
+              "value": 1
+            }
+          ],
+          "expect": [
+            {
+              "device": "pt",
+              "key": "currentMa",
+              "value": 5.6
+            },
+            {
+              "device": "pic",
+              "key": "pv",
+              "value": 1
+            },
+            {
+              "device": "pic",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "light",
+              "key": "active",
+              "value": false
+            }
+          ]
+        },
+        {
+          "label": "Cắt nguồn vòng đo",
+          "actions": [
+            {
+              "device": "supply",
+              "key": "on",
+              "value": false
+            }
+          ],
+          "expect": [
+            {
+              "device": "pic",
+              "key": "sensorFault",
+              "value": true
+            },
+            {
+              "device": "light",
+              "key": "active",
+              "value": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

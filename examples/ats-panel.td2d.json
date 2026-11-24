@@ -1,0 +1,314 @@
+{
+  "version": 1,
+  "name": "Tủ chuyển nguồn tự động ATS (Automatic Transfer Switch)",
+  "devices": [
+    {
+      "id": "src_mains",
+      "type": "source-3ph",
+      "tag": "3P_MAINS",
+      "x": 80,
+      "y": 100,
+      "params": {
+        "orientation": "horizontal",
+        "domain": "3P400"
+      }
+    },
+    {
+      "id": "mccb_mains",
+      "type": "mccb-3ph",
+      "tag": "MCCB_M",
+      "x": 220,
+      "y": 100,
+      "params": {
+        "orientation": "horizontal",
+        "domain": "3P400",
+        "initial": true
+      }
+    },
+    {
+      "id": "pr_grid",
+      "type": "phase-relay",
+      "tag": "PR1",
+      "x": 360,
+      "y": 100,
+      "params": {
+        "orientation": "horizontal",
+        "domain": "3P400",
+        "initial": true
+      }
+    },
+    {
+      "id": "src_gen",
+      "type": "source-3ph",
+      "tag": "3P_GEN",
+      "x": 80,
+      "y": 380,
+      "params": {
+        "orientation": "horizontal",
+        "domain": "3P400"
+      }
+    },
+    {
+      "id": "mccb_gen",
+      "type": "mccb-3ph",
+      "tag": "MCCB_G",
+      "x": 220,
+      "y": 380,
+      "params": {
+        "orientation": "horizontal",
+        "domain": "3P400",
+        "initial": true
+      }
+    },
+    {
+      "id": "main_km_m",
+      "type": "main-3ph",
+      "tag": "KM_M",
+      "x": 560,
+      "y": 100,
+      "params": {
+        "orientation": "horizontal",
+        "masterId": "mc_mains",
+        "masterState": "active",
+        "domain": "3P400"
+      }
+    },
+    {
+      "id": "main_km_g",
+      "type": "main-3ph",
+      "tag": "KM_G",
+      "x": 560,
+      "y": 380,
+      "params": {
+        "orientation": "horizontal",
+        "masterId": "mc_gen",
+        "masterState": "active",
+        "domain": "3P400"
+      }
+    },
+    {
+      "id": "ctrl_mains",
+      "type": "source-ac",
+      "tag": "AC_M",
+      "x": 80,
+      "y": 240,
+      "params": {
+        "orientation": "horizontal",
+        "domain": "AC230"
+      }
+    },
+    {
+      "id": "ctrl_gen",
+      "type": "source-ac",
+      "tag": "AC_G",
+      "x": 80,
+      "y": 500,
+      "params": {
+        "orientation": "horizontal",
+        "domain": "AC230"
+      }
+    },
+    {
+      "id": "nc_km_g",
+      "type": "contact-nc",
+      "tag": "NC_KM_G",
+      "x": 560,
+      "y": 240,
+      "params": {
+        "orientation": "horizontal",
+        "masterId": "mc_gen",
+        "masterState": "active"
+      }
+    },
+    {
+      "id": "nc_km_m",
+      "type": "contact-nc",
+      "tag": "NC_KM_M",
+      "x": 560,
+      "y": 500,
+      "params": {
+        "orientation": "horizontal",
+        "masterId": "mc_mains",
+        "masterState": "active"
+      }
+    },
+    {
+      "id": "kt_g",
+      "type": "timer-on",
+      "tag": "KT_G",
+      "x": 680,
+      "y": 500,
+      "params": {
+        "orientation": "horizontal",
+        "domain": "AC230",
+        "delayMs": 1000
+      }
+    },
+    {
+      "id": "no_kt_g",
+      "type": "contact-no",
+      "tag": "NO_KT_G",
+      "x": 760,
+      "y": 500,
+      "params": {
+        "orientation": "horizontal",
+        "masterId": "kt_g",
+        "masterState": "active"
+      }
+    },
+    {
+      "id": "mc_mains",
+      "type": "contactor",
+      "tag": "KM_M",
+      "x": 720,
+      "y": 240,
+      "params": {
+        "orientation": "horizontal",
+        "domain": "AC230"
+      }
+    },
+    {
+      "id": "mc_gen",
+      "type": "contactor",
+      "tag": "KM_G",
+      "x": 860,
+      "y": 500,
+      "params": {
+        "orientation": "horizontal",
+        "domain": "AC230"
+      }
+    },
+    {
+      "id": "hl_mains",
+      "type": "lamp",
+      "tag": "HL_M",
+      "x": 860,
+      "y": 240,
+      "params": {
+        "orientation": "horizontal",
+        "domain": "AC230",
+        "color": "#22c55e"
+      }
+    },
+    {
+      "id": "hl_gen",
+      "type": "lamp",
+      "tag": "HL_G",
+      "x": 980,
+      "y": 500,
+      "params": {
+        "orientation": "horizontal",
+        "domain": "AC230",
+        "color": "#eab308"
+      }
+    },
+    {
+      "id": "hl_flt",
+      "type": "lamp",
+      "tag": "HL_FLT",
+      "x": 480,
+      "y": 180,
+      "params": {
+        "orientation": "horizontal",
+        "domain": "AC230",
+        "color": "#ef4444"
+      }
+    },
+    {
+      "id": "load_motor",
+      "type": "motor",
+      "tag": "M_CRITICAL",
+      "x": 860,
+      "y": 380,
+      "params": {
+        "orientation": "horizontal",
+        "domain": "3P400"
+      }
+    }
+  ],
+  "wires": [
+    { "id": "w1", "from": { "device": "src_mains", "pin": "L1" }, "to": { "device": "mccb_mains", "pin": "L1" } },
+    { "id": "w2", "from": { "device": "src_mains", "pin": "L2" }, "to": { "device": "mccb_mains", "pin": "L2" } },
+    { "id": "w3", "from": { "device": "src_mains", "pin": "L3" }, "to": { "device": "mccb_mains", "pin": "L3" } },
+    { "id": "w4", "from": { "device": "mccb_mains", "pin": "T1" }, "to": { "device": "pr_grid", "pin": "L1" } },
+    { "id": "w5", "from": { "device": "mccb_mains", "pin": "T2" }, "to": { "device": "pr_grid", "pin": "L2" } },
+    { "id": "w6", "from": { "device": "mccb_mains", "pin": "T3" }, "to": { "device": "pr_grid", "pin": "L3" } },
+    { "id": "w7", "from": { "device": "mccb_mains", "pin": "T1" }, "to": { "device": "main_km_m", "pin": "L1" } },
+    { "id": "w8", "from": { "device": "mccb_mains", "pin": "T2" }, "to": { "device": "main_km_m", "pin": "L2" } },
+    { "id": "w9", "from": { "device": "mccb_mains", "pin": "T3" }, "to": { "device": "main_km_m", "pin": "L3" } },
+    { "id": "w10", "from": { "device": "src_gen", "pin": "L1" }, "to": { "device": "mccb_gen", "pin": "L1" } },
+    { "id": "w11", "from": { "device": "src_gen", "pin": "L2" }, "to": { "device": "mccb_gen", "pin": "L2" } },
+    { "id": "w12", "from": { "device": "src_gen", "pin": "L3" }, "to": { "device": "mccb_gen", "pin": "L3" } },
+    { "id": "w13", "from": { "device": "mccb_gen", "pin": "T1" }, "to": { "device": "main_km_g", "pin": "L1" } },
+    { "id": "w14", "from": { "device": "mccb_gen", "pin": "T2" }, "to": { "device": "main_km_g", "pin": "L2" } },
+    { "id": "w15", "from": { "device": "mccb_gen", "pin": "T3" }, "to": { "device": "main_km_g", "pin": "L3" } },
+    { "id": "w16", "from": { "device": "main_km_m", "pin": "T1" }, "to": { "device": "load_motor", "pin": "U" } },
+    { "id": "w17", "from": { "device": "main_km_m", "pin": "T2" }, "to": { "device": "load_motor", "pin": "V" } },
+    { "id": "w18", "from": { "device": "main_km_m", "pin": "T3" }, "to": { "device": "load_motor", "pin": "W" } },
+    { "id": "w19", "from": { "device": "main_km_g", "pin": "T1" }, "to": { "device": "load_motor", "pin": "U" } },
+    { "id": "w20", "from": { "device": "main_km_g", "pin": "T2" }, "to": { "device": "load_motor", "pin": "V" } },
+    { "id": "w21", "from": { "device": "main_km_g", "pin": "T3" }, "to": { "device": "load_motor", "pin": "W" } },
+    { "id": "wc1", "from": { "device": "ctrl_mains", "pin": "L" }, "to": { "device": "pr_grid", "pin": "11" } },
+    { "id": "wc2", "from": { "device": "pr_grid", "pin": "14" }, "to": { "device": "nc_km_g", "pin": "21" } },
+    { "id": "wc3", "from": { "device": "nc_km_g", "pin": "22" }, "to": { "device": "mc_mains", "pin": "A1" } },
+    { "id": "wc4", "from": { "device": "mc_mains", "pin": "A2" }, "to": { "device": "ctrl_mains", "pin": "N" } },
+    { "id": "wc5", "from": { "device": "mc_mains", "pin": "A1" }, "to": { "device": "hl_mains", "pin": "A1" } },
+    { "id": "wc6", "from": { "device": "hl_mains", "pin": "A2" }, "to": { "device": "ctrl_mains", "pin": "N" } },
+    { "id": "wc7", "from": { "device": "pr_grid", "pin": "12" }, "to": { "device": "hl_flt", "pin": "A1" } },
+    { "id": "wc8", "from": { "device": "hl_flt", "pin": "A2" }, "to": { "device": "ctrl_mains", "pin": "N" } },
+    { "id": "wc9", "from": { "device": "ctrl_gen", "pin": "L" }, "to": { "device": "nc_km_m", "pin": "21" } },
+    { "id": "wc10", "from": { "device": "nc_km_m", "pin": "22" }, "to": { "device": "kt_g", "pin": "A1" } },
+    { "id": "wc10b", "from": { "device": "kt_g", "pin": "A2" }, "to": { "device": "ctrl_gen", "pin": "N" } },
+    { "id": "wc10c", "from": { "device": "ctrl_gen", "pin": "L" }, "to": { "device": "no_kt_g", "pin": "13" } },
+    { "id": "wc10d", "from": { "device": "no_kt_g", "pin": "14" }, "to": { "device": "mc_gen", "pin": "A1" } },
+    { "id": "wc11", "from": { "device": "mc_gen", "pin": "A2" }, "to": { "device": "ctrl_gen", "pin": "N" } },
+    { "id": "wc12", "from": { "device": "mc_gen", "pin": "A1" }, "to": { "device": "hl_gen", "pin": "A1" } },
+    { "id": "wc13", "from": { "device": "hl_gen", "pin": "A2" }, "to": { "device": "ctrl_gen", "pin": "N" } }
+  ],
+  "scenarios": [
+    {
+      "id": "ats-mains-healthy",
+      "name": "Nguồn lưới bình thường, cấp tải chính",
+      "reference": "Tiêu chuẩn ATS - TCVN / IEC 60947-6-1",
+      "initialSummary": "Lưới và máy phát đều có nguồn, PR1 kiểm tra pha đạt",
+      "initial": [],
+      "steps": [
+        {
+          "label": "Trạng thái ưu tiên nguồn lưới",
+          "expect": [
+            { "device": "pr_grid", "key": "healthy", "value": true },
+            { "device": "mc_mains", "key": "active", "value": true },
+            { "device": "nc_km_m", "key": "closed", "value": false },
+            { "device": "mc_gen", "key": "active", "value": false },
+            { "device": "load_motor", "key": "running", "value": true },
+            { "device": "hl_mains", "key": "active", "value": true }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ats-transfer-to-gen",
+      "name": "Mất pha lưới, tự động chuyển sang máy phát",
+      "reference": "Tiêu chuẩn ATS - TCVN / IEC 60947-6-1",
+      "initialSummary": "Lưới gặp sự cố mất pha L1, chuyển nguồn sang máy phát sau trễ KT_G",
+      "initial": [
+        { "device": "pr_grid", "key": "faultMode", "value": "LOSS_L1" }
+      ],
+      "steps": [
+        {
+          "label": "Chuyển nguồn tự động sang máy phát",
+          "advanceMs": 1500,
+          "expect": [
+            { "device": "pr_grid", "key": "healthy", "value": false },
+            { "device": "hl_flt", "key": "active", "value": true },
+            { "device": "mc_mains", "key": "active", "value": false },
+            { "device": "nc_km_m", "key": "closed", "value": true },
+            { "device": "mc_gen", "key": "active", "value": true },
+            { "device": "load_motor", "key": "running", "value": true },
+            { "device": "hl_gen", "key": "active", "value": true }
+          ]
+        }
+      ]
+    }
+  ]
+}

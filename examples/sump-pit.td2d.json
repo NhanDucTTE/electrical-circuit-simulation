@@ -1,0 +1,5885 @@
+{
+  "version": 1,
+  "name": "Sump Pit · SP-CP-01",
+  "devices": [
+    {
+      "id": "src3",
+      "type": "source-3ph",
+      "tag": "R/S/T · 380 V",
+      "x": 190,
+      "y": 60,
+      "params": {
+        "domain": "3P380",
+        "note": "Nguồn ba pha, thử mất động lực độc lập.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "main",
+      "type": "mccb-3ph",
+      "tag": "MAIN MCCB",
+      "x": 190,
+      "y": 240,
+      "params": {
+        "domain": "3P380",
+        "note": "SP-CP-01 / 301, biểu diễn ba cực động lực và các cực R/N đồng bộ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "srcac",
+      "type": "source-ac",
+      "tag": "R/N · 220 V",
+      "x": 420,
+      "y": 60,
+      "params": {
+        "domain": "AC220",
+        "note": "Biểu diễn miền điều khiển R/N riêng trong mô hình. Tại tủ, lấy từ nguồn vào chung với miền động lực.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "mainL",
+      "type": "contact-no",
+      "tag": "MAIN MCCB",
+      "x": 380,
+      "y": 240,
+      "params": {
+        "masterId": "main",
+        "masterState": "closed",
+        "pinLabels": {
+          "13": "R",
+          "14": "L1"
+        },
+        "note": "Cực R của MAIN quy đổi sang miền điều khiển.",
+        "orientation": "vertical",
+        "contactLabel": "MAIN · R"
+      }
+    },
+    {
+      "id": "mainN",
+      "type": "contact-no",
+      "tag": "MAIN MCCB",
+      "x": 490,
+      "y": 240,
+      "params": {
+        "masterId": "main",
+        "masterState": "closed",
+        "pinLabels": {
+          "13": "N",
+          "14": "N1"
+        },
+        "note": "Cực N của MAIN MCCB 4P.",
+        "orientation": "vertical",
+        "contactLabel": "MAIN · N"
+      }
+    },
+    {
+      "id": "ctr",
+      "type": "mcb-2p",
+      "tag": "MCB điều khiển",
+      "x": 430,
+      "y": 435,
+      "params": {
+        "domain": "AC220",
+        "note": "MCB điều khiển 2P, cả đường cấp và về.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "emer",
+      "type": "push-nc",
+      "tag": "EMER",
+      "x": 365,
+      "y": 600,
+      "params": {
+        "pinLabels": {
+          "21": "11A",
+          "22": "12A"
+        },
+        "note": "Thao tác giữ nhấn để mô phỏng EMER mở. Kiểu chốt cơ khí ngoài phạm vi mẫu.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "lc",
+      "type": "junction",
+      "tag": "LC",
+      "x": 535,
+      "y": -40,
+      "params": {
+        "drawingTag": "LC"
+      }
+    },
+    {
+      "id": "nc",
+      "type": "junction",
+      "tag": "NC",
+      "x": 505,
+      "y": 2070,
+      "params": {
+        "drawingTag": "NC"
+      }
+    },
+    {
+      "id": "cb1",
+      "type": "breaker-3ph",
+      "tag": "ELCB 1",
+      "x": 110,
+      "y": 435,
+      "params": {
+        "domain": "3P380",
+        "note": "CB nhánh động lực 3P.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "mainc1",
+      "type": "main-3ph",
+      "tag": "MC1",
+      "x": 110,
+      "y": 615,
+      "params": {
+        "domain": "3P380",
+        "masterId": "mc1",
+        "orientation": "vertical",
+        "contactLabel": "MC1 · chính"
+      }
+    },
+    {
+      "id": "th1",
+      "type": "overload",
+      "tag": "TH1",
+      "x": 110,
+      "y": 795,
+      "params": {
+        "domain": "3P380",
+        "note": "Mô phỏng trạng thái trip/reset, không tính ngưỡng hoặc thời gian cắt.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "pump1",
+      "type": "pump",
+      "tag": "SP-01-01",
+      "x": 110,
+      "y": 995,
+      "params": {
+        "domain": "3P380",
+        "commandId": "r1",
+        "note": "Tải động lực. Trạng thái này dựa vào mạch ba pha. Không có cảm biến chạy thực tại tải.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "cb2",
+      "type": "breaker-3ph",
+      "tag": "ELCB 2",
+      "x": 245,
+      "y": 435,
+      "params": {
+        "domain": "3P380",
+        "note": "CB nhánh động lực 3P.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "mainc2",
+      "type": "main-3ph",
+      "tag": "MC2",
+      "x": 245,
+      "y": 615,
+      "params": {
+        "domain": "3P380",
+        "masterId": "mc2",
+        "orientation": "vertical",
+        "contactLabel": "MC2 · chính"
+      }
+    },
+    {
+      "id": "th2",
+      "type": "overload",
+      "tag": "TH2",
+      "x": 245,
+      "y": 795,
+      "params": {
+        "domain": "3P380",
+        "note": "Mô phỏng trạng thái trip/reset, không tính ngưỡng hoặc thời gian cắt.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "pump2",
+      "type": "pump",
+      "tag": "SP-01-02",
+      "x": 245,
+      "y": 995,
+      "params": {
+        "domain": "3P380",
+        "commandId": "r2",
+        "note": "Tải động lực. Trạng thái này dựa vào mạch ba pha. Không có cảm biến chạy thực tại tải.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "ps",
+      "type": "power-supply-dc",
+      "tag": "PS · 24 VDC",
+      "x": 420,
+      "y": 900,
+      "params": {
+        "domain": "DC24",
+        "inputDomain": "AC220",
+        "note": "PS nhận LC/NC từ mạch sau MCB và EMER.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "dcpos",
+      "type": "junction",
+      "tag": "+24 V",
+      "x": 375,
+      "y": 1020,
+      "params": {}
+    },
+    {
+      "id": "dcneg",
+      "type": "junction",
+      "tag": "0 V",
+      "x": 375,
+      "y": 1500,
+      "params": {}
+    },
+    {
+      "id": "level1",
+      "type": "float",
+      "tag": "LEVEL 1",
+      "x": 420,
+      "y": 1140,
+      "params": {
+        "normalClosed": false,
+        "pinLabels": {
+          "13": "XC1:1",
+          "14": "XC1:2"
+        },
+        "note": "Đầu vào là trạng thái đóng tiếp điểm ngoài. Chiều tác động thực theo mức nước chưa xác minh.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "rl1",
+      "type": "relay",
+      "tag": "RL1",
+      "x": 420,
+      "y": 1360,
+      "params": {
+        "domain": "DC24",
+        "pinLabels": {
+          "A1": "13",
+          "A2": "14"
+        },
+        "note": "Tờ 303, cuộn tiếp điểm mức 1",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "level2",
+      "type": "float",
+      "tag": "LEVEL 2",
+      "x": 530,
+      "y": 1140,
+      "params": {
+        "normalClosed": false,
+        "pinLabels": {
+          "13": "XC1:3",
+          "14": "XC1:4"
+        },
+        "note": "Đầu vào là trạng thái đóng tiếp điểm ngoài. Chiều tác động thực theo mức nước chưa xác minh.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "rl2",
+      "type": "relay",
+      "tag": "RL2",
+      "x": 530,
+      "y": 1360,
+      "params": {
+        "domain": "DC24",
+        "pinLabels": {
+          "A1": "13",
+          "A2": "14"
+        },
+        "note": "Tờ 303, cuộn tiếp điểm mức 2",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "level3",
+      "type": "float",
+      "tag": "LEVEL 3",
+      "x": 640,
+      "y": 1140,
+      "params": {
+        "normalClosed": false,
+        "pinLabels": {
+          "13": "XC1:5",
+          "14": "XC1:6"
+        },
+        "note": "Đầu vào là trạng thái đóng tiếp điểm ngoài. Chiều tác động thực theo mức nước chưa xác minh.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "rl3",
+      "type": "relay",
+      "tag": "RL3",
+      "x": 640,
+      "y": 1360,
+      "params": {
+        "domain": "DC24",
+        "pinLabels": {
+          "A1": "13",
+          "A2": "14"
+        },
+        "note": "Tờ 303, cuộn tiếp điểm mức 3",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "level4",
+      "type": "float",
+      "tag": "LEVEL 4",
+      "x": 750,
+      "y": 1140,
+      "params": {
+        "normalClosed": false,
+        "pinLabels": {
+          "13": "XC1:7",
+          "14": "XC1:8"
+        },
+        "note": "Đầu vào là trạng thái đóng tiếp điểm ngoài. Chiều tác động thực theo mức nước chưa xác minh.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "rl4",
+      "type": "relay",
+      "tag": "RL4",
+      "x": 750,
+      "y": 1360,
+      "params": {
+        "domain": "DC24",
+        "pinLabels": {
+          "A1": "13",
+          "A2": "14"
+        },
+        "note": "Tờ 303, cuộn tiếp điểm mức 4",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "s",
+      "type": "selector",
+      "tag": "S · AUTO/OFF/MAN",
+      "x": 635,
+      "y": 245,
+      "params": {
+        "initial": "OFF",
+        "note": "Tờ 304. AUTO qua RL2. MAN cấp các nút và RA.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "rl2auto",
+      "type": "contact-no",
+      "tag": "RL2",
+      "x": 585,
+      "y": 420,
+      "params": {
+        "masterId": "rl2",
+        "masterState": "active",
+        "pinLabels": {
+          "13": "9",
+          "14": "5"
+        },
+        "orientation": "vertical",
+        "contactLabel": "RL2 · AUTO"
+      }
+    },
+    {
+      "id": "n1202",
+      "type": "junction",
+      "tag": "1202",
+      "x": 585,
+      "y": 550,
+      "params": {}
+    },
+    {
+      "id": "t1",
+      "type": "timer-on",
+      "tag": "T1 · 3 phút",
+      "x": 665,
+      "y": 735,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "A1",
+          "A2": "A2"
+        },
+        "note": "Tờ 304, ON delay 180 giây ảo.",
+        "delayMs": 180000,
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "altno",
+      "type": "contact-no",
+      "tag": "ALT",
+      "x": 560,
+      "y": 720,
+      "params": {
+        "masterId": "alt",
+        "masterState": "active",
+        "pinLabels": {
+          "13": "4",
+          "14": "3"
+        },
+        "orientation": "vertical",
+        "contactLabel": "ALT · 4–3"
+      }
+    },
+    {
+      "id": "altnc",
+      "type": "contact-nc",
+      "tag": "ALT",
+      "x": 775,
+      "y": 720,
+      "params": {
+        "masterId": "alt",
+        "masterState": "active",
+        "pinLabels": {
+          "21": "4",
+          "22": "1"
+        },
+        "orientation": "vertical",
+        "contactLabel": "ALT · 4–1"
+      }
+    },
+    {
+      "id": "n1207",
+      "type": "junction",
+      "tag": "1207",
+      "x": 775,
+      "y": 865,
+      "params": {}
+    },
+    {
+      "id": "n1203",
+      "type": "junction",
+      "tag": "1203",
+      "x": 615,
+      "y": 1300,
+      "params": {}
+    },
+    {
+      "id": "rl3path",
+      "type": "contact-no",
+      "tag": "RL3",
+      "x": 660,
+      "y": 955,
+      "params": {
+        "masterId": "rl3",
+        "masterState": "active",
+        "pinLabels": {
+          "13": "9",
+          "14": "5"
+        },
+        "orientation": "vertical",
+        "contactLabel": "RL3 · bổ sung"
+      }
+    },
+    {
+      "id": "t1path",
+      "type": "contact-no",
+      "tag": "T1 · 3 phút",
+      "x": 765,
+      "y": 955,
+      "params": {
+        "masterId": "t1",
+        "masterState": "active",
+        "pinLabels": {
+          "13": "151",
+          "14": "181"
+        },
+        "orientation": "vertical",
+        "contactLabel": "T1 · bổ sung"
+      }
+    },
+    {
+      "id": "rl2alt",
+      "type": "contact-no",
+      "tag": "RL2",
+      "x": 460,
+      "y": 1690,
+      "params": {
+        "masterId": "rl2",
+        "masterState": "active",
+        "pinLabels": {
+          "13": "10",
+          "14": "6"
+        },
+        "orientation": "vertical",
+        "contactLabel": "RL2 · ALT"
+      }
+    },
+    {
+      "id": "alt",
+      "type": "relay-alternate-g4q",
+      "tag": "ALT",
+      "x": 460,
+      "y": 1880,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "13",
+          "A2": "14"
+        },
+        "note": "Tờ 304 ghi cuộn 13–14 và các nhánh 4–3 / 4–1. Đế Omron có cuộn 2–7 và COM 1 / 8. Cần đối chiếu đầu dây tại tủ. Vị trí cam ban đầu là giả định của ca kiểm thử.",
+        "initial": false,
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "n1205",
+      "type": "junction",
+      "tag": "1205",
+      "x": 920,
+      "y": 420,
+      "params": {}
+    },
+    {
+      "id": "ra",
+      "type": "relay",
+      "tag": "RA",
+      "x": 920,
+      "y": 630,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "13",
+          "A2": "14"
+        },
+        "note": "Tờ 304. Chọn MAN chuyển các tiếp điểm RA.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "pb1on",
+      "type": "push-no",
+      "tag": "PB ON 1",
+      "x": 1040,
+      "y": 560,
+      "params": {
+        "note": "Nút tức thời NO trong MAN.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "pb1off",
+      "type": "push-nc",
+      "tag": "PB OFF 1",
+      "x": 1040,
+      "y": 895,
+      "params": {
+        "pinLabels": {
+          "21": "11",
+          "22": "12"
+        },
+        "note": "Nút tức thời NC trong MAN.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "seal1",
+      "type": "contact-no",
+      "tag": "1R1",
+      "x": 1145,
+      "y": 560,
+      "params": {
+        "masterId": "r1",
+        "masterState": "active",
+        "pinLabels": {
+          "13": "5",
+          "14": "9"
+        },
+        "orientation": "vertical",
+        "contactLabel": "1R1 · tự giữ"
+      }
+    },
+    {
+      "id": "ram1",
+      "type": "contact-no",
+      "tag": "RA",
+      "x": 1040,
+      "y": 1080,
+      "params": {
+        "masterId": "ra",
+        "masterState": "active",
+        "pinLabels": {
+          "13": "5",
+          "14": "9"
+        },
+        "orientation": "vertical",
+        "contactLabel": "RA · MAN 1"
+      }
+    },
+    {
+      "id": "raa1",
+      "type": "contact-nc",
+      "tag": "RA",
+      "x": 1145,
+      "y": 1080,
+      "params": {
+        "masterId": "ra",
+        "masterState": "active",
+        "pinLabels": {
+          "21": "1",
+          "22": "9"
+        },
+        "orientation": "vertical",
+        "contactLabel": "RA · AUTO 1"
+      }
+    },
+    {
+      "id": "thnc1",
+      "type": "contact-nc",
+      "tag": "TH1",
+      "x": 1040,
+      "y": 1430,
+      "params": {
+        "masterId": "th1",
+        "masterState": "tripped",
+        "pinLabels": {
+          "21": "96",
+          "22": "95"
+        },
+        "note": "Ngắt cuộn khi TH trip.",
+        "orientation": "vertical",
+        "contactLabel": "TH1 · NC"
+      }
+    },
+    {
+      "id": "mc1",
+      "type": "contactor",
+      "tag": "MC1",
+      "x": 1040,
+      "y": 1780,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "A2",
+          "A2": "A1"
+        },
+        "note": "Cuộn contactor và relay chỉ thị dùng chung lệnh.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "r1",
+      "type": "relay",
+      "tag": "1R1",
+      "x": 1145,
+      "y": 1780,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "13",
+          "A2": "14"
+        },
+        "note": "Relay tự giữ và chỉ thị ON/OFF. Không đo chuyển động bơm.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "n1206",
+      "type": "junction",
+      "tag": "1206",
+      "x": 1040,
+      "y": 735,
+      "params": {}
+    },
+    {
+      "id": "n1204",
+      "type": "junction",
+      "tag": "1204",
+      "x": 1040,
+      "y": 1260,
+      "params": {}
+    },
+    {
+      "id": "n1208",
+      "type": "junction",
+      "tag": "1208",
+      "x": 1040,
+      "y": 1595,
+      "params": {}
+    },
+    {
+      "id": "pb2on",
+      "type": "push-no",
+      "tag": "PB ON 2",
+      "x": 1310,
+      "y": 560,
+      "params": {
+        "note": "Nút tức thời NO trong MAN.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "pb2off",
+      "type": "push-nc",
+      "tag": "PB OFF 2",
+      "x": 1310,
+      "y": 895,
+      "params": {
+        "pinLabels": {
+          "21": "11",
+          "22": "12"
+        },
+        "note": "Nút tức thời NC trong MAN.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "seal2",
+      "type": "contact-no",
+      "tag": "2R1",
+      "x": 1415,
+      "y": 560,
+      "params": {
+        "masterId": "r2",
+        "masterState": "active",
+        "pinLabels": {
+          "13": "5",
+          "14": "9"
+        },
+        "orientation": "vertical",
+        "contactLabel": "2R1 · tự giữ"
+      }
+    },
+    {
+      "id": "ram2",
+      "type": "contact-no",
+      "tag": "RA",
+      "x": 1310,
+      "y": 1080,
+      "params": {
+        "masterId": "ra",
+        "masterState": "active",
+        "pinLabels": {
+          "13": "6",
+          "14": "10"
+        },
+        "orientation": "vertical",
+        "contactLabel": "RA · MAN 2"
+      }
+    },
+    {
+      "id": "raa2",
+      "type": "contact-nc",
+      "tag": "RA",
+      "x": 1415,
+      "y": 1080,
+      "params": {
+        "masterId": "ra",
+        "masterState": "active",
+        "pinLabels": {
+          "21": "2",
+          "22": "10"
+        },
+        "orientation": "vertical",
+        "contactLabel": "RA · AUTO 2"
+      }
+    },
+    {
+      "id": "thnc2",
+      "type": "contact-nc",
+      "tag": "TH2",
+      "x": 1310,
+      "y": 1430,
+      "params": {
+        "masterId": "th2",
+        "masterState": "tripped",
+        "pinLabels": {
+          "21": "96",
+          "22": "95"
+        },
+        "note": "Ngắt cuộn khi TH trip.",
+        "orientation": "vertical",
+        "contactLabel": "TH2 · NC"
+      }
+    },
+    {
+      "id": "mc2",
+      "type": "contactor",
+      "tag": "MC2",
+      "x": 1310,
+      "y": 1780,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "A2",
+          "A2": "A1"
+        },
+        "note": "Cuộn contactor và relay chỉ thị dùng chung lệnh.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "r2",
+      "type": "relay",
+      "tag": "2R1",
+      "x": 1415,
+      "y": 1780,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "13",
+          "A2": "14"
+        },
+        "note": "Relay tự giữ và chỉ thị ON/OFF. Không đo chuyển động bơm.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "n1209",
+      "type": "junction",
+      "tag": "1209",
+      "x": 1310,
+      "y": 735,
+      "params": {}
+    },
+    {
+      "id": "n1210",
+      "type": "junction",
+      "tag": "1210",
+      "x": 1310,
+      "y": 1260,
+      "params": {}
+    },
+    {
+      "id": "n1211",
+      "type": "junction",
+      "tag": "1211",
+      "x": 1310,
+      "y": 1595,
+      "params": {}
+    },
+    {
+      "id": "lvlight1",
+      "type": "contact-no",
+      "tag": "RL1",
+      "x": 565,
+      "y": 1710,
+      "params": {
+        "masterId": "rl1",
+        "masterState": "active",
+        "pinLabels": {
+          "13": "9",
+          "14": "5"
+        },
+        "orientation": "vertical",
+        "contactLabel": "RL1 · đèn"
+      }
+    },
+    {
+      "id": "levelLamp1",
+      "type": "lamp",
+      "tag": "LOW LEVEL",
+      "x": 565,
+      "y": 1900,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "X1",
+          "A2": "X2"
+        },
+        "note": "Tờ 303.",
+        "orientation": "vertical",
+        "lampMark": "O"
+      }
+    },
+    {
+      "id": "lvlight4",
+      "type": "contact-no",
+      "tag": "RL4",
+      "x": 675,
+      "y": 1710,
+      "params": {
+        "masterId": "rl4",
+        "masterState": "active",
+        "pinLabels": {
+          "13": "9",
+          "14": "5"
+        },
+        "orientation": "vertical",
+        "contactLabel": "RL4 · đèn"
+      }
+    },
+    {
+      "id": "levelLamp4",
+      "type": "lamp",
+      "tag": "HIGH LEVEL",
+      "x": 675,
+      "y": 1900,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "X1",
+          "A2": "X2"
+        },
+        "note": "Tờ 303.",
+        "orientation": "vertical",
+        "lampMark": "O"
+      }
+    },
+    {
+      "id": "thno1",
+      "type": "contact-no",
+      "tag": "TH1",
+      "x": 1550,
+      "y": 245,
+      "params": {
+        "masterId": "th1",
+        "masterState": "tripped",
+        "pinLabels": {
+          "13": "98",
+          "14": "97"
+        },
+        "note": "Tác động cùng trạng thái nhiệt.",
+        "orientation": "vertical",
+        "contactLabel": "TH1 · NO"
+      }
+    },
+    {
+      "id": "rf1",
+      "type": "relay",
+      "tag": "RF1",
+      "x": 1550,
+      "y": 565,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "13",
+          "A2": "14"
+        },
+        "note": "Relay nhánh FAULT / báo chung.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "faultLamp1",
+      "type": "lamp",
+      "tag": "FAULT 1",
+      "x": 1612,
+      "y": 565,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "X1",
+          "A2": "X2"
+        },
+        "note": "Đèn FAULT theo TH.",
+        "orientation": "vertical",
+        "lampMark": "O"
+      }
+    },
+    {
+      "id": "fjoin1",
+      "type": "junction",
+      "tag": "1220",
+      "x": 1550,
+      "y": 420,
+      "params": {}
+    },
+    {
+      "id": "runno1",
+      "type": "contact-no",
+      "tag": "1R1",
+      "x": 1550,
+      "y": 800,
+      "params": {
+        "masterId": "r1",
+        "masterState": "active",
+        "pinLabels": {
+          "13": "10",
+          "14": "6"
+        },
+        "orientation": "vertical",
+        "contactLabel": "1R1 · NO"
+      }
+    },
+    {
+      "id": "onLamp1",
+      "type": "lamp",
+      "tag": "ON 1",
+      "x": 1550,
+      "y": 1000,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "X1",
+          "A2": "X2"
+        },
+        "note": "Đèn ON theo relay lệnh; không phải cảm biến chạy.",
+        "orientation": "vertical",
+        "lampMark": "G"
+      }
+    },
+    {
+      "id": "runnc1",
+      "type": "contact-nc",
+      "tag": "1R1",
+      "x": 1550,
+      "y": 1230,
+      "params": {
+        "masterId": "r1",
+        "masterState": "active",
+        "pinLabels": {
+          "21": "10",
+          "22": "2"
+        },
+        "orientation": "vertical",
+        "contactLabel": "1R1 · NC"
+      }
+    },
+    {
+      "id": "rfnc1",
+      "type": "contact-nc",
+      "tag": "RF1",
+      "x": 1550,
+      "y": 1420,
+      "params": {
+        "masterId": "rf1",
+        "masterState": "active",
+        "pinLabels": {
+          "21": "12",
+          "22": "4"
+        },
+        "orientation": "vertical",
+        "contactLabel": "RF1 · NC"
+      }
+    },
+    {
+      "id": "offLamp1",
+      "type": "lamp",
+      "tag": "OFF 1",
+      "x": 1550,
+      "y": 1610,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "X1",
+          "A2": "X2"
+        },
+        "note": "Đèn OFF tắt khi chạy hoặc khi FAULT.",
+        "orientation": "vertical",
+        "lampMark": "R"
+      }
+    },
+    {
+      "id": "thno2",
+      "type": "contact-no",
+      "tag": "TH2",
+      "x": 1675,
+      "y": 245,
+      "params": {
+        "masterId": "th2",
+        "masterState": "tripped",
+        "pinLabels": {
+          "13": "98",
+          "14": "97"
+        },
+        "note": "Tác động cùng trạng thái nhiệt.",
+        "orientation": "vertical",
+        "contactLabel": "TH2 · NO"
+      }
+    },
+    {
+      "id": "rf2",
+      "type": "relay",
+      "tag": "RF2",
+      "x": 1675,
+      "y": 565,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "13",
+          "A2": "14"
+        },
+        "note": "Relay nhánh FAULT / báo chung.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "faultLamp2",
+      "type": "lamp",
+      "tag": "FAULT 2",
+      "x": 1737,
+      "y": 565,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "X1",
+          "A2": "X2"
+        },
+        "note": "Đèn FAULT theo TH.",
+        "orientation": "vertical",
+        "lampMark": "O"
+      }
+    },
+    {
+      "id": "fjoin2",
+      "type": "junction",
+      "tag": "1221",
+      "x": 1675,
+      "y": 420,
+      "params": {}
+    },
+    {
+      "id": "runno2",
+      "type": "contact-no",
+      "tag": "2R1",
+      "x": 1675,
+      "y": 800,
+      "params": {
+        "masterId": "r2",
+        "masterState": "active",
+        "pinLabels": {
+          "13": "10",
+          "14": "6"
+        },
+        "orientation": "vertical",
+        "contactLabel": "2R1 · NO"
+      }
+    },
+    {
+      "id": "onLamp2",
+      "type": "lamp",
+      "tag": "ON 2",
+      "x": 1675,
+      "y": 1000,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "X1",
+          "A2": "X2"
+        },
+        "note": "Đèn ON theo relay lệnh; không phải cảm biến chạy.",
+        "orientation": "vertical",
+        "lampMark": "G"
+      }
+    },
+    {
+      "id": "runnc2",
+      "type": "contact-nc",
+      "tag": "2R1",
+      "x": 1675,
+      "y": 1230,
+      "params": {
+        "masterId": "r2",
+        "masterState": "active",
+        "pinLabels": {
+          "21": "10",
+          "22": "2"
+        },
+        "orientation": "vertical",
+        "contactLabel": "2R1 · NC"
+      }
+    },
+    {
+      "id": "rfnc2",
+      "type": "contact-nc",
+      "tag": "RF2",
+      "x": 1675,
+      "y": 1420,
+      "params": {
+        "masterId": "rf2",
+        "masterState": "active",
+        "pinLabels": {
+          "21": "12",
+          "22": "4"
+        },
+        "orientation": "vertical",
+        "contactLabel": "RF2 · NC"
+      }
+    },
+    {
+      "id": "offLamp2",
+      "type": "lamp",
+      "tag": "OFF 2",
+      "x": 1675,
+      "y": 1610,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "X1",
+          "A2": "X2"
+        },
+        "note": "Đèn OFF tắt khi chạy hoặc khi FAULT.",
+        "orientation": "vertical",
+        "lampMark": "R"
+      }
+    },
+    {
+      "id": "rl4alarm",
+      "type": "contact-no",
+      "tag": "RL4",
+      "x": 1930,
+      "y": 245,
+      "params": {
+        "masterId": "rl4",
+        "masterState": "active",
+        "pinLabels": {
+          "13": "10",
+          "14": "6"
+        },
+        "orientation": "vertical",
+        "contactLabel": "RL4 · báo"
+      }
+    },
+    {
+      "id": "rf1alarm",
+      "type": "contact-no",
+      "tag": "RF1",
+      "x": 2040,
+      "y": 245,
+      "params": {
+        "masterId": "rf1",
+        "masterState": "active",
+        "pinLabels": {
+          "13": "9",
+          "14": "5"
+        },
+        "orientation": "vertical",
+        "contactLabel": "RF1 · báo"
+      }
+    },
+    {
+      "id": "rf2alarm",
+      "type": "contact-no",
+      "tag": "RF2",
+      "x": 2150,
+      "y": 245,
+      "params": {
+        "masterId": "rf2",
+        "masterState": "active",
+        "pinLabels": {
+          "13": "9",
+          "14": "5"
+        },
+        "orientation": "vertical",
+        "contactLabel": "RF2 · báo"
+      }
+    },
+    {
+      "id": "n1105",
+      "type": "junction",
+      "tag": "1105",
+      "x": 2040,
+      "y": 440,
+      "params": {}
+    },
+    {
+      "id": "as",
+      "type": "relay",
+      "tag": "AS",
+      "x": 1890,
+      "y": 640,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "13",
+          "A2": "14"
+        },
+        "note": "Báo chung đến XC1:9–10.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "rbznc",
+      "type": "contact-nc",
+      "tag": "RBZ",
+      "x": 2000,
+      "y": 640,
+      "params": {
+        "masterId": "rbz",
+        "masterState": "active",
+        "pinLabels": {
+          "21": "9",
+          "22": "1"
+        },
+        "orientation": "vertical",
+        "contactLabel": "RBZ · NC"
+      }
+    },
+    {
+      "id": "rbzno",
+      "type": "contact-no",
+      "tag": "RBZ",
+      "x": 2220,
+      "y": 640,
+      "params": {
+        "masterId": "rbz",
+        "masterState": "active",
+        "pinLabels": {
+          "13": "9",
+          "14": "5"
+        },
+        "orientation": "vertical",
+        "contactLabel": "RBZ · tự giữ"
+      }
+    },
+    {
+      "id": "mute",
+      "type": "push-no",
+      "tag": "MUTE",
+      "x": 2110,
+      "y": 640,
+      "params": {
+        "pinLabels": {
+          "13": "3",
+          "14": "4"
+        },
+        "note": "Nhấn để giữ im chuông trong khi còn báo.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "n1110",
+      "type": "junction",
+      "tag": "1110",
+      "x": 2000,
+      "y": 815,
+      "params": {}
+    },
+    {
+      "id": "n1111",
+      "type": "junction",
+      "tag": "1111",
+      "x": 2155,
+      "y": 815,
+      "params": {}
+    },
+    {
+      "id": "beacon",
+      "type": "lamp",
+      "tag": "RL · đèn xoay",
+      "x": 1945,
+      "y": 1010,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "X1",
+          "A2": "X2"
+        },
+        "note": "Tắt cùng còi khi MUTE đã giữ.",
+        "orientation": "vertical",
+        "lampMark": "RL",
+        "blink": true
+      }
+    },
+    {
+      "id": "buzzer",
+      "type": "buzzer",
+      "tag": "BZ",
+      "x": 2055,
+      "y": 1010,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "A1",
+          "A2": "A2"
+        },
+        "note": "",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "rbz",
+      "type": "relay",
+      "tag": "RBZ",
+      "x": 2165,
+      "y": 1010,
+      "params": {
+        "domain": "AC220",
+        "pinLabels": {
+          "A1": "13",
+          "A2": "14"
+        },
+        "note": "",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "asout",
+      "type": "contact-no",
+      "tag": "AS",
+      "x": 2320,
+      "y": 300,
+      "params": {
+        "masterId": "as",
+        "masterState": "active",
+        "pinLabels": {
+          "13": "9",
+          "14": "5"
+        },
+        "orientation": "vertical",
+        "contactLabel": "AS · báo ngoài"
+      }
+    },
+    {
+      "id": "xc1outa",
+      "type": "terminal",
+      "tag": "XC1:9",
+      "x": 2320,
+      "y": 40,
+      "params": {
+        "externalPins": [
+          "1"
+        ],
+        "note": "Đầu ra khô tới hệ ngoài. Để hở đầu ngoài.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "xc1outb",
+      "type": "terminal",
+      "tag": "XC1:10",
+      "x": 2320,
+      "y": 560,
+      "params": {
+        "externalPins": [
+          "2"
+        ],
+        "note": "Đầu ra khô tới hệ ngoài. Để hở đầu ngoài.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "lc-482",
+      "type": "junction",
+      "tag": "LC / 482",
+      "x": 482,
+      "y": -40,
+      "params": {}
+    },
+    {
+      "id": "lc-635",
+      "type": "junction",
+      "tag": "LC / 635",
+      "x": 635,
+      "y": -40,
+      "params": {}
+    },
+    {
+      "id": "lc-374",
+      "type": "junction",
+      "tag": "LC / 374",
+      "x": 374,
+      "y": -40,
+      "params": {}
+    },
+    {
+      "id": "lc-479",
+      "type": "junction",
+      "tag": "LC / 479",
+      "x": 479,
+      "y": -40,
+      "params": {}
+    },
+    {
+      "id": "lc-719",
+      "type": "junction",
+      "tag": "LC / 719",
+      "x": 719,
+      "y": -40,
+      "params": {}
+    },
+    {
+      "id": "lc-1550",
+      "type": "junction",
+      "tag": "LC / 1550",
+      "x": 1550,
+      "y": -40,
+      "params": {}
+    },
+    {
+      "id": "lc-1506",
+      "type": "junction",
+      "tag": "LC / 1506",
+      "x": 1506,
+      "y": -40,
+      "params": {}
+    },
+    {
+      "id": "lc-1675",
+      "type": "junction",
+      "tag": "LC / 1675",
+      "x": 1675,
+      "y": -40,
+      "params": {}
+    },
+    {
+      "id": "lc-1631",
+      "type": "junction",
+      "tag": "LC / 1631",
+      "x": 1631,
+      "y": -40,
+      "params": {}
+    },
+    {
+      "id": "lc-1930",
+      "type": "junction",
+      "tag": "LC / 1930",
+      "x": 1930,
+      "y": -40,
+      "params": {}
+    },
+    {
+      "id": "lc-2040",
+      "type": "junction",
+      "tag": "LC / 2040",
+      "x": 2040,
+      "y": -40,
+      "params": {}
+    },
+    {
+      "id": "lc-2150",
+      "type": "junction",
+      "tag": "LC / 2150",
+      "x": 2150,
+      "y": -40,
+      "params": {}
+    },
+    {
+      "id": "nc-374",
+      "type": "junction",
+      "tag": "NC / 374",
+      "x": 374,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-611",
+      "type": "junction",
+      "tag": "NC / 611",
+      "x": 611,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-460",
+      "type": "junction",
+      "tag": "NC / 460",
+      "x": 460,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-920",
+      "type": "junction",
+      "tag": "NC / 920",
+      "x": 920,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-1040",
+      "type": "junction",
+      "tag": "NC / 1040",
+      "x": 1040,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-1145",
+      "type": "junction",
+      "tag": "NC / 1145",
+      "x": 1145,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-1310",
+      "type": "junction",
+      "tag": "NC / 1310",
+      "x": 1310,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-1415",
+      "type": "junction",
+      "tag": "NC / 1415",
+      "x": 1415,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-565",
+      "type": "junction",
+      "tag": "NC / 565",
+      "x": 565,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-675",
+      "type": "junction",
+      "tag": "NC / 675",
+      "x": 675,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-1506",
+      "type": "junction",
+      "tag": "NC / 1506",
+      "x": 1506,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-1612",
+      "type": "junction",
+      "tag": "NC / 1612",
+      "x": 1612,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-1550",
+      "type": "junction",
+      "tag": "NC / 1550",
+      "x": 1550,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-1631",
+      "type": "junction",
+      "tag": "NC / 1631",
+      "x": 1631,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-1737",
+      "type": "junction",
+      "tag": "NC / 1737",
+      "x": 1737,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-1675",
+      "type": "junction",
+      "tag": "NC / 1675",
+      "x": 1675,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-1890",
+      "type": "junction",
+      "tag": "NC / 1890",
+      "x": 1890,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-2165",
+      "type": "junction",
+      "tag": "NC / 2165",
+      "x": 2165,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-2055",
+      "type": "junction",
+      "tag": "NC / 2055",
+      "x": 2055,
+      "y": 2070,
+      "params": {}
+    },
+    {
+      "id": "nc-1945",
+      "type": "junction",
+      "tag": "NC / 1945",
+      "x": 1945,
+      "y": 2070,
+      "params": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "w1",
+      "from": {
+        "device": "src3",
+        "pin": "L1"
+      },
+      "to": {
+        "device": "main",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "w2",
+      "from": {
+        "device": "src3",
+        "pin": "L2"
+      },
+      "to": {
+        "device": "main",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "w3",
+      "from": {
+        "device": "src3",
+        "pin": "L3"
+      },
+      "to": {
+        "device": "main",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "w4",
+      "from": {
+        "device": "srcac",
+        "pin": "L"
+      },
+      "to": {
+        "device": "mainL",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 412,
+          "y": 150
+        },
+        {
+          "x": 380,
+          "y": 150
+        }
+      ]
+    },
+    {
+      "id": "w5",
+      "from": {
+        "device": "srcac",
+        "pin": "N"
+      },
+      "to": {
+        "device": "mainN",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 428,
+          "y": 150
+        },
+        {
+          "x": 490,
+          "y": 150
+        }
+      ]
+    },
+    {
+      "id": "w6",
+      "from": {
+        "device": "mainL",
+        "pin": "14"
+      },
+      "to": {
+        "device": "ctr",
+        "pin": "L"
+      },
+      "points": [
+        {
+          "x": 380,
+          "y": 337.5
+        },
+        {
+          "x": 422,
+          "y": 337.5
+        }
+      ]
+    },
+    {
+      "id": "w7",
+      "from": {
+        "device": "mainN",
+        "pin": "14"
+      },
+      "to": {
+        "device": "ctr",
+        "pin": "N"
+      },
+      "points": [
+        {
+          "x": 490,
+          "y": 337.5
+        },
+        {
+          "x": 438,
+          "y": 337.5
+        }
+      ]
+    },
+    {
+      "id": "w8",
+      "from": {
+        "device": "ctr",
+        "pin": "LC"
+      },
+      "to": {
+        "device": "emer",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 422,
+          "y": 517.5
+        },
+        {
+          "x": 365,
+          "y": 517.5
+        }
+      ]
+    },
+    {
+      "id": "w9",
+      "from": {
+        "device": "emer",
+        "pin": "22"
+      },
+      "to": {
+        "device": "lc",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 535,
+          "y": 658
+        }
+      ]
+    },
+    {
+      "id": "w10",
+      "from": {
+        "device": "ctr",
+        "pin": "NC"
+      },
+      "to": {
+        "device": "nc",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 438,
+          "y": 508
+        },
+        {
+          "x": 484,
+          "y": 508
+        },
+        {
+          "x": 484,
+          "y": 1632
+        },
+        {
+          "x": 505,
+          "y": 1632
+        }
+      ]
+    },
+    {
+      "id": "w11",
+      "from": {
+        "device": "main",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "cb1",
+        "pin": "L1"
+      },
+      "label": "L1",
+      "points": [
+        {
+          "x": 174,
+          "y": 360
+        },
+        {
+          "x": 94,
+          "y": 360
+        }
+      ]
+    },
+    {
+      "id": "w12",
+      "from": {
+        "device": "cb1",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "mainc1",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "w13",
+      "from": {
+        "device": "mainc1",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "th1",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "w14",
+      "from": {
+        "device": "th1",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "pump1",
+        "pin": "U"
+      }
+    },
+    {
+      "id": "w15",
+      "from": {
+        "device": "main",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "cb1",
+        "pin": "L2"
+      },
+      "label": "L2",
+      "points": [
+        {
+          "x": 190,
+          "y": 340
+        },
+        {
+          "x": 110,
+          "y": 340
+        }
+      ]
+    },
+    {
+      "id": "w16",
+      "from": {
+        "device": "cb1",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "mainc1",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "w17",
+      "from": {
+        "device": "mainc1",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "th1",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "w18",
+      "from": {
+        "device": "th1",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "pump1",
+        "pin": "V"
+      }
+    },
+    {
+      "id": "w19",
+      "from": {
+        "device": "main",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "cb1",
+        "pin": "L3"
+      },
+      "label": "L3",
+      "points": [
+        {
+          "x": 206,
+          "y": 320
+        },
+        {
+          "x": 126,
+          "y": 320
+        }
+      ]
+    },
+    {
+      "id": "w20",
+      "from": {
+        "device": "cb1",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "mainc1",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "w21",
+      "from": {
+        "device": "mainc1",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "th1",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "w22",
+      "from": {
+        "device": "th1",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "pump1",
+        "pin": "W"
+      }
+    },
+    {
+      "id": "w23",
+      "from": {
+        "device": "main",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "cb2",
+        "pin": "L1"
+      },
+      "label": "L1",
+      "points": [
+        {
+          "x": 174,
+          "y": 320
+        },
+        {
+          "x": 229,
+          "y": 320
+        }
+      ]
+    },
+    {
+      "id": "w24",
+      "from": {
+        "device": "cb2",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "mainc2",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "w25",
+      "from": {
+        "device": "mainc2",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "th2",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "w26",
+      "from": {
+        "device": "th2",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "pump2",
+        "pin": "U"
+      }
+    },
+    {
+      "id": "w27",
+      "from": {
+        "device": "main",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "cb2",
+        "pin": "L2"
+      },
+      "label": "L2",
+      "points": [
+        {
+          "x": 190,
+          "y": 340
+        },
+        {
+          "x": 245,
+          "y": 340
+        }
+      ]
+    },
+    {
+      "id": "w28",
+      "from": {
+        "device": "cb2",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "mainc2",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "w29",
+      "from": {
+        "device": "mainc2",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "th2",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "w30",
+      "from": {
+        "device": "th2",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "pump2",
+        "pin": "V"
+      }
+    },
+    {
+      "id": "w31",
+      "from": {
+        "device": "main",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "cb2",
+        "pin": "L3"
+      },
+      "label": "L3",
+      "points": [
+        {
+          "x": 206,
+          "y": 360
+        },
+        {
+          "x": 261,
+          "y": 360
+        }
+      ]
+    },
+    {
+      "id": "w32",
+      "from": {
+        "device": "cb2",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "mainc2",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "w33",
+      "from": {
+        "device": "mainc2",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "th2",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "w34",
+      "from": {
+        "device": "th2",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "pump2",
+        "pin": "W"
+      }
+    },
+    {
+      "id": "w35",
+      "from": {
+        "device": "lc-482",
+        "pin": "J"
+      },
+      "to": {
+        "device": "ps",
+        "pin": "L"
+      },
+      "points": [
+        {
+          "x": 536,
+          "y": -40
+        },
+        {
+          "x": 536,
+          "y": 662
+        },
+        {
+          "x": 412,
+          "y": 662
+        }
+      ]
+    },
+    {
+      "id": "w36",
+      "from": {
+        "device": "nc-374",
+        "pin": "J"
+      },
+      "to": {
+        "device": "ps",
+        "pin": "N"
+      },
+      "points": [
+        {
+          "x": 374,
+          "y": 825
+        },
+        {
+          "x": 428,
+          "y": 825
+        }
+      ]
+    },
+    {
+      "id": "w37",
+      "from": {
+        "device": "ps",
+        "pin": "+"
+      },
+      "to": {
+        "device": "dcpos",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 412,
+          "y": 1020
+        }
+      ]
+    },
+    {
+      "id": "w38",
+      "from": {
+        "device": "ps",
+        "pin": "-"
+      },
+      "to": {
+        "device": "dcneg",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 428,
+          "y": 973
+        },
+        {
+          "x": 375,
+          "y": 973
+        }
+      ]
+    },
+    {
+      "id": "w39",
+      "from": {
+        "device": "dcpos",
+        "pin": "J"
+      },
+      "to": {
+        "device": "level1",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 375,
+          "y": 1070
+        },
+        {
+          "x": 420,
+          "y": 1070
+        }
+      ]
+    },
+    {
+      "id": "w40",
+      "from": {
+        "device": "level1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "rl1",
+        "pin": "A1"
+      },
+      "label": "1101"
+    },
+    {
+      "id": "w41",
+      "from": {
+        "device": "rl1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "dcneg",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 420,
+          "y": 1500
+        }
+      ]
+    },
+    {
+      "id": "w42",
+      "from": {
+        "device": "dcpos",
+        "pin": "J"
+      },
+      "to": {
+        "device": "level2",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 375,
+          "y": 1070
+        },
+        {
+          "x": 530,
+          "y": 1070
+        }
+      ]
+    },
+    {
+      "id": "w43",
+      "from": {
+        "device": "level2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "rl2",
+        "pin": "A1"
+      },
+      "label": "1102"
+    },
+    {
+      "id": "w44",
+      "from": {
+        "device": "rl2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "dcneg",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 530,
+          "y": 1500
+        }
+      ]
+    },
+    {
+      "id": "w45",
+      "from": {
+        "device": "dcpos",
+        "pin": "J"
+      },
+      "to": {
+        "device": "level3",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 375,
+          "y": 1070
+        },
+        {
+          "x": 640,
+          "y": 1070
+        }
+      ]
+    },
+    {
+      "id": "w46",
+      "from": {
+        "device": "level3",
+        "pin": "14"
+      },
+      "to": {
+        "device": "rl3",
+        "pin": "A1"
+      },
+      "label": "1103"
+    },
+    {
+      "id": "w47",
+      "from": {
+        "device": "rl3",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "dcneg",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 640,
+          "y": 1500
+        }
+      ]
+    },
+    {
+      "id": "w48",
+      "from": {
+        "device": "dcpos",
+        "pin": "J"
+      },
+      "to": {
+        "device": "level4",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 375,
+          "y": 1070
+        },
+        {
+          "x": 750,
+          "y": 1070
+        }
+      ]
+    },
+    {
+      "id": "w49",
+      "from": {
+        "device": "level4",
+        "pin": "14"
+      },
+      "to": {
+        "device": "rl4",
+        "pin": "A1"
+      },
+      "label": "1104"
+    },
+    {
+      "id": "w50",
+      "from": {
+        "device": "rl4",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "dcneg",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 750,
+          "y": 1500
+        }
+      ]
+    },
+    {
+      "id": "w51",
+      "from": {
+        "device": "lc-635",
+        "pin": "J"
+      },
+      "to": {
+        "device": "s",
+        "pin": "COM"
+      }
+    },
+    {
+      "id": "w52",
+      "from": {
+        "device": "s",
+        "pin": "AUTO"
+      },
+      "to": {
+        "device": "rl2auto",
+        "pin": "13"
+      },
+      "label": "1201",
+      "points": [
+        {
+          "x": 627,
+          "y": 332.5
+        },
+        {
+          "x": 585,
+          "y": 332.5
+        }
+      ]
+    },
+    {
+      "id": "w53",
+      "from": {
+        "device": "rl2auto",
+        "pin": "14"
+      },
+      "to": {
+        "device": "n1202",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w54",
+      "from": {
+        "device": "n1202",
+        "pin": "J"
+      },
+      "to": {
+        "device": "t1",
+        "pin": "A1"
+      },
+      "points": [
+        {
+          "x": 585,
+          "y": 665
+        },
+        {
+          "x": 665,
+          "y": 665
+        }
+      ]
+    },
+    {
+      "id": "w55",
+      "from": {
+        "device": "t1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-611",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 665,
+          "y": 808
+        },
+        {
+          "x": 594,
+          "y": 808
+        },
+        {
+          "x": 594,
+          "y": 1652
+        },
+        {
+          "x": 611,
+          "y": 1652
+        }
+      ]
+    },
+    {
+      "id": "w56",
+      "from": {
+        "device": "n1202",
+        "pin": "J"
+      },
+      "to": {
+        "device": "altno",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 585,
+          "y": 650
+        },
+        {
+          "x": 560,
+          "y": 650
+        }
+      ]
+    },
+    {
+      "id": "w57",
+      "from": {
+        "device": "n1202",
+        "pin": "J"
+      },
+      "to": {
+        "device": "altnc",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 585,
+          "y": 650
+        },
+        {
+          "x": 775,
+          "y": 650
+        }
+      ]
+    },
+    {
+      "id": "w58",
+      "from": {
+        "device": "altnc",
+        "pin": "22"
+      },
+      "to": {
+        "device": "n1207",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w59",
+      "from": {
+        "device": "altno",
+        "pin": "14"
+      },
+      "to": {
+        "device": "n1203",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 560,
+          "y": 793
+        },
+        {
+          "x": 594,
+          "y": 793
+        },
+        {
+          "x": 594,
+          "y": 1300
+        }
+      ]
+    },
+    {
+      "id": "w60",
+      "from": {
+        "device": "n1207",
+        "pin": "J"
+      },
+      "to": {
+        "device": "rl3path",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 775,
+          "y": 885
+        },
+        {
+          "x": 660,
+          "y": 885
+        }
+      ]
+    },
+    {
+      "id": "w61",
+      "from": {
+        "device": "n1207",
+        "pin": "J"
+      },
+      "to": {
+        "device": "t1path",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 775,
+          "y": 885
+        },
+        {
+          "x": 765,
+          "y": 885
+        }
+      ]
+    },
+    {
+      "id": "w62",
+      "from": {
+        "device": "rl3path",
+        "pin": "14"
+      },
+      "to": {
+        "device": "n1203",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 660,
+          "y": 1028
+        },
+        {
+          "x": 594,
+          "y": 1028
+        },
+        {
+          "x": 594,
+          "y": 1300
+        }
+      ]
+    },
+    {
+      "id": "w63",
+      "from": {
+        "device": "t1path",
+        "pin": "14"
+      },
+      "to": {
+        "device": "n1203",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 765,
+          "y": 1028
+        },
+        {
+          "x": 681,
+          "y": 1028
+        },
+        {
+          "x": 681,
+          "y": 1300
+        }
+      ]
+    },
+    {
+      "id": "w64",
+      "from": {
+        "device": "lc-374",
+        "pin": "J"
+      },
+      "to": {
+        "device": "rl2alt",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 319,
+          "y": -40
+        },
+        {
+          "x": 319,
+          "y": 1617
+        },
+        {
+          "x": 460,
+          "y": 1617
+        }
+      ]
+    },
+    {
+      "id": "w65",
+      "from": {
+        "device": "rl2alt",
+        "pin": "14"
+      },
+      "to": {
+        "device": "alt",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "w66",
+      "from": {
+        "device": "alt",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-460",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w67",
+      "from": {
+        "device": "s",
+        "pin": "MAN"
+      },
+      "to": {
+        "device": "n1205",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 643,
+          "y": 420
+        }
+      ]
+    },
+    {
+      "id": "w68",
+      "from": {
+        "device": "n1205",
+        "pin": "J"
+      },
+      "to": {
+        "device": "ra",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "w69",
+      "from": {
+        "device": "ra",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-920",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w70",
+      "from": {
+        "device": "pb1on",
+        "pin": "14"
+      },
+      "to": {
+        "device": "n1206",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w71",
+      "from": {
+        "device": "ram1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "n1204",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w72",
+      "from": {
+        "device": "thnc1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "n1208",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w73",
+      "from": {
+        "device": "n1205",
+        "pin": "J"
+      },
+      "to": {
+        "device": "pb1on",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 920,
+          "y": 490
+        },
+        {
+          "x": 1040,
+          "y": 490
+        }
+      ]
+    },
+    {
+      "id": "w74",
+      "from": {
+        "device": "n1205",
+        "pin": "J"
+      },
+      "to": {
+        "device": "seal1",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 920,
+          "y": 490
+        },
+        {
+          "x": 1145,
+          "y": 490
+        }
+      ]
+    },
+    {
+      "id": "w75",
+      "from": {
+        "device": "n1208",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mc1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "w76",
+      "from": {
+        "device": "n1208",
+        "pin": "J"
+      },
+      "to": {
+        "device": "r1",
+        "pin": "A1"
+      },
+      "points": [
+        {
+          "x": 1040,
+          "y": 1710
+        },
+        {
+          "x": 1145,
+          "y": 1710
+        }
+      ]
+    },
+    {
+      "id": "w77",
+      "from": {
+        "device": "seal1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "n1206",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 1145,
+          "y": 735
+        }
+      ]
+    },
+    {
+      "id": "w78",
+      "from": {
+        "device": "n1206",
+        "pin": "J"
+      },
+      "to": {
+        "device": "pb1off",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "w79",
+      "from": {
+        "device": "pb1off",
+        "pin": "22"
+      },
+      "to": {
+        "device": "ram1",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "w80",
+      "from": {
+        "device": "n1203",
+        "pin": "J"
+      },
+      "to": {
+        "device": "raa1",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 1099,
+          "y": 1300
+        },
+        {
+          "x": 1099,
+          "y": 1007
+        },
+        {
+          "x": 1145,
+          "y": 1007
+        }
+      ]
+    },
+    {
+      "id": "w81",
+      "from": {
+        "device": "raa1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "n1204",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 1145,
+          "y": 1260
+        }
+      ]
+    },
+    {
+      "id": "w82",
+      "from": {
+        "device": "n1204",
+        "pin": "J"
+      },
+      "to": {
+        "device": "thnc1",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "w83",
+      "from": {
+        "device": "mc1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-1040",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w84",
+      "from": {
+        "device": "r1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-1145",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w85",
+      "from": {
+        "device": "pb2on",
+        "pin": "14"
+      },
+      "to": {
+        "device": "n1209",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w86",
+      "from": {
+        "device": "ram2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "n1210",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w87",
+      "from": {
+        "device": "thnc2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "n1211",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w88",
+      "from": {
+        "device": "n1205",
+        "pin": "J"
+      },
+      "to": {
+        "device": "pb2on",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 920,
+          "y": 490
+        },
+        {
+          "x": 1310,
+          "y": 490
+        }
+      ]
+    },
+    {
+      "id": "w89",
+      "from": {
+        "device": "n1205",
+        "pin": "J"
+      },
+      "to": {
+        "device": "seal2",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 920,
+          "y": 490
+        },
+        {
+          "x": 1415,
+          "y": 490
+        }
+      ]
+    },
+    {
+      "id": "w90",
+      "from": {
+        "device": "n1211",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mc2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "w91",
+      "from": {
+        "device": "n1211",
+        "pin": "J"
+      },
+      "to": {
+        "device": "r2",
+        "pin": "A1"
+      },
+      "points": [
+        {
+          "x": 1310,
+          "y": 1710
+        },
+        {
+          "x": 1415,
+          "y": 1710
+        }
+      ]
+    },
+    {
+      "id": "w92",
+      "from": {
+        "device": "seal2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "n1209",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 1415,
+          "y": 735
+        }
+      ]
+    },
+    {
+      "id": "w93",
+      "from": {
+        "device": "n1209",
+        "pin": "J"
+      },
+      "to": {
+        "device": "pb2off",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "w94",
+      "from": {
+        "device": "pb2off",
+        "pin": "22"
+      },
+      "to": {
+        "device": "ram2",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "w95",
+      "from": {
+        "device": "n1207",
+        "pin": "J"
+      },
+      "to": {
+        "device": "raa2",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 994,
+          "y": 865
+        },
+        {
+          "x": 994,
+          "y": 1007
+        },
+        {
+          "x": 1415,
+          "y": 1007
+        }
+      ]
+    },
+    {
+      "id": "w96",
+      "from": {
+        "device": "raa2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "n1210",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 1415,
+          "y": 1260
+        }
+      ]
+    },
+    {
+      "id": "w97",
+      "from": {
+        "device": "n1210",
+        "pin": "J"
+      },
+      "to": {
+        "device": "thnc2",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "w98",
+      "from": {
+        "device": "mc2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-1310",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w99",
+      "from": {
+        "device": "r2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-1415",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w100",
+      "from": {
+        "device": "lc-479",
+        "pin": "J"
+      },
+      "to": {
+        "device": "lvlight1",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 536,
+          "y": -40
+        },
+        {
+          "x": 536,
+          "y": 662
+        },
+        {
+          "x": 484,
+          "y": 662
+        },
+        {
+          "x": 484,
+          "y": 1637
+        },
+        {
+          "x": 565,
+          "y": 1637
+        }
+      ]
+    },
+    {
+      "id": "w101",
+      "from": {
+        "device": "lvlight1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "levelLamp1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "w102",
+      "from": {
+        "device": "levelLamp1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-565",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w103",
+      "from": {
+        "device": "lc-719",
+        "pin": "J"
+      },
+      "to": {
+        "device": "lvlight4",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 706,
+          "y": -40
+        },
+        {
+          "x": 706,
+          "y": 1637
+        },
+        {
+          "x": 675,
+          "y": 1637
+        }
+      ]
+    },
+    {
+      "id": "w104",
+      "from": {
+        "device": "lvlight4",
+        "pin": "14"
+      },
+      "to": {
+        "device": "levelLamp4",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "w105",
+      "from": {
+        "device": "levelLamp4",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-675",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w106",
+      "from": {
+        "device": "thno1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "fjoin1",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w107",
+      "from": {
+        "device": "lc-1550",
+        "pin": "J"
+      },
+      "to": {
+        "device": "thno1",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "w108",
+      "from": {
+        "device": "fjoin1",
+        "pin": "J"
+      },
+      "to": {
+        "device": "rf1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "w109",
+      "from": {
+        "device": "fjoin1",
+        "pin": "J"
+      },
+      "to": {
+        "device": "faultLamp1",
+        "pin": "A1"
+      },
+      "points": [
+        {
+          "x": 1550,
+          "y": 495
+        },
+        {
+          "x": 1612,
+          "y": 495
+        }
+      ]
+    },
+    {
+      "id": "w110",
+      "from": {
+        "device": "rf1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-1506",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 1550,
+          "y": 640
+        },
+        {
+          "x": 1506,
+          "y": 640
+        }
+      ]
+    },
+    {
+      "id": "w111",
+      "from": {
+        "device": "faultLamp1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-1612",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w112",
+      "from": {
+        "device": "lc-1506",
+        "pin": "J"
+      },
+      "to": {
+        "device": "runno1",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 1506,
+          "y": 725
+        },
+        {
+          "x": 1550,
+          "y": 725
+        }
+      ]
+    },
+    {
+      "id": "w113",
+      "from": {
+        "device": "runno1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "onLamp1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "w114",
+      "from": {
+        "device": "onLamp1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-1506",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 1550,
+          "y": 1075
+        },
+        {
+          "x": 1506,
+          "y": 1075
+        }
+      ]
+    },
+    {
+      "id": "w115",
+      "from": {
+        "device": "lc-1506",
+        "pin": "J"
+      },
+      "to": {
+        "device": "runnc1",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 1506,
+          "y": 1155
+        },
+        {
+          "x": 1550,
+          "y": 1155
+        }
+      ]
+    },
+    {
+      "id": "w116",
+      "from": {
+        "device": "runnc1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "rfnc1",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "w117",
+      "from": {
+        "device": "rfnc1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "offLamp1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "w118",
+      "from": {
+        "device": "offLamp1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-1550",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w119",
+      "from": {
+        "device": "thno2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "fjoin2",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w120",
+      "from": {
+        "device": "lc-1675",
+        "pin": "J"
+      },
+      "to": {
+        "device": "thno2",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "w121",
+      "from": {
+        "device": "fjoin2",
+        "pin": "J"
+      },
+      "to": {
+        "device": "rf2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "w122",
+      "from": {
+        "device": "fjoin2",
+        "pin": "J"
+      },
+      "to": {
+        "device": "faultLamp2",
+        "pin": "A1"
+      },
+      "points": [
+        {
+          "x": 1675,
+          "y": 495
+        },
+        {
+          "x": 1737,
+          "y": 495
+        }
+      ]
+    },
+    {
+      "id": "w123",
+      "from": {
+        "device": "rf2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-1631",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 1675,
+          "y": 640
+        },
+        {
+          "x": 1631,
+          "y": 640
+        }
+      ]
+    },
+    {
+      "id": "w124",
+      "from": {
+        "device": "faultLamp2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-1737",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w125",
+      "from": {
+        "device": "lc-1631",
+        "pin": "J"
+      },
+      "to": {
+        "device": "runno2",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 1783,
+          "y": -40
+        },
+        {
+          "x": 1783,
+          "y": 727
+        },
+        {
+          "x": 1675,
+          "y": 727
+        }
+      ]
+    },
+    {
+      "id": "w126",
+      "from": {
+        "device": "runno2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "onLamp2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "w127",
+      "from": {
+        "device": "onLamp2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-1631",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 1675,
+          "y": 1075
+        },
+        {
+          "x": 1631,
+          "y": 1075
+        }
+      ]
+    },
+    {
+      "id": "w128",
+      "from": {
+        "device": "lc-1631",
+        "pin": "J"
+      },
+      "to": {
+        "device": "runnc2",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 1783,
+          "y": -40
+        },
+        {
+          "x": 1783,
+          "y": 1157
+        },
+        {
+          "x": 1675,
+          "y": 1157
+        }
+      ]
+    },
+    {
+      "id": "w129",
+      "from": {
+        "device": "runnc2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "rfnc2",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "w130",
+      "from": {
+        "device": "rfnc2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "offLamp2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "w131",
+      "from": {
+        "device": "offLamp2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-1675",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w132",
+      "from": {
+        "device": "lc-1930",
+        "pin": "J"
+      },
+      "to": {
+        "device": "rl4alarm",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "w133",
+      "from": {
+        "device": "lc-2040",
+        "pin": "J"
+      },
+      "to": {
+        "device": "rf1alarm",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "w134",
+      "from": {
+        "device": "lc-2150",
+        "pin": "J"
+      },
+      "to": {
+        "device": "rf2alarm",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "w135",
+      "from": {
+        "device": "rl4alarm",
+        "pin": "14"
+      },
+      "to": {
+        "device": "n1105",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 1930,
+          "y": 440
+        }
+      ]
+    },
+    {
+      "id": "w136",
+      "from": {
+        "device": "rf1alarm",
+        "pin": "14"
+      },
+      "to": {
+        "device": "n1105",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w137",
+      "from": {
+        "device": "rf2alarm",
+        "pin": "14"
+      },
+      "to": {
+        "device": "n1105",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 2150,
+          "y": 440
+        }
+      ]
+    },
+    {
+      "id": "w138",
+      "from": {
+        "device": "rbznc",
+        "pin": "22"
+      },
+      "to": {
+        "device": "n1110",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w139",
+      "from": {
+        "device": "mute",
+        "pin": "14"
+      },
+      "to": {
+        "device": "n1111",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 2110,
+          "y": 815
+        }
+      ]
+    },
+    {
+      "id": "w140",
+      "from": {
+        "device": "xc1outa",
+        "pin": "2"
+      },
+      "to": {
+        "device": "asout",
+        "pin": "13"
+      },
+      "label": "XC1:9"
+    },
+    {
+      "id": "w141",
+      "from": {
+        "device": "asout",
+        "pin": "14"
+      },
+      "to": {
+        "device": "xc1outb",
+        "pin": "1"
+      },
+      "label": "XC1:10"
+    },
+    {
+      "id": "w142",
+      "from": {
+        "device": "n1105",
+        "pin": "J"
+      },
+      "to": {
+        "device": "as",
+        "pin": "A1"
+      },
+      "points": [
+        {
+          "x": 2040,
+          "y": 570
+        },
+        {
+          "x": 1890,
+          "y": 570
+        }
+      ]
+    },
+    {
+      "id": "w143",
+      "from": {
+        "device": "n1105",
+        "pin": "J"
+      },
+      "to": {
+        "device": "rbznc",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 2040,
+          "y": 570
+        },
+        {
+          "x": 2000,
+          "y": 570
+        }
+      ]
+    },
+    {
+      "id": "w144",
+      "from": {
+        "device": "n1105",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mute",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 2040,
+          "y": 570
+        },
+        {
+          "x": 2110,
+          "y": 570
+        }
+      ]
+    },
+    {
+      "id": "w145",
+      "from": {
+        "device": "n1105",
+        "pin": "J"
+      },
+      "to": {
+        "device": "rbzno",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 2040,
+          "y": 570
+        },
+        {
+          "x": 2220,
+          "y": 570
+        }
+      ]
+    },
+    {
+      "id": "w146",
+      "from": {
+        "device": "as",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-1890",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w147",
+      "from": {
+        "device": "rbzno",
+        "pin": "14"
+      },
+      "to": {
+        "device": "n1111",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 2220,
+          "y": 815
+        }
+      ]
+    },
+    {
+      "id": "w148",
+      "from": {
+        "device": "n1111",
+        "pin": "J"
+      },
+      "to": {
+        "device": "rbz",
+        "pin": "A1"
+      },
+      "points": [
+        {
+          "x": 2155,
+          "y": 940
+        },
+        {
+          "x": 2165,
+          "y": 940
+        }
+      ]
+    },
+    {
+      "id": "w149",
+      "from": {
+        "device": "n1110",
+        "pin": "J"
+      },
+      "to": {
+        "device": "buzzer",
+        "pin": "A1"
+      },
+      "points": [
+        {
+          "x": 2000,
+          "y": 940
+        },
+        {
+          "x": 2055,
+          "y": 940
+        }
+      ]
+    },
+    {
+      "id": "w150",
+      "from": {
+        "device": "n1110",
+        "pin": "J"
+      },
+      "to": {
+        "device": "beacon",
+        "pin": "A1"
+      },
+      "points": [
+        {
+          "x": 2000,
+          "y": 940
+        },
+        {
+          "x": 1945,
+          "y": 940
+        }
+      ]
+    },
+    {
+      "id": "w151",
+      "from": {
+        "device": "rbz",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-2165",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w152",
+      "from": {
+        "device": "buzzer",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-2055",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w153",
+      "from": {
+        "device": "beacon",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "nc-1945",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w154",
+      "from": {
+        "device": "lc-374",
+        "pin": "J"
+      },
+      "to": {
+        "device": "lc-479",
+        "pin": "J"
+      },
+      "label": "LC"
+    },
+    {
+      "id": "w155",
+      "from": {
+        "device": "lc-479",
+        "pin": "J"
+      },
+      "to": {
+        "device": "lc-482",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w156",
+      "from": {
+        "device": "lc-482",
+        "pin": "J"
+      },
+      "to": {
+        "device": "lc",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w157",
+      "from": {
+        "device": "lc",
+        "pin": "J"
+      },
+      "to": {
+        "device": "lc-635",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w158",
+      "from": {
+        "device": "lc-635",
+        "pin": "J"
+      },
+      "to": {
+        "device": "lc-719",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w159",
+      "from": {
+        "device": "lc-719",
+        "pin": "J"
+      },
+      "to": {
+        "device": "lc-1506",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w160",
+      "from": {
+        "device": "lc-1506",
+        "pin": "J"
+      },
+      "to": {
+        "device": "lc-1550",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w161",
+      "from": {
+        "device": "lc-1550",
+        "pin": "J"
+      },
+      "to": {
+        "device": "lc-1631",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w162",
+      "from": {
+        "device": "lc-1631",
+        "pin": "J"
+      },
+      "to": {
+        "device": "lc-1675",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w163",
+      "from": {
+        "device": "lc-1675",
+        "pin": "J"
+      },
+      "to": {
+        "device": "lc-1930",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w164",
+      "from": {
+        "device": "lc-1930",
+        "pin": "J"
+      },
+      "to": {
+        "device": "lc-2040",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w165",
+      "from": {
+        "device": "lc-2040",
+        "pin": "J"
+      },
+      "to": {
+        "device": "lc-2150",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w166",
+      "from": {
+        "device": "nc-374",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-460",
+        "pin": "J"
+      },
+      "label": "NC"
+    },
+    {
+      "id": "w167",
+      "from": {
+        "device": "nc-460",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w168",
+      "from": {
+        "device": "nc",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-565",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w169",
+      "from": {
+        "device": "nc-565",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-611",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w170",
+      "from": {
+        "device": "nc-611",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-675",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w171",
+      "from": {
+        "device": "nc-675",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-920",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w172",
+      "from": {
+        "device": "nc-920",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-1040",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w173",
+      "from": {
+        "device": "nc-1040",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-1145",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w174",
+      "from": {
+        "device": "nc-1145",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-1310",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w175",
+      "from": {
+        "device": "nc-1310",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-1415",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w176",
+      "from": {
+        "device": "nc-1415",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-1506",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w177",
+      "from": {
+        "device": "nc-1506",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-1550",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w178",
+      "from": {
+        "device": "nc-1550",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-1612",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w179",
+      "from": {
+        "device": "nc-1612",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-1631",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w180",
+      "from": {
+        "device": "nc-1631",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-1675",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w181",
+      "from": {
+        "device": "nc-1675",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-1737",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w182",
+      "from": {
+        "device": "nc-1737",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-1890",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w183",
+      "from": {
+        "device": "nc-1890",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-1945",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w184",
+      "from": {
+        "device": "nc-1945",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-2055",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "w185",
+      "from": {
+        "device": "nc-2055",
+        "pin": "J"
+      },
+      "to": {
+        "device": "nc-2165",
+        "pin": "J"
+      }
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "sump-level",
+      "name": "01 · Mức nước tăng/giảm theo giả thiết XC1",
+      "reference": "TU DIEN/PDF/26. SP-CP-01 (Rev.A 20251030).pdf · PDF tr. 13 / tờ 303 + tờ 304",
+      "initial": [
+        {
+          "device": "s",
+          "key": "mode",
+          "value": "AUTO"
+        }
+      ],
+      "steps": [
+        {
+          "label": "Đáy bể giả định: cả bốn tiếp điểm mở",
+          "actions": [],
+          "expect": [
+            {
+              "device": "rl2",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Tăng đến LEVEL 1; vùng giữa L1/L2 theo chiều tăng",
+          "actions": [
+            {
+              "device": "level1",
+              "key": "signal",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "rl1",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "levelLamp1",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "LEVEL 2 đóng; ALT đổi sang nhánh MC1 trong mẫu",
+          "actions": [
+            {
+              "device": "level2",
+              "key": "signal",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "rl2",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "alt",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "mc1",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "r1",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            },
+            {
+              "device": "onLamp1",
+              "key": "active",
+              "value": true
+            }
+          ]
+        },
+        {
+          "label": "LEVEL 3 đóng; RL3 nối hai nhánh nên hai bơm cùng có lệnh",
+          "actions": [
+            {
+              "device": "level3",
+              "key": "signal",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "rl3",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "LEVEL 4 đóng; báo mức cao",
+          "actions": [
+            {
+              "device": "level4",
+              "key": "signal",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "rl4",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "levelLamp4",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "buzzer",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "beacon",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "asout",
+              "key": "closed",
+              "value": true
+            }
+          ]
+        },
+        {
+          "label": "Giảm qua LEVEL 4",
+          "actions": [
+            {
+              "device": "level4",
+              "key": "signal",
+              "value": false
+            }
+          ],
+          "expect": [
+            {
+              "device": "levelLamp4",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "asout",
+              "key": "closed",
+              "value": false
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Giảm qua LEVEL 3 trước mốc timer, nhánh được ALT chọn vẫn chạy",
+          "actions": [
+            {
+              "device": "level3",
+              "key": "signal",
+              "value": false
+            }
+          ],
+          "expect": [
+            {
+              "device": "rl3",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Giảm dưới LEVEL 2; L1 vẫn đóng trong vùng giữa",
+          "actions": [
+            {
+              "device": "level2",
+              "key": "signal",
+              "value": false
+            }
+          ],
+          "expect": [
+            {
+              "device": "rl2",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "mc1",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            },
+            {
+              "device": "offLamp1",
+              "key": "active",
+              "value": true
+            }
+          ]
+        },
+        {
+          "label": "Giảm dưới LEVEL 1",
+          "actions": [
+            {
+              "device": "level1",
+              "key": "signal",
+              "value": false
+            }
+          ],
+          "expect": [
+            {
+              "device": "rl1",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "levelLamp1",
+              "key": "active",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "verification": "unverified"
+    },
+    {
+      "id": "sump-auto-relays",
+      "name": "02 · AUTO theo XC1, Omron G4Q và T1",
+      "reference": "TU DIEN/PDF/26. SP-CP-01 (Rev.A 20251030).pdf · PDF tr. 14 / tờ 304. Omron G4Q CSM_G4Q_DS_E_3_2 · tr. 4–5",
+      "initialDescription": "AUTO, XC1:3–4 mở. Ca chọn vị trí ban đầu của ALT để lần cấp điện đầu tiên ưu tiên MC1",
+      "initial": [
+        {
+          "device": "s",
+          "key": "mode",
+          "value": "AUTO"
+        }
+      ],
+      "steps": [
+        {
+          "label": "Đóng XC1:3–4 lần 1, cuộn ALT đổi sang nhánh MC1",
+          "actions": [
+            {
+              "device": "level2",
+              "key": "signal",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "rl2",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "alt",
+              "key": "powered",
+              "value": true
+            },
+            {
+              "device": "altno",
+              "key": "closed",
+              "value": true
+            },
+            {
+              "device": "altnc",
+              "key": "closed",
+              "value": false
+            },
+            {
+              "device": "mc1",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Giữ XC1:3–4 đóng, G4Q giữ nhánh đã chọn",
+          "actions": [],
+          "expect": [
+            {
+              "device": "alt",
+              "key": "powered",
+              "value": true
+            },
+            {
+              "device": "altno",
+              "key": "closed",
+              "value": true
+            },
+            {
+              "device": "altnc",
+              "key": "closed",
+              "value": false
+            }
+          ],
+          "advanceMs": 1000
+        },
+        {
+          "label": "Mở XC1:3–4, lệnh AUTO mất và cam G4Q giữ vị trí",
+          "actions": [
+            {
+              "device": "level2",
+              "key": "signal",
+              "value": false
+            }
+          ],
+          "expect": [
+            {
+              "device": "alt",
+              "key": "powered",
+              "value": false
+            },
+            {
+              "device": "altno",
+              "key": "closed",
+              "value": true
+            },
+            {
+              "device": "altnc",
+              "key": "closed",
+              "value": false
+            },
+            {
+              "device": "mc1",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "mc2",
+              "key": "active",
+              "value": false
+            }
+          ]
+        },
+        {
+          "label": "Đóng XC1:3–4 lần 2, ALT chọn MC2",
+          "actions": [
+            {
+              "device": "level2",
+              "key": "signal",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "alt",
+              "key": "powered",
+              "value": true
+            },
+            {
+              "device": "altno",
+              "key": "closed",
+              "value": false
+            },
+            {
+              "device": "altnc",
+              "key": "closed",
+              "value": true
+            },
+            {
+              "device": "mc1",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "mc2",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            },
+            {
+              "device": "t1",
+              "key": "active",
+              "value": false
+            }
+          ]
+        },
+        {
+          "label": "Trước mốc 3 phút",
+          "actions": [],
+          "expect": [
+            {
+              "device": "t1",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            }
+          ],
+          "advanceMs": 179999
+        },
+        {
+          "label": "Chạm 3 phút, T1 NO cấp thêm MC1",
+          "actions": [],
+          "expect": [
+            {
+              "device": "t1",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "mc1",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            }
+          ],
+          "advanceMs": 1
+        },
+        {
+          "label": "OFF ngắt lệnh chạy, cuộn ALT vẫn được RL2 cấp điện",
+          "actions": [
+            {
+              "device": "s",
+              "key": "mode",
+              "value": "OFF"
+            }
+          ],
+          "expect": [
+            {
+              "device": "alt",
+              "key": "powered",
+              "value": true
+            },
+            {
+              "device": "altnc",
+              "key": "closed",
+              "value": true
+            },
+            {
+              "device": "mc1",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "mc2",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sump-rl3",
+      "name": "03 · RL3 bổ sung MC1 khi ALT cấp MC2",
+      "reference": "TU DIEN/PDF/26. SP-CP-01 (Rev.A 20251030).pdf · PDF tr. 14 / tờ 304",
+      "initial": [
+        {
+          "device": "s",
+          "key": "mode",
+          "value": "AUTO"
+        }
+      ],
+      "steps": [
+        {
+          "label": "Tạo hai cạnh lên RL2 để chọn nhánh MC2",
+          "actions": [
+            {
+              "device": "level2",
+              "key": "signal",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "alt",
+              "key": "active",
+              "value": true
+            }
+          ]
+        },
+        {
+          "label": "Nhả XC1:3–4",
+          "actions": [
+            {
+              "device": "level2",
+              "key": "signal",
+              "value": false
+            }
+          ],
+          "expect": [
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Đóng lại XC1:3–4",
+          "actions": [
+            {
+              "device": "level2",
+              "key": "signal",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Đóng XC1:5–6 trước mốc timer; RL3 cấp thêm MC1",
+          "actions": [
+            {
+              "device": "level3",
+              "key": "signal",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "rl3",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "t1",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "r1",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Mở XC1:5–6 trước mốc timer; MC1 nhả",
+          "actions": [
+            {
+              "device": "level3",
+              "key": "signal",
+              "value": false
+            }
+          ],
+          "expect": [
+            {
+              "device": "mc1",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sump-man-trip",
+      "name": "04 · MAN, tự giữ, trip/reset và OFF",
+      "reference": "TU DIEN/PDF/26. SP-CP-01 (Rev.A 20251030).pdf · PDF tr. 14 / tờ 304",
+      "initial": [
+        {
+          "device": "s",
+          "key": "mode",
+          "value": "MAN"
+        }
+      ],
+      "steps": [
+        {
+          "label": "MAN, chưa có thao tác ON",
+          "actions": [],
+          "expect": [
+            {
+              "device": "ra",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "mc1",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "offLamp1",
+              "key": "active",
+              "value": true
+            }
+          ]
+        },
+        {
+          "label": "Nhấn ON 1",
+          "actions": [
+            {
+              "device": "pb1on",
+              "key": "pressed",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "r1",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "mc1",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Nhả ON 1, tự giữ nhờ 1R1",
+          "actions": [
+            {
+              "device": "pb1on",
+              "key": "pressed",
+              "value": false
+            }
+          ],
+          "expect": [
+            {
+              "device": "seal1",
+              "key": "closed",
+              "value": true
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Giả lập TH1 trip",
+          "actions": [
+            {
+              "device": "th1",
+              "key": "trip",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "thnc1",
+              "key": "closed",
+              "value": false
+            },
+            {
+              "device": "mc1",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "faultLamp1",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "asout",
+              "key": "closed",
+              "value": true
+            }
+          ]
+        },
+        {
+          "label": "Nhấn MUTE",
+          "actions": [
+            {
+              "device": "mute",
+              "key": "pressed",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "rbz",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "buzzer",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "asout",
+              "key": "closed",
+              "value": true
+            }
+          ]
+        },
+        {
+          "label": "Nhả MUTE, còi vẫn tắt khi FAULT còn",
+          "actions": [
+            {
+              "device": "mute",
+              "key": "pressed",
+              "value": false
+            }
+          ],
+          "expect": [
+            {
+              "device": "rbz",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "buzzer",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "asout",
+              "key": "closed",
+              "value": true
+            }
+          ]
+        },
+        {
+          "label": "Reset TH1, tự giữ cũ đã nhả",
+          "actions": [
+            {
+              "device": "th1",
+              "key": "trip",
+              "value": false
+            }
+          ],
+          "expect": [
+            {
+              "device": "faultLamp1",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "rbz",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "asout",
+              "key": "closed",
+              "value": false
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Nhấn ON 2",
+          "actions": [
+            {
+              "device": "pb2on",
+              "key": "pressed",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            },
+            {
+              "device": "onLamp2",
+              "key": "active",
+              "value": true
+            }
+          ]
+        },
+        {
+          "label": "Nhả ON 2",
+          "actions": [
+            {
+              "device": "pb2on",
+              "key": "pressed",
+              "value": false
+            }
+          ],
+          "expect": [
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Nhấn OFF 2",
+          "actions": [
+            {
+              "device": "pb2off",
+              "key": "pressed",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "r2",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "mc2",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Chuyển OFF rồi nhả nút",
+          "actions": [
+            {
+              "device": "s",
+              "key": "mode",
+              "value": "OFF"
+            },
+            {
+              "device": "pb2off",
+              "key": "pressed",
+              "value": false
+            }
+          ],
+          "expect": [
+            {
+              "device": "ra",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sump-power",
+      "name": "05 · Tách mất động lực, điều khiển và nguồn chung",
+      "reference": "TU DIEN/PDF/26. SP-CP-01 (Rev.A 20251030).pdf · PDF tr. 12 / tờ 302 + tờ 304",
+      "initial": [
+        {
+          "device": "s",
+          "key": "mode",
+          "value": "MAN"
+        }
+      ],
+      "steps": [
+        {
+          "label": "Tạo lệnh MAN",
+          "actions": [
+            {
+              "device": "pb1on",
+              "key": "pressed",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "mc1",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Nhả ON",
+          "actions": [
+            {
+              "device": "pb1on",
+              "key": "pressed",
+              "value": false
+            }
+          ],
+          "expect": [
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Mất động lực độc lập nhưng cuộn vẫn hút",
+          "actions": [
+            {
+              "device": "src3",
+              "key": "on",
+              "value": false
+            }
+          ],
+          "expect": [
+            {
+              "device": "mc1",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "pump1",
+              "key": "command",
+              "value": true
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Mất điều khiển và 24 VDC",
+          "actions": [
+            {
+              "device": "srcac",
+              "key": "on",
+              "value": false
+            }
+          ],
+          "expect": [
+            {
+              "device": "ps",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "r1",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "mc1",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Khôi phục hai miền nguồn, không có lệnh MAN mới",
+          "actions": [
+            {
+              "device": "src3",
+              "key": "on",
+              "value": true
+            },
+            {
+              "device": "srcac",
+              "key": "on",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "ps",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "mc1",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Cắt MAIN, mất cả nhánh PS và chỉ thị",
+          "actions": [
+            {
+              "device": "main",
+              "key": "on",
+              "value": false
+            }
+          ],
+          "expect": [
+            {
+              "device": "ps",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "offLamp1",
+              "key": "active",
+              "value": false
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Đóng MAIN tại MAN, đèn OFF trở lại",
+          "actions": [
+            {
+              "device": "main",
+              "key": "on",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "ps",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "offLamp1",
+              "key": "active",
+              "value": true
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sump-outage-site",
+      "name": "06 · Khởi động lại AUTO cần xác nhận hiện trường",
+      "reference": "TU DIEN/PDF/26. SP-CP-01 (Rev.A 20251030).pdf · PDF tr. 12 / tờ 302 và PDF tr. 14 / tờ 304. Điều kiện khởi động lại tại tủ cần xác nhận",
+      "initial": [
+        {
+          "device": "s",
+          "key": "mode",
+          "value": "AUTO"
+        }
+      ],
+      "steps": [
+        {
+          "label": "Đóng tiếp điểm mức 2 khi AUTO",
+          "actions": [
+            {
+              "device": "level2",
+              "key": "signal",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Cắt MAIN khi XC1:3–4 chưa mở",
+          "actions": [
+            {
+              "device": "main",
+              "key": "on",
+              "value": false
+            }
+          ],
+          "expect": [
+            {
+              "device": "alt",
+              "key": "powered",
+              "value": false
+            },
+            {
+              "device": "altno",
+              "key": "closed",
+              "value": true
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            }
+          ]
+        },
+        {
+          "label": "Đóng MAIN, mô hình tạo cạnh lên mới nên ALT đổi nhánh",
+          "actions": [
+            {
+              "device": "main",
+              "key": "on",
+              "value": true
+            }
+          ],
+          "expect": [
+            {
+              "device": "alt",
+              "key": "powered",
+              "value": true
+            },
+            {
+              "device": "altno",
+              "key": "closed",
+              "value": false
+            },
+            {
+              "device": "altnc",
+              "key": "closed",
+              "value": true
+            },
+            {
+              "device": "pump1",
+              "key": "running",
+              "value": false,
+              "label": "Bơm 1 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "running",
+              "value": true,
+              "label": "Bơm 2 đủ điều kiện động lực"
+            },
+            {
+              "device": "pump2",
+              "key": "feedback",
+              "value": null,
+              "label": "Chưa có phản hồi bơm thực"
+            }
+          ]
+        }
+      ],
+      "verification": "unverified"
+    }
+  ],
+  "metadata": {
+    "verification": "unverified",
+    "summary": "Bản mẫu SP-CP-01. Mạch nội bộ theo tờ 302–304. Cao độ, trạng thái phao hiện trường và khởi động lại cần xác minh.",
+    "references": [
+      {
+        "file": "TU DIEN/PDF/26. SP-CP-01 (Rev.A 20251030).pdf",
+        "pages": "PDF 11–14 / 301–304"
+      },
+      {
+        "file": "Omron G4Q CSM_G4Q_DS_E_3_2",
+        "pages": "Tr. 4–5 · biểu đồ thời gian và sơ đồ chân G4Q-212S"
+      }
+    ],
+    "openIssues": [
+      "Xác minh cao độ và kiểu tiếp điểm thực cho XC1:1–8, bao gồm mức tăng và giảm.",
+      "Xác minh vị trí cam ALT ban đầu và số đầu dây thực tế. Tờ 304 ghi cuộn 13–14, COM 4. Omron chỉ định cuộn 2–7, COM 1 và 8.",
+      "Xác minh quy tắc phục hồi nguồn, tác động EMER và phản hồi bơm thực."
+    ]
+  }
+}

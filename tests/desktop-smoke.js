@@ -180,15 +180,15 @@
     check(projectTabs().includes(dolTab) && projectTabs().includes(starDeltaTab), 'Thư viện mở mẫu bơm theo mức nước trong tab thứ ba');
   }
 
-  async function verifyOu101Templates() {
+  async function verifyDemo01Templates() {
     click(action('examples'));
-    click(action('template-ou101-vfd'));
-    await waitFor(() => device('vfd-ls-h100') && !action('new').disabled, 'Không tải được biến tần OU-101');
+    click(action('template-demo01-vfd'));
+    await waitFor(() => device('vfd-ls-h100') && !action('new').disabled, 'Không tải được biến tần DEMO-01');
     const driveTab = activeProjectTab();
     check(query('#inspector').textContent.includes('302'), 'Mạch biến tần có nguồn tham chiếu tờ 302');
     click(query('[data-tab="tests"]'));
     click(action('run-tests'));
-    check(query('#scenario-list .status-pass') && !query('#scenario-list .status-fail'), 'Các ca biến tần OU-101 đều đạt');
+    check(query('#scenario-list .status-pass') && !query('#scenario-list .status-fail'), 'Các ca biến tần DEMO-01 đều đạt');
     click(action('step'));
     pointAt(query('#schematic [data-device="mode"]'));
     const mode = query('#inspector [data-input-key="mode"]');
@@ -204,14 +204,14 @@
       'Sơ đồ biến tần hiển thị 35 Hz và 1050 rpm');
 
     click(action('examples'));
-    click(action('template-ou101-scr'));
-    await waitFor(() => device('scr-tpr-3sl') && !action('new').disabled, 'Không tải được mạch SCR OU-101');
+    click(action('template-demo01-scr'));
+    await waitFor(() => device('scr-tpr-3sl') && !action('new').disabled, 'Không tải được mạch SCR DEMO-01');
     check(projectTabs().includes(driveTab) && document.querySelectorAll('#schematic [data-type="heater-3ph"]').length === 2 &&
       query('#inspector').textContent.includes('303') && query('#inspector').textContent.includes('304'),
       'Mạch SCR mở riêng và có đủ hai nhánh gia nhiệt tờ 303/304');
     click(query('[data-tab="tests"]'));
     click(action('run-tests'));
-    check(query('#scenario-list .status-pass') && !query('#scenario-list .status-fail'), 'Các ca SCR OU-101 đều đạt');
+    check(query('#scenario-list .status-pass') && !query('#scenario-list .status-fail'), 'Các ca SCR DEMO-01 đều đạt');
   }
 
   async function run() {
@@ -454,7 +454,7 @@
     check(query('#schematic [data-type="phase-relay"]'), 'Mạch mẫu ATS có rơ-le giám sát bảo vệ pha');
     const bom = await verifyBomExport();
     await verifyProjectWorkspace(roundtripTab);
-    await verifyOu101Templates();
+    await verifyDemo01Templates();
     check(performance.getEntriesByType('resource').every(resource => new URL(resource.name).origin === location.origin),
       'Tất cả tài nguyên giao diện tải từ gói cục bộ');
     check(consoleErrors.length === 0, 'Không có lỗi JavaScript trong các bước kiểm tra');

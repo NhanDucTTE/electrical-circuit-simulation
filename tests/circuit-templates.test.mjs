@@ -16,7 +16,7 @@ test('The circuit library opens independent, localized projects that pass their 
     const project = parseProject(serializeProject(createCircuitTemplate(id)));
     assert.equal(project.devices[0].tag, originalTag);
     const issues = validateProject(project);
-    assert.deepEqual(id.startsWith('ou101-') ? issues.filter(issue => issue.severity === 'error') : issues, [], id);
+    assert.deepEqual(id.startsWith('demo01-') ? issues.filter(issue => issue.severity === 'error') : issues, [], id);
     for (const scenario of project.scenarios) {
       const result = runScenario(project, scenario);
       assert.equal(result.status, 'pass', `${id}: ${scenario.name}`);

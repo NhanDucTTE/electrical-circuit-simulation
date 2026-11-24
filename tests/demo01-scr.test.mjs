@@ -3,8 +3,8 @@ import test from 'node:test';
 import {createCircuitTemplate} from '../src/circuit-templates.mjs';
 import {Simulator} from '../src/simulator.mjs';
 
-test('OU-101 SCR preserves the 1201 seal branch and loses local control power with the main bus', () => {
-  const simulator = new Simulator(createCircuitTemplate('ou101-scr'));
+test('DEMO-01 SCR preserves the 1201 seal branch and loses local control power with the main bus', () => {
+  const simulator = new Simulator(createCircuitTemplate('demo01-scr'));
   simulator.apply('ac4-scr', 'demandPercent', 60);
   simulator.apply('ac4-mode', 'mode', 'AUTO');
   assert.equal(simulator.apply('ac4-remote', 'signal', true).devices['ac4-heater'].heating, true);

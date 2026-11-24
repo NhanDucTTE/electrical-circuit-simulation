@@ -1,10 +1,10 @@
 import { pinLocation } from './schematic.mjs';
 
-const drawing = 'Q25-6123-20 · Rev.A · 16/04/2026';
+const drawing = 'DEMO-ELEC-001 · Rev.A · 16/04/2026';
 const title = {
-  vi: 'OU-101 · Biến tần VFD-1 (AC3)',
-  en: 'OU-101 · VFD-1 motor circuit (AC3)',
-  ja: 'OU-101 · VFD-1 インバータ回路（AC3）',
+  vi: 'DEMO-01 · Biến tần VFD-1 (AC3)',
+  en: 'DEMO-01 · VFD-1 motor circuit (AC3)',
+  ja: 'DEMO-01 · VFD-1 インバータ回路（AC3）',
 };
 const description = {
   vi: 'Tờ 302 · Biến tần LS H100, AUTO/OFF/MAN, DCS START/STOP và dừng báo cháy.',
@@ -63,7 +63,7 @@ function build(c, language) {
       'AC3 branch on sheets 201/302. The model tests VFD-1 run, stop, fault and digital feedback.',
       '図面201/302のAC3分岐。VFD-1の始動・停止・異常・デジタル応答を検証します。',
     ),
-    references: [{ file: '21. OU-101 (Rev.A 20260416).pdf', pages: l('Tờ 201, 302 · PDF trang 10, 12', 'Sheets 201, 302 · PDF pages 10, 12', '図面201、302 · PDF 10、12ページ') }, drawing],
+    references: [{ file: '21. DEMO-01 (Rev.A 20260416).pdf', pages: l('Tờ 201, 302 · PDF trang 10, 12', 'Sheets 201, 302 · PDF pages 10, 12', '図面201、302 · PDF 10、12ページ') }, drawing],
     openIssues: [
       l('Tờ 302 ghi MCCB ABS103c 3P–60 A; tờ 201 ghi 125AF/63AT. Dòng CB cần xác nhận theo thiết bị thực tế.',
         'Sheet 302 labels ABS103c 3P–60 A, while sheet 201 lists 125AF/63AT. Verify the installed breaker rating.',
@@ -234,12 +234,12 @@ function build(c, language) {
   const signal = (id, value) => record(id, 'signal', value);
   const running = value => [record('drive', 'running', value), record('motor', 'running', value), record('run-feedback', 'powered', value)];
   const man = [mode('MAN'), pressed('manual-on', true)];
-  scenario('ou101-vfd-man', l('MAN · Khởi động, tự giữ và dừng', 'MAN · Start, latch and stop', 'MAN · 始動、自己保持、停止'), [
+  scenario('demo01-vfd-man', l('MAN · Khởi động, tự giữ và dừng', 'MAN · Start, latch and stop', 'MAN · 始動、自己保持、停止'), [
     step(l('Chọn MAN và nhấn ON', 'Select MAN and press ON', 'MANを選びONボタンを押す'), man, running(true)),
     step(l('Nhả ON', 'Release ON', 'ONボタンを離す'), [pressed('manual-on', false)], running(true)),
     step(l('Nhấn OFF', 'Press OFF', 'OFFボタンを押す'), [pressed('manual-off', true)], running(false)),
   ]);
-  scenario('ou101-vfd-auto', l('AUTO · Điều khiển DCS và tần số', 'AUTO · DCS command and frequency', 'AUTO · DCS指令と周波数'), [
+  scenario('demo01-vfd-auto', l('AUTO · Điều khiển DCS và tần số', 'AUTO · DCS command and frequency', 'AUTO · DCS指令と周波数'), [
     step(l('Chọn AUTO khi chưa có START', 'Select AUTO with START off', 'STARTなしでAUTOを選ぶ'), [mode('AUTO')],
       [...running(false), record('drive', 'autoInput', true)]),
     step(l('Bật DCS START và đặt 35 Hz', 'Enable DCS START and set 35 Hz', 'DCS STARTを有効にし35 Hzに設定'),
@@ -250,7 +250,7 @@ function build(c, language) {
     step(l('Bỏ START rồi chọn OFF', 'Clear START and select OFF', 'STARTを解除してOFFを選ぶ'),
       [signal('dcs-start', false), signal('dcs-stop', false), mode('OFF')], [...running(false), record('line', 'powered', false)]),
   ]);
-  scenario('ou101-vfd-fire-fault', l('Liên động báo cháy và lỗi biến tần', 'Fire alarm interlock and VFD fault', '火災インターロックとインバータ異常'), [
+  scenario('demo01-vfd-fire-fault', l('Liên động báo cháy và lỗi biến tần', 'Fire alarm interlock and VFD fault', '火災インターロックとインバータ異常'), [
     step(l('Khởi động bằng MAN', 'Start in MAN', 'MANで始動'), man, running(true)),
     step(l('Nhả ON và bật FIRE', 'Release ON and enable FIRE', 'ONを離してFIREを有効にする'),
       [pressed('manual-on', false), signal('fire', true)], [...running(false), record('line', 'powered', false)]),
@@ -261,4 +261,4 @@ function build(c, language) {
   ]);
 }
 
-export const ou101VfdTemplate = { id: 'ou101-vfd', title, description, build };
+export const demo01VfdTemplate = { id: 'demo01-vfd', title, description, build };

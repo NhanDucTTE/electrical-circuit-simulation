@@ -1,6 +1,6 @@
 import { createDevice, createProject, normalizeProject, SIX_PIN_MOTOR } from './model.mjs';
-import { ou101VfdTemplate } from './ou101-vfd.mjs';
-import { ou101ScrTemplate } from './ou101-scr.mjs';
+import { demo01VfdTemplate } from './demo01-vfd.mjs';
+import { demo01ScrTemplate } from './demo01-scr.mjs';
 
 const text = (vi, en, ja) => Object.freeze({ vi, en, ja });
 const localized = (labels, language) => labels[language] ?? labels.vi;
@@ -38,8 +38,8 @@ const templates = [
     ),
     build: levelPump,
   },
-  ou101VfdTemplate,
-  ou101ScrTemplate,
+  demo01VfdTemplate,
+  demo01ScrTemplate,
 ];
 
 export const circuitTemplates = Object.freeze(templates.map(({ id, title, description }) =>

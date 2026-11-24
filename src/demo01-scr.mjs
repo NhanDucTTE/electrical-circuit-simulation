@@ -1,8 +1,8 @@
 const local = (vi, en, ja) => ({vi, en, ja});
 const languageValue = (value, language) => value[language] ?? value.vi;
 const act = (device, key, value) => ({device, key, value});
-const drawing = 'Q25-6123-20 · OU-101 · Rev.A · 16/04/2026';
-const sourceFile = '21. OU-101 (Rev.A 20260416).pdf';
+const drawing = 'DEMO-ELEC-001 · DEMO-01 · Rev.A · 16/04/2026';
+const sourceFile = '21. DEMO-01 (Rev.A 20260416).pdf';
 const powerDomain = '3P380';
 const controlDomain = 'AC220';
 const branches = [
@@ -46,7 +46,7 @@ function addBranch({project, device, wire, junction}, branch, row) {
   place('scr', 'scr-tpr-3sl', `SCR-${index}`, 890, 103,
     {domain: powerDomain, inputDomain: controlDomain, partNumber, ratedCurrentA, note: `HANYOUNG · ${ratedCurrentA} A · ${reference}`});
   place('heater', 'heater-3ph', `HT-${index - 1}`, 1324, 77,
-    {domain: powerDomain, ratedPowerKw, commandId: key(runRelay), note: `DX-OHU-101 · ${title} · ${ratedPowerKw} kW · ${reference}`});
+    {domain: powerDomain, ratedPowerKw, commandId: key(runRelay), note: `AHU-DEMO-01 · ${title} · ${ratedPowerKw} kW · ${reference}`});
   for (const [phase, output] of ['U', 'V', 'W'].entries()) {
     const stemX = 157 + phase * 25;
     const terminal = `xp-${output}`;
@@ -65,7 +65,7 @@ function addBranch({project, device, wire, junction}, branch, row) {
   }
 
   place('control', 'source-ac', `L1/N-${title}`, 86, 212, {domain: controlDomain});
-  place('bus-control-gate', 'contact-no', 'MAIN BUSBAR OU-101', 303, 204,
+  place('bus-control-gate', 'contact-no', 'MAIN BUSBAR DEMO-01', 303, 204,
     {masterId: 'main-bus', masterState: 'powered', contactLabel: 'L1'});
   place('control-gate', 'contact-no', branch.breakerTag, 445, 204,
     {masterId: key('breaker'), masterState: 'closed', contactLabel: 'L1'});
@@ -206,13 +206,13 @@ function addBranch({project, device, wire, junction}, branch, row) {
 function build(circuit, language) {
   const {project, device} = circuit;
   const tr = value => languageValue(value, language);
-  device('main-bus', 'source-3ph', 'MAIN BUSBAR OU-101', 74, 33, {domain: powerDomain});
+  device('main-bus', 'source-3ph', 'MAIN BUSBAR DEMO-01', 74, 33, {domain: powerDomain});
   const [ac4, ac5] = branches.map((branch, row) => addBranch(circuit, branch, row));
   project.metadata = {
     verification: 'unverified',
     references: [{file: sourceFile, pages: `${drawing} · tờ 006, 201, 303, 304`}],
-    summary: tr(local('Mẫu mô phỏng hai nhánh gia nhiệt HT-1 và HT-2 theo sơ đồ tủ OU-101 Rev.A.',
-      'Simulation of the HT-1 and HT-2 heater branches in OU-101 Rev.A.', 'OU-101 Rev.A のヒーター回路 HT-1・HT-2 をシミュレーションします。')),
+    summary: tr(local('Mẫu mô phỏng hai nhánh gia nhiệt HT-1 và HT-2 theo sơ đồ tủ DEMO-01 Rev.A.',
+      'Simulation of the HT-1 and HT-2 heater branches in DEMO-01 Rev.A.', 'DEMO-01 Rev.A のヒーター回路 HT-1・HT-2 をシミュレーションします。')),
     openIssues: [
       tr(local('Tín hiệu điều khiển SCR đặt theo % trong Thuộc tính. Tờ 303/304 ghi 4–20 mA và 1–5 VDC tại SCR, còn đầu ngoài tủ ghi 0–20 mA và 0–10 VDC. Cần xác nhận cách chuyển đổi.',
         'Set the SCR command as a percentage in Properties. Sheets 303/304 label the SCR at 4–20 mA and 1–5 VDC, and the field side at 0–20 mA and 0–10 VDC. The scaling needs confirmation.',
@@ -259,9 +259,9 @@ function build(circuit, language) {
   ]);
 }
 
-export const ou101ScrTemplate = {
-  id: 'ou101-scr',
-  title: local('OU-101 · Mạch SCR gia nhiệt', 'OU-101 · SCR heater circuit', 'OU-101 · SCRヒーター回路'),
+export const demo01ScrTemplate = {
+  id: 'demo01-scr',
+  title: local('DEMO-01 · Mạch SCR gia nhiệt', 'DEMO-01 · SCR heater circuit', 'DEMO-01 · SCRヒーター回路'),
   description: local('HT-1 60 kW và HT-2 6 kW · AUTO/MAN, SCR Hanyoung và liên động báo lỗi.',
     'HT-1 60 kW and HT-2 6 kW · AUTO/MAN, Hanyoung SCR units and fault interlocks.',
     'HT-1 60 kW・HT-2 6 kW · 自動/手動、Hanyoung製SCR、異常インターロック。'),

@@ -1,0 +1,7208 @@
+{
+  "version": 1,
+  "name": "CP-PCT & PCWP PANEL · Rev.D · 20.07.2018",
+  "sourceFile": "2. CP-PCT & PCWP PANEL(Rev.D 20.07.2018).dwg",
+  "conversionNotes": [
+    "Mô hình được tái dựng từ nhãn và mạch đọc được trong DWG; đây không phải chức năng nhập DWG nguyên bản của phần mềm.",
+    "MCCB1 được mô hình hóa là CB nguồn vào 3P 380 V; dây trung tính của hệ 3 pha 4 dây không có chân riêng trong mô hình và nguồn điều khiển 220 V được biểu diễn riêng.",
+    "MCCB2–4: PCWP-1–3, 7.5 kW; MCCB5–8: SCWP-1–4, 30 kW; MCCB9–11: CT-1–3, quạt 3.7 kW. Ghép tag theo vị trí trong bản vẽ.",
+    "Bảy bơm PCWP/SCWP được dựng logic sao–tam giác; ba quạt CT được dựng DOL. Timer dùng 1 giây mặc định vì bản vẽ không chỉ rõ giá trị đặt. Cần đối chiếu lại đúng nhánh và thời gian timer trên bản gốc trước khi dùng kết quả như hồ sơ nghiệm thu.",
+    "Start/Stop là đầu vào điều khiển thủ công để thử mạch; hai bộ 61F và vòng cảm biến áp suất được đưa vào làm thiết bị mô phỏng riêng, chưa ghép với logic chạy bơm vì sơ đồ điều khiển liên quan chưa xác định chắc chắn.",
+    "Mô phỏng sao–tam giác chỉ biểu diễn trình tự cuộn Main/Star/Delta; thư viện tải chỉ có ba đầu U/V/W nên không mô phỏng được việc chuyển đấu 6 đầu dây stator. Chemical pump, motorized valve, bộ biến áp 24 VAC và các chỉ thị/tín hiệu phụ chưa được ánh xạ vì thiếu phần tử tương đương trực tiếp hoặc sơ đồ chưa đủ rõ."
+  ],
+  "devices": [
+    {
+      "id": "source-380v",
+      "type": "source-3ph",
+      "tag": "R/S/T · 3φ 380 V",
+      "x": 350,
+      "y": 40,
+      "params": {
+        "domain": "3P380",
+        "initial": true,
+        "note": "DWG: 3φ AC380V, 50 Hz; mô hình hóa nguồn lý tưởng.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "mccb-1-main",
+      "type": "mccb-3ph",
+      "tag": "MCCB 1 · 400AF/400AT",
+      "x": 350,
+      "y": 230,
+      "params": {
+        "domain": "3P380",
+        "initial": true,
+        "note": "CB nguồn vào theo nhãn DWG; mô hình 3 cực.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "bus-phase-1",
+      "type": "junction",
+      "tag": "BUS R",
+      "x": 550,
+      "y": 300,
+      "params": {
+        "drawingTag": "R",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "bus-phase-2",
+      "type": "junction",
+      "tag": "BUS S",
+      "x": 550,
+      "y": 350,
+      "params": {
+        "drawingTag": "S",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "bus-phase-3",
+      "type": "junction",
+      "tag": "BUS T",
+      "x": 550,
+      "y": 400,
+      "params": {
+        "drawingTag": "T",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "source-control-220",
+      "type": "source-ac",
+      "tag": "CONTROL POWER · 220 VAC",
+      "x": 350,
+      "y": 1260,
+      "params": {
+        "domain": "AC220",
+        "initial": true,
+        "note": "Nguồn điều khiển 220 VAC; nguồn mô hình hóa riêng từ bus 380 V.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "control-mcb-2p",
+      "type": "mcb-2p",
+      "tag": "CB-6 · CONTROL 2P",
+      "x": 350,
+      "y": 1450,
+      "params": {
+        "domain": "AC220",
+        "initial": true,
+        "note": "Nhánh điều khiển 2 cực theo sơ đồ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "control-live-bus",
+      "type": "junction",
+      "tag": "BUS L · 220V",
+      "x": 550,
+      "y": 1540,
+      "params": {
+        "drawingTag": "L",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "control-neutral-bus",
+      "type": "junction",
+      "tag": "BUS N",
+      "x": 550,
+      "y": 2780,
+      "params": {
+        "drawingTag": "N",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "mccb-9",
+      "type": "mccb-3ph",
+      "tag": "MCCB 9",
+      "x": 900,
+      "y": 500,
+      "params": {
+        "domain": "3P380",
+        "initial": true,
+        "note": "Nhánh CT-1; 3.7 kW.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-ct-1",
+      "type": "contactor",
+      "tag": "MC MAIN CT-1",
+      "x": 840,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn contactor chính của CT-1.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-main-ct-1",
+      "type": "main-3ph",
+      "tag": "MC MAIN CT-1",
+      "x": 900,
+      "y": 700,
+      "params": {
+        "masterId": "km-ct-1",
+        "masterState": "active",
+        "domain": "3P380",
+        "contactLabel": "MAIN POWER",
+        "note": "Tiếp điểm chính 3 pha đóng theo cuộn contactor.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-ct-1",
+      "type": "overload",
+      "tag": "TH CT-1",
+      "x": 900,
+      "y": 900,
+      "params": {
+        "domain": "3P380",
+        "initial": false,
+        "note": "Rơ-le quá tải; có thể đặt Trip trong thuộc tính.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "load-ct-1",
+      "type": "fan",
+      "tag": "CT-1 · 3.7 kW",
+      "x": 900,
+      "y": 1100,
+      "params": {
+        "domain": "3P380",
+        "commandId": "km-ct-1",
+        "feedbackId": "",
+        "note": "Quạt cooling tower CT-1, 3φ AC380V. DOL",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-nc-ct-1",
+      "type": "contact-nc",
+      "tag": "TH CT-1",
+      "x": 900,
+      "y": 1680,
+      "params": {
+        "masterId": "th-ct-1",
+        "masterState": "tripped",
+        "contactLabel": "TRIP NC",
+        "note": "Mở mạch điều khiển khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "stop-ct-1",
+      "type": "push-nc",
+      "tag": "STOP CT-1",
+      "x": 900,
+      "y": 1810,
+      "params": {
+        "initial": false,
+        "note": "Nút dừng thường đóng; nhấn để dừng mạch.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-ct-1",
+      "type": "push-no",
+      "tag": "START CT-1",
+      "x": 840,
+      "y": 1950,
+      "params": {
+        "initial": false,
+        "note": "Nút khởi động thường mở.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-hold-ct-1",
+      "type": "contact-no",
+      "tag": "MC MAIN CT-1",
+      "x": 960,
+      "y": 1950,
+      "params": {
+        "masterId": "km-ct-1",
+        "masterState": "active",
+        "contactLabel": "SELF HOLD",
+        "note": "Tiếp điểm tự giữ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-join-ct-1",
+      "type": "junction",
+      "tag": "J CT-1",
+      "x": 900,
+      "y": 2040,
+      "params": {
+        "drawingTag": "START/HOLD",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "run-lamp-ct-1",
+      "type": "lamp",
+      "tag": "RUN CT-1",
+      "x": 960,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "RUN",
+        "note": "Đèn sáng khi cuộn contactor chính có điện.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-fault-ct-1",
+      "type": "contact-no",
+      "tag": "TH CT-1",
+      "x": 1050,
+      "y": 1940,
+      "params": {
+        "masterId": "th-ct-1",
+        "masterState": "tripped",
+        "contactLabel": "FAULT NO",
+        "note": "Đóng khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "fault-lamp-ct-1",
+      "type": "lamp",
+      "tag": "FAULT CT-1",
+      "x": 1050,
+      "y": 2120,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "FLT",
+        "note": "Đèn báo Trip của nhánh.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "mccb-10",
+      "type": "mccb-3ph",
+      "tag": "MCCB 10",
+      "x": 1320,
+      "y": 500,
+      "params": {
+        "domain": "3P380",
+        "initial": true,
+        "note": "Nhánh CT-2; 3.7 kW.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-ct-2",
+      "type": "contactor",
+      "tag": "MC MAIN CT-2",
+      "x": 1260,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn contactor chính của CT-2.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-main-ct-2",
+      "type": "main-3ph",
+      "tag": "MC MAIN CT-2",
+      "x": 1320,
+      "y": 700,
+      "params": {
+        "masterId": "km-ct-2",
+        "masterState": "active",
+        "domain": "3P380",
+        "contactLabel": "MAIN POWER",
+        "note": "Tiếp điểm chính 3 pha đóng theo cuộn contactor.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-ct-2",
+      "type": "overload",
+      "tag": "TH CT-2",
+      "x": 1320,
+      "y": 900,
+      "params": {
+        "domain": "3P380",
+        "initial": false,
+        "note": "Rơ-le quá tải; có thể đặt Trip trong thuộc tính.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "load-ct-2",
+      "type": "fan",
+      "tag": "CT-2 · 3.7 kW",
+      "x": 1320,
+      "y": 1100,
+      "params": {
+        "domain": "3P380",
+        "commandId": "km-ct-2",
+        "feedbackId": "",
+        "note": "Quạt cooling tower CT-2, 3φ AC380V. DOL",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-nc-ct-2",
+      "type": "contact-nc",
+      "tag": "TH CT-2",
+      "x": 1320,
+      "y": 1680,
+      "params": {
+        "masterId": "th-ct-2",
+        "masterState": "tripped",
+        "contactLabel": "TRIP NC",
+        "note": "Mở mạch điều khiển khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "stop-ct-2",
+      "type": "push-nc",
+      "tag": "STOP CT-2",
+      "x": 1320,
+      "y": 1810,
+      "params": {
+        "initial": false,
+        "note": "Nút dừng thường đóng; nhấn để dừng mạch.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-ct-2",
+      "type": "push-no",
+      "tag": "START CT-2",
+      "x": 1260,
+      "y": 1950,
+      "params": {
+        "initial": false,
+        "note": "Nút khởi động thường mở.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-hold-ct-2",
+      "type": "contact-no",
+      "tag": "MC MAIN CT-2",
+      "x": 1380,
+      "y": 1950,
+      "params": {
+        "masterId": "km-ct-2",
+        "masterState": "active",
+        "contactLabel": "SELF HOLD",
+        "note": "Tiếp điểm tự giữ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-join-ct-2",
+      "type": "junction",
+      "tag": "J CT-2",
+      "x": 1320,
+      "y": 2040,
+      "params": {
+        "drawingTag": "START/HOLD",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "run-lamp-ct-2",
+      "type": "lamp",
+      "tag": "RUN CT-2",
+      "x": 1380,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "RUN",
+        "note": "Đèn sáng khi cuộn contactor chính có điện.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-fault-ct-2",
+      "type": "contact-no",
+      "tag": "TH CT-2",
+      "x": 1470,
+      "y": 1940,
+      "params": {
+        "masterId": "th-ct-2",
+        "masterState": "tripped",
+        "contactLabel": "FAULT NO",
+        "note": "Đóng khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "fault-lamp-ct-2",
+      "type": "lamp",
+      "tag": "FAULT CT-2",
+      "x": 1470,
+      "y": 2120,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "FLT",
+        "note": "Đèn báo Trip của nhánh.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "mccb-11",
+      "type": "mccb-3ph",
+      "tag": "MCCB 11",
+      "x": 1740,
+      "y": 500,
+      "params": {
+        "domain": "3P380",
+        "initial": true,
+        "note": "Nhánh CT-3; 3.7 kW.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-ct-3",
+      "type": "contactor",
+      "tag": "MC MAIN CT-3",
+      "x": 1680,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn contactor chính của CT-3.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-main-ct-3",
+      "type": "main-3ph",
+      "tag": "MC MAIN CT-3",
+      "x": 1740,
+      "y": 700,
+      "params": {
+        "masterId": "km-ct-3",
+        "masterState": "active",
+        "domain": "3P380",
+        "contactLabel": "MAIN POWER",
+        "note": "Tiếp điểm chính 3 pha đóng theo cuộn contactor.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-ct-3",
+      "type": "overload",
+      "tag": "TH CT-3",
+      "x": 1740,
+      "y": 900,
+      "params": {
+        "domain": "3P380",
+        "initial": false,
+        "note": "Rơ-le quá tải; có thể đặt Trip trong thuộc tính.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "load-ct-3",
+      "type": "fan",
+      "tag": "CT-3 · 3.7 kW",
+      "x": 1740,
+      "y": 1100,
+      "params": {
+        "domain": "3P380",
+        "commandId": "km-ct-3",
+        "feedbackId": "",
+        "note": "Quạt cooling tower CT-3, 3φ AC380V. DOL",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-nc-ct-3",
+      "type": "contact-nc",
+      "tag": "TH CT-3",
+      "x": 1740,
+      "y": 1680,
+      "params": {
+        "masterId": "th-ct-3",
+        "masterState": "tripped",
+        "contactLabel": "TRIP NC",
+        "note": "Mở mạch điều khiển khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "stop-ct-3",
+      "type": "push-nc",
+      "tag": "STOP CT-3",
+      "x": 1740,
+      "y": 1810,
+      "params": {
+        "initial": false,
+        "note": "Nút dừng thường đóng; nhấn để dừng mạch.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-ct-3",
+      "type": "push-no",
+      "tag": "START CT-3",
+      "x": 1680,
+      "y": 1950,
+      "params": {
+        "initial": false,
+        "note": "Nút khởi động thường mở.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-hold-ct-3",
+      "type": "contact-no",
+      "tag": "MC MAIN CT-3",
+      "x": 1800,
+      "y": 1950,
+      "params": {
+        "masterId": "km-ct-3",
+        "masterState": "active",
+        "contactLabel": "SELF HOLD",
+        "note": "Tiếp điểm tự giữ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-join-ct-3",
+      "type": "junction",
+      "tag": "J CT-3",
+      "x": 1740,
+      "y": 2040,
+      "params": {
+        "drawingTag": "START/HOLD",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "run-lamp-ct-3",
+      "type": "lamp",
+      "tag": "RUN CT-3",
+      "x": 1800,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "RUN",
+        "note": "Đèn sáng khi cuộn contactor chính có điện.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-fault-ct-3",
+      "type": "contact-no",
+      "tag": "TH CT-3",
+      "x": 1890,
+      "y": 1940,
+      "params": {
+        "masterId": "th-ct-3",
+        "masterState": "tripped",
+        "contactLabel": "FAULT NO",
+        "note": "Đóng khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "fault-lamp-ct-3",
+      "type": "lamp",
+      "tag": "FAULT CT-3",
+      "x": 1890,
+      "y": 2120,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "FLT",
+        "note": "Đèn báo Trip của nhánh.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "mccb-2",
+      "type": "mccb-3ph",
+      "tag": "MCCB 2",
+      "x": 2160,
+      "y": 500,
+      "params": {
+        "domain": "3P380",
+        "initial": true,
+        "note": "Nhánh PCWP-1; 7.5 kW.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-pcwp-1",
+      "type": "contactor",
+      "tag": "MC MAIN PCWP-1",
+      "x": 2100,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn contactor chính của PCWP-1.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-main-pcwp-1",
+      "type": "main-3ph",
+      "tag": "MC MAIN PCWP-1",
+      "x": 2160,
+      "y": 700,
+      "params": {
+        "masterId": "km-pcwp-1",
+        "masterState": "active",
+        "domain": "3P380",
+        "contactLabel": "MAIN POWER",
+        "note": "Tiếp điểm chính 3 pha đóng theo cuộn contactor.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-pcwp-1",
+      "type": "overload",
+      "tag": "TH PCWP-1",
+      "x": 2160,
+      "y": 900,
+      "params": {
+        "domain": "3P380",
+        "initial": false,
+        "note": "Rơ-le quá tải; có thể đặt Trip trong thuộc tính.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "load-pcwp-1",
+      "type": "pump",
+      "tag": "PCWP-1 · 7.5 kW",
+      "x": 2160,
+      "y": 1100,
+      "params": {
+        "domain": "3P380",
+        "commandId": "km-pcwp-1",
+        "feedbackId": "",
+        "note": "Bơm nước sơ cấp PCWP-1, 3φ AC380V. Mạch sao–tam giác được biểu diễn ở phần logic điều khiển.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-nc-pcwp-1",
+      "type": "contact-nc",
+      "tag": "TH PCWP-1",
+      "x": 2160,
+      "y": 1680,
+      "params": {
+        "masterId": "th-pcwp-1",
+        "masterState": "tripped",
+        "contactLabel": "TRIP NC",
+        "note": "Mở mạch điều khiển khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "stop-pcwp-1",
+      "type": "push-nc",
+      "tag": "STOP PCWP-1",
+      "x": 2160,
+      "y": 1810,
+      "params": {
+        "initial": false,
+        "note": "Nút dừng thường đóng; nhấn để dừng mạch.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-pcwp-1",
+      "type": "push-no",
+      "tag": "START PCWP-1",
+      "x": 2100,
+      "y": 1950,
+      "params": {
+        "initial": false,
+        "note": "Nút khởi động thường mở.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-hold-pcwp-1",
+      "type": "contact-no",
+      "tag": "MC MAIN PCWP-1",
+      "x": 2220,
+      "y": 1950,
+      "params": {
+        "masterId": "km-pcwp-1",
+        "masterState": "active",
+        "contactLabel": "SELF HOLD",
+        "note": "Tiếp điểm tự giữ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-join-pcwp-1",
+      "type": "junction",
+      "tag": "J PCWP-1",
+      "x": 2160,
+      "y": 2040,
+      "params": {
+        "drawingTag": "START/HOLD",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "run-lamp-pcwp-1",
+      "type": "lamp",
+      "tag": "RUN PCWP-1",
+      "x": 2220,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "RUN",
+        "note": "Đèn sáng khi cuộn contactor chính có điện.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-fault-pcwp-1",
+      "type": "contact-no",
+      "tag": "TH PCWP-1",
+      "x": 2490,
+      "y": 1940,
+      "params": {
+        "masterId": "th-pcwp-1",
+        "masterState": "tripped",
+        "contactLabel": "FAULT NO",
+        "note": "Đóng khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "fault-lamp-pcwp-1",
+      "type": "lamp",
+      "tag": "FAULT PCWP-1",
+      "x": 2490,
+      "y": 2120,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "FLT",
+        "note": "Đèn báo Trip của nhánh.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-pcwp-1",
+      "type": "timer-on",
+      "tag": "TIMER S/D PCWP-1",
+      "x": 2310,
+      "y": 2120,
+      "params": {
+        "domain": "AC220",
+        "delayMs": 1000,
+        "note": "Giá trị 1 giây là mặc định tạm; chỉnh theo thông số thực tế.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-enable-pcwp-1",
+      "type": "contact-no",
+      "tag": "MC MAIN PCWP-1",
+      "x": 2310,
+      "y": 1940,
+      "params": {
+        "masterId": "km-pcwp-1",
+        "masterState": "active",
+        "contactLabel": "S/D ENABLE",
+        "note": "Tiếp điểm cấp cho timer khi contactor chính hút.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-no-pcwp-1",
+      "type": "contact-no",
+      "tag": "TIMER S/D PCWP-1",
+      "x": 2240,
+      "y": 2310,
+      "params": {
+        "masterId": "kt-pcwp-1",
+        "masterState": "active",
+        "contactLabel": "DELTA NO",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-nc-pcwp-1",
+      "type": "contact-nc",
+      "tag": "TIMER S/D PCWP-1",
+      "x": 2380,
+      "y": 2310,
+      "params": {
+        "masterId": "kt-pcwp-1",
+        "masterState": "active",
+        "contactLabel": "STAR NC",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "ks-pcwp-1",
+      "type": "contactor",
+      "tag": "MC STAR PCWP-1",
+      "x": 2380,
+      "y": 2620,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn STAR; chỉ biểu diễn trình tự trạng thái, không chuyển 6 đầu dây động cơ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kd-pcwp-1",
+      "type": "contactor",
+      "tag": "MC DELTA PCWP-1",
+      "x": 2240,
+      "y": 2620,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn DELTA; chỉ biểu diễn trình tự trạng thái, không chuyển 6 đầu dây động cơ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kd-interlock-pcwp-1",
+      "type": "contact-nc",
+      "tag": "MC DELTA PCWP-1",
+      "x": 2380,
+      "y": 2460,
+      "params": {
+        "masterId": "kd-pcwp-1",
+        "masterState": "active",
+        "contactLabel": "DELTA INTERLOCK",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "ks-interlock-pcwp-1",
+      "type": "contact-nc",
+      "tag": "MC STAR PCWP-1",
+      "x": 2240,
+      "y": 2460,
+      "params": {
+        "masterId": "ks-pcwp-1",
+        "masterState": "active",
+        "contactLabel": "STAR INTERLOCK",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "mccb-3",
+      "type": "mccb-3ph",
+      "tag": "MCCB 3",
+      "x": 2580,
+      "y": 500,
+      "params": {
+        "domain": "3P380",
+        "initial": true,
+        "note": "Nhánh PCWP-2; 7.5 kW.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-pcwp-2",
+      "type": "contactor",
+      "tag": "MC MAIN PCWP-2",
+      "x": 2520,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn contactor chính của PCWP-2.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-main-pcwp-2",
+      "type": "main-3ph",
+      "tag": "MC MAIN PCWP-2",
+      "x": 2580,
+      "y": 700,
+      "params": {
+        "masterId": "km-pcwp-2",
+        "masterState": "active",
+        "domain": "3P380",
+        "contactLabel": "MAIN POWER",
+        "note": "Tiếp điểm chính 3 pha đóng theo cuộn contactor.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-pcwp-2",
+      "type": "overload",
+      "tag": "TH PCWP-2",
+      "x": 2580,
+      "y": 900,
+      "params": {
+        "domain": "3P380",
+        "initial": false,
+        "note": "Rơ-le quá tải; có thể đặt Trip trong thuộc tính.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "load-pcwp-2",
+      "type": "pump",
+      "tag": "PCWP-2 · 7.5 kW",
+      "x": 2580,
+      "y": 1100,
+      "params": {
+        "domain": "3P380",
+        "commandId": "km-pcwp-2",
+        "feedbackId": "",
+        "note": "Bơm nước sơ cấp PCWP-2, 3φ AC380V. Mạch sao–tam giác được biểu diễn ở phần logic điều khiển.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-nc-pcwp-2",
+      "type": "contact-nc",
+      "tag": "TH PCWP-2",
+      "x": 2580,
+      "y": 1680,
+      "params": {
+        "masterId": "th-pcwp-2",
+        "masterState": "tripped",
+        "contactLabel": "TRIP NC",
+        "note": "Mở mạch điều khiển khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "stop-pcwp-2",
+      "type": "push-nc",
+      "tag": "STOP PCWP-2",
+      "x": 2580,
+      "y": 1810,
+      "params": {
+        "initial": false,
+        "note": "Nút dừng thường đóng; nhấn để dừng mạch.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-pcwp-2",
+      "type": "push-no",
+      "tag": "START PCWP-2",
+      "x": 2520,
+      "y": 1950,
+      "params": {
+        "initial": false,
+        "note": "Nút khởi động thường mở.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-hold-pcwp-2",
+      "type": "contact-no",
+      "tag": "MC MAIN PCWP-2",
+      "x": 2640,
+      "y": 1950,
+      "params": {
+        "masterId": "km-pcwp-2",
+        "masterState": "active",
+        "contactLabel": "SELF HOLD",
+        "note": "Tiếp điểm tự giữ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-join-pcwp-2",
+      "type": "junction",
+      "tag": "J PCWP-2",
+      "x": 2580,
+      "y": 2040,
+      "params": {
+        "drawingTag": "START/HOLD",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "run-lamp-pcwp-2",
+      "type": "lamp",
+      "tag": "RUN PCWP-2",
+      "x": 2640,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "RUN",
+        "note": "Đèn sáng khi cuộn contactor chính có điện.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-fault-pcwp-2",
+      "type": "contact-no",
+      "tag": "TH PCWP-2",
+      "x": 2910,
+      "y": 1940,
+      "params": {
+        "masterId": "th-pcwp-2",
+        "masterState": "tripped",
+        "contactLabel": "FAULT NO",
+        "note": "Đóng khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "fault-lamp-pcwp-2",
+      "type": "lamp",
+      "tag": "FAULT PCWP-2",
+      "x": 2910,
+      "y": 2120,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "FLT",
+        "note": "Đèn báo Trip của nhánh.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-pcwp-2",
+      "type": "timer-on",
+      "tag": "TIMER S/D PCWP-2",
+      "x": 2730,
+      "y": 2120,
+      "params": {
+        "domain": "AC220",
+        "delayMs": 1000,
+        "note": "Giá trị 1 giây là mặc định tạm; chỉnh theo thông số thực tế.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-enable-pcwp-2",
+      "type": "contact-no",
+      "tag": "MC MAIN PCWP-2",
+      "x": 2730,
+      "y": 1940,
+      "params": {
+        "masterId": "km-pcwp-2",
+        "masterState": "active",
+        "contactLabel": "S/D ENABLE",
+        "note": "Tiếp điểm cấp cho timer khi contactor chính hút.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-no-pcwp-2",
+      "type": "contact-no",
+      "tag": "TIMER S/D PCWP-2",
+      "x": 2660,
+      "y": 2310,
+      "params": {
+        "masterId": "kt-pcwp-2",
+        "masterState": "active",
+        "contactLabel": "DELTA NO",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-nc-pcwp-2",
+      "type": "contact-nc",
+      "tag": "TIMER S/D PCWP-2",
+      "x": 2800,
+      "y": 2310,
+      "params": {
+        "masterId": "kt-pcwp-2",
+        "masterState": "active",
+        "contactLabel": "STAR NC",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "ks-pcwp-2",
+      "type": "contactor",
+      "tag": "MC STAR PCWP-2",
+      "x": 2800,
+      "y": 2620,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn STAR; chỉ biểu diễn trình tự trạng thái, không chuyển 6 đầu dây động cơ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kd-pcwp-2",
+      "type": "contactor",
+      "tag": "MC DELTA PCWP-2",
+      "x": 2660,
+      "y": 2620,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn DELTA; chỉ biểu diễn trình tự trạng thái, không chuyển 6 đầu dây động cơ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kd-interlock-pcwp-2",
+      "type": "contact-nc",
+      "tag": "MC DELTA PCWP-2",
+      "x": 2800,
+      "y": 2460,
+      "params": {
+        "masterId": "kd-pcwp-2",
+        "masterState": "active",
+        "contactLabel": "DELTA INTERLOCK",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "ks-interlock-pcwp-2",
+      "type": "contact-nc",
+      "tag": "MC STAR PCWP-2",
+      "x": 2660,
+      "y": 2460,
+      "params": {
+        "masterId": "ks-pcwp-2",
+        "masterState": "active",
+        "contactLabel": "STAR INTERLOCK",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "mccb-4",
+      "type": "mccb-3ph",
+      "tag": "MCCB 4",
+      "x": 3000,
+      "y": 500,
+      "params": {
+        "domain": "3P380",
+        "initial": true,
+        "note": "Nhánh PCWP-3; 7.5 kW.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-pcwp-3",
+      "type": "contactor",
+      "tag": "MC MAIN PCWP-3",
+      "x": 2940,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn contactor chính của PCWP-3.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-main-pcwp-3",
+      "type": "main-3ph",
+      "tag": "MC MAIN PCWP-3",
+      "x": 3000,
+      "y": 700,
+      "params": {
+        "masterId": "km-pcwp-3",
+        "masterState": "active",
+        "domain": "3P380",
+        "contactLabel": "MAIN POWER",
+        "note": "Tiếp điểm chính 3 pha đóng theo cuộn contactor.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-pcwp-3",
+      "type": "overload",
+      "tag": "TH PCWP-3",
+      "x": 3000,
+      "y": 900,
+      "params": {
+        "domain": "3P380",
+        "initial": false,
+        "note": "Rơ-le quá tải; có thể đặt Trip trong thuộc tính.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "load-pcwp-3",
+      "type": "pump",
+      "tag": "PCWP-3 · 7.5 kW",
+      "x": 3000,
+      "y": 1100,
+      "params": {
+        "domain": "3P380",
+        "commandId": "km-pcwp-3",
+        "feedbackId": "",
+        "note": "Bơm nước sơ cấp PCWP-3, 3φ AC380V. Mạch sao–tam giác được biểu diễn ở phần logic điều khiển.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-nc-pcwp-3",
+      "type": "contact-nc",
+      "tag": "TH PCWP-3",
+      "x": 3000,
+      "y": 1680,
+      "params": {
+        "masterId": "th-pcwp-3",
+        "masterState": "tripped",
+        "contactLabel": "TRIP NC",
+        "note": "Mở mạch điều khiển khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "stop-pcwp-3",
+      "type": "push-nc",
+      "tag": "STOP PCWP-3",
+      "x": 3000,
+      "y": 1810,
+      "params": {
+        "initial": false,
+        "note": "Nút dừng thường đóng; nhấn để dừng mạch.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-pcwp-3",
+      "type": "push-no",
+      "tag": "START PCWP-3",
+      "x": 2940,
+      "y": 1950,
+      "params": {
+        "initial": false,
+        "note": "Nút khởi động thường mở.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-hold-pcwp-3",
+      "type": "contact-no",
+      "tag": "MC MAIN PCWP-3",
+      "x": 3060,
+      "y": 1950,
+      "params": {
+        "masterId": "km-pcwp-3",
+        "masterState": "active",
+        "contactLabel": "SELF HOLD",
+        "note": "Tiếp điểm tự giữ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-join-pcwp-3",
+      "type": "junction",
+      "tag": "J PCWP-3",
+      "x": 3000,
+      "y": 2040,
+      "params": {
+        "drawingTag": "START/HOLD",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "run-lamp-pcwp-3",
+      "type": "lamp",
+      "tag": "RUN PCWP-3",
+      "x": 3060,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "RUN",
+        "note": "Đèn sáng khi cuộn contactor chính có điện.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-fault-pcwp-3",
+      "type": "contact-no",
+      "tag": "TH PCWP-3",
+      "x": 3330,
+      "y": 1940,
+      "params": {
+        "masterId": "th-pcwp-3",
+        "masterState": "tripped",
+        "contactLabel": "FAULT NO",
+        "note": "Đóng khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "fault-lamp-pcwp-3",
+      "type": "lamp",
+      "tag": "FAULT PCWP-3",
+      "x": 3330,
+      "y": 2120,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "FLT",
+        "note": "Đèn báo Trip của nhánh.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-pcwp-3",
+      "type": "timer-on",
+      "tag": "TIMER S/D PCWP-3",
+      "x": 3150,
+      "y": 2120,
+      "params": {
+        "domain": "AC220",
+        "delayMs": 1000,
+        "note": "Giá trị 1 giây là mặc định tạm; chỉnh theo thông số thực tế.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-enable-pcwp-3",
+      "type": "contact-no",
+      "tag": "MC MAIN PCWP-3",
+      "x": 3150,
+      "y": 1940,
+      "params": {
+        "masterId": "km-pcwp-3",
+        "masterState": "active",
+        "contactLabel": "S/D ENABLE",
+        "note": "Tiếp điểm cấp cho timer khi contactor chính hút.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-no-pcwp-3",
+      "type": "contact-no",
+      "tag": "TIMER S/D PCWP-3",
+      "x": 3080,
+      "y": 2310,
+      "params": {
+        "masterId": "kt-pcwp-3",
+        "masterState": "active",
+        "contactLabel": "DELTA NO",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-nc-pcwp-3",
+      "type": "contact-nc",
+      "tag": "TIMER S/D PCWP-3",
+      "x": 3220,
+      "y": 2310,
+      "params": {
+        "masterId": "kt-pcwp-3",
+        "masterState": "active",
+        "contactLabel": "STAR NC",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "ks-pcwp-3",
+      "type": "contactor",
+      "tag": "MC STAR PCWP-3",
+      "x": 3220,
+      "y": 2620,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn STAR; chỉ biểu diễn trình tự trạng thái, không chuyển 6 đầu dây động cơ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kd-pcwp-3",
+      "type": "contactor",
+      "tag": "MC DELTA PCWP-3",
+      "x": 3080,
+      "y": 2620,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn DELTA; chỉ biểu diễn trình tự trạng thái, không chuyển 6 đầu dây động cơ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kd-interlock-pcwp-3",
+      "type": "contact-nc",
+      "tag": "MC DELTA PCWP-3",
+      "x": 3220,
+      "y": 2460,
+      "params": {
+        "masterId": "kd-pcwp-3",
+        "masterState": "active",
+        "contactLabel": "DELTA INTERLOCK",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "ks-interlock-pcwp-3",
+      "type": "contact-nc",
+      "tag": "MC STAR PCWP-3",
+      "x": 3080,
+      "y": 2460,
+      "params": {
+        "masterId": "ks-pcwp-3",
+        "masterState": "active",
+        "contactLabel": "STAR INTERLOCK",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "mccb-5",
+      "type": "mccb-3ph",
+      "tag": "MCCB 5",
+      "x": 3420,
+      "y": 500,
+      "params": {
+        "domain": "3P380",
+        "initial": true,
+        "note": "Nhánh SCWP-1; 30 kW.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-scwp-1",
+      "type": "contactor",
+      "tag": "MC MAIN SCWP-1",
+      "x": 3360,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn contactor chính của SCWP-1.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-main-scwp-1",
+      "type": "main-3ph",
+      "tag": "MC MAIN SCWP-1",
+      "x": 3420,
+      "y": 700,
+      "params": {
+        "masterId": "km-scwp-1",
+        "masterState": "active",
+        "domain": "3P380",
+        "contactLabel": "MAIN POWER",
+        "note": "Tiếp điểm chính 3 pha đóng theo cuộn contactor.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-scwp-1",
+      "type": "overload",
+      "tag": "TH SCWP-1",
+      "x": 3420,
+      "y": 900,
+      "params": {
+        "domain": "3P380",
+        "initial": false,
+        "note": "Rơ-le quá tải; có thể đặt Trip trong thuộc tính.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "load-scwp-1",
+      "type": "pump",
+      "tag": "SCWP-1 · 30 kW",
+      "x": 3420,
+      "y": 1100,
+      "params": {
+        "domain": "3P380",
+        "commandId": "km-scwp-1",
+        "feedbackId": "",
+        "note": "Bơm nước thứ cấp SCWP-1, 3φ AC380V. Mạch sao–tam giác được biểu diễn ở phần logic điều khiển.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-nc-scwp-1",
+      "type": "contact-nc",
+      "tag": "TH SCWP-1",
+      "x": 3420,
+      "y": 1680,
+      "params": {
+        "masterId": "th-scwp-1",
+        "masterState": "tripped",
+        "contactLabel": "TRIP NC",
+        "note": "Mở mạch điều khiển khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "stop-scwp-1",
+      "type": "push-nc",
+      "tag": "STOP SCWP-1",
+      "x": 3420,
+      "y": 1810,
+      "params": {
+        "initial": false,
+        "note": "Nút dừng thường đóng; nhấn để dừng mạch.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-scwp-1",
+      "type": "push-no",
+      "tag": "START SCWP-1",
+      "x": 3360,
+      "y": 1950,
+      "params": {
+        "initial": false,
+        "note": "Nút khởi động thường mở.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-hold-scwp-1",
+      "type": "contact-no",
+      "tag": "MC MAIN SCWP-1",
+      "x": 3480,
+      "y": 1950,
+      "params": {
+        "masterId": "km-scwp-1",
+        "masterState": "active",
+        "contactLabel": "SELF HOLD",
+        "note": "Tiếp điểm tự giữ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-join-scwp-1",
+      "type": "junction",
+      "tag": "J SCWP-1",
+      "x": 3420,
+      "y": 2040,
+      "params": {
+        "drawingTag": "START/HOLD",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "run-lamp-scwp-1",
+      "type": "lamp",
+      "tag": "RUN SCWP-1",
+      "x": 3480,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "RUN",
+        "note": "Đèn sáng khi cuộn contactor chính có điện.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-fault-scwp-1",
+      "type": "contact-no",
+      "tag": "TH SCWP-1",
+      "x": 3750,
+      "y": 1940,
+      "params": {
+        "masterId": "th-scwp-1",
+        "masterState": "tripped",
+        "contactLabel": "FAULT NO",
+        "note": "Đóng khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "fault-lamp-scwp-1",
+      "type": "lamp",
+      "tag": "FAULT SCWP-1",
+      "x": 3750,
+      "y": 2120,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "FLT",
+        "note": "Đèn báo Trip của nhánh.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-scwp-1",
+      "type": "timer-on",
+      "tag": "TIMER S/D SCWP-1",
+      "x": 3570,
+      "y": 2120,
+      "params": {
+        "domain": "AC220",
+        "delayMs": 1000,
+        "note": "Giá trị 1 giây là mặc định tạm; chỉnh theo thông số thực tế.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-enable-scwp-1",
+      "type": "contact-no",
+      "tag": "MC MAIN SCWP-1",
+      "x": 3570,
+      "y": 1940,
+      "params": {
+        "masterId": "km-scwp-1",
+        "masterState": "active",
+        "contactLabel": "S/D ENABLE",
+        "note": "Tiếp điểm cấp cho timer khi contactor chính hút.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-no-scwp-1",
+      "type": "contact-no",
+      "tag": "TIMER S/D SCWP-1",
+      "x": 3500,
+      "y": 2310,
+      "params": {
+        "masterId": "kt-scwp-1",
+        "masterState": "active",
+        "contactLabel": "DELTA NO",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-nc-scwp-1",
+      "type": "contact-nc",
+      "tag": "TIMER S/D SCWP-1",
+      "x": 3640,
+      "y": 2310,
+      "params": {
+        "masterId": "kt-scwp-1",
+        "masterState": "active",
+        "contactLabel": "STAR NC",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "ks-scwp-1",
+      "type": "contactor",
+      "tag": "MC STAR SCWP-1",
+      "x": 3640,
+      "y": 2620,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn STAR; chỉ biểu diễn trình tự trạng thái, không chuyển 6 đầu dây động cơ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kd-scwp-1",
+      "type": "contactor",
+      "tag": "MC DELTA SCWP-1",
+      "x": 3500,
+      "y": 2620,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn DELTA; chỉ biểu diễn trình tự trạng thái, không chuyển 6 đầu dây động cơ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kd-interlock-scwp-1",
+      "type": "contact-nc",
+      "tag": "MC DELTA SCWP-1",
+      "x": 3640,
+      "y": 2460,
+      "params": {
+        "masterId": "kd-scwp-1",
+        "masterState": "active",
+        "contactLabel": "DELTA INTERLOCK",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "ks-interlock-scwp-1",
+      "type": "contact-nc",
+      "tag": "MC STAR SCWP-1",
+      "x": 3500,
+      "y": 2460,
+      "params": {
+        "masterId": "ks-scwp-1",
+        "masterState": "active",
+        "contactLabel": "STAR INTERLOCK",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "mccb-6",
+      "type": "mccb-3ph",
+      "tag": "MCCB 6",
+      "x": 3840,
+      "y": 500,
+      "params": {
+        "domain": "3P380",
+        "initial": true,
+        "note": "Nhánh SCWP-2; 30 kW.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-scwp-2",
+      "type": "contactor",
+      "tag": "MC MAIN SCWP-2",
+      "x": 3780,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn contactor chính của SCWP-2.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-main-scwp-2",
+      "type": "main-3ph",
+      "tag": "MC MAIN SCWP-2",
+      "x": 3840,
+      "y": 700,
+      "params": {
+        "masterId": "km-scwp-2",
+        "masterState": "active",
+        "domain": "3P380",
+        "contactLabel": "MAIN POWER",
+        "note": "Tiếp điểm chính 3 pha đóng theo cuộn contactor.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-scwp-2",
+      "type": "overload",
+      "tag": "TH SCWP-2",
+      "x": 3840,
+      "y": 900,
+      "params": {
+        "domain": "3P380",
+        "initial": false,
+        "note": "Rơ-le quá tải; có thể đặt Trip trong thuộc tính.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "load-scwp-2",
+      "type": "pump",
+      "tag": "SCWP-2 · 30 kW",
+      "x": 3840,
+      "y": 1100,
+      "params": {
+        "domain": "3P380",
+        "commandId": "km-scwp-2",
+        "feedbackId": "",
+        "note": "Bơm nước thứ cấp SCWP-2, 3φ AC380V. Mạch sao–tam giác được biểu diễn ở phần logic điều khiển.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-nc-scwp-2",
+      "type": "contact-nc",
+      "tag": "TH SCWP-2",
+      "x": 3840,
+      "y": 1680,
+      "params": {
+        "masterId": "th-scwp-2",
+        "masterState": "tripped",
+        "contactLabel": "TRIP NC",
+        "note": "Mở mạch điều khiển khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "stop-scwp-2",
+      "type": "push-nc",
+      "tag": "STOP SCWP-2",
+      "x": 3840,
+      "y": 1810,
+      "params": {
+        "initial": false,
+        "note": "Nút dừng thường đóng; nhấn để dừng mạch.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-scwp-2",
+      "type": "push-no",
+      "tag": "START SCWP-2",
+      "x": 3780,
+      "y": 1950,
+      "params": {
+        "initial": false,
+        "note": "Nút khởi động thường mở.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-hold-scwp-2",
+      "type": "contact-no",
+      "tag": "MC MAIN SCWP-2",
+      "x": 3900,
+      "y": 1950,
+      "params": {
+        "masterId": "km-scwp-2",
+        "masterState": "active",
+        "contactLabel": "SELF HOLD",
+        "note": "Tiếp điểm tự giữ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-join-scwp-2",
+      "type": "junction",
+      "tag": "J SCWP-2",
+      "x": 3840,
+      "y": 2040,
+      "params": {
+        "drawingTag": "START/HOLD",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "run-lamp-scwp-2",
+      "type": "lamp",
+      "tag": "RUN SCWP-2",
+      "x": 3900,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "RUN",
+        "note": "Đèn sáng khi cuộn contactor chính có điện.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-fault-scwp-2",
+      "type": "contact-no",
+      "tag": "TH SCWP-2",
+      "x": 4170,
+      "y": 1940,
+      "params": {
+        "masterId": "th-scwp-2",
+        "masterState": "tripped",
+        "contactLabel": "FAULT NO",
+        "note": "Đóng khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "fault-lamp-scwp-2",
+      "type": "lamp",
+      "tag": "FAULT SCWP-2",
+      "x": 4170,
+      "y": 2120,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "FLT",
+        "note": "Đèn báo Trip của nhánh.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-scwp-2",
+      "type": "timer-on",
+      "tag": "TIMER S/D SCWP-2",
+      "x": 3990,
+      "y": 2120,
+      "params": {
+        "domain": "AC220",
+        "delayMs": 1000,
+        "note": "Giá trị 1 giây là mặc định tạm; chỉnh theo thông số thực tế.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-enable-scwp-2",
+      "type": "contact-no",
+      "tag": "MC MAIN SCWP-2",
+      "x": 3990,
+      "y": 1940,
+      "params": {
+        "masterId": "km-scwp-2",
+        "masterState": "active",
+        "contactLabel": "S/D ENABLE",
+        "note": "Tiếp điểm cấp cho timer khi contactor chính hút.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-no-scwp-2",
+      "type": "contact-no",
+      "tag": "TIMER S/D SCWP-2",
+      "x": 3920,
+      "y": 2310,
+      "params": {
+        "masterId": "kt-scwp-2",
+        "masterState": "active",
+        "contactLabel": "DELTA NO",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-nc-scwp-2",
+      "type": "contact-nc",
+      "tag": "TIMER S/D SCWP-2",
+      "x": 4060,
+      "y": 2310,
+      "params": {
+        "masterId": "kt-scwp-2",
+        "masterState": "active",
+        "contactLabel": "STAR NC",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "ks-scwp-2",
+      "type": "contactor",
+      "tag": "MC STAR SCWP-2",
+      "x": 4060,
+      "y": 2620,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn STAR; chỉ biểu diễn trình tự trạng thái, không chuyển 6 đầu dây động cơ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kd-scwp-2",
+      "type": "contactor",
+      "tag": "MC DELTA SCWP-2",
+      "x": 3920,
+      "y": 2620,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn DELTA; chỉ biểu diễn trình tự trạng thái, không chuyển 6 đầu dây động cơ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kd-interlock-scwp-2",
+      "type": "contact-nc",
+      "tag": "MC DELTA SCWP-2",
+      "x": 4060,
+      "y": 2460,
+      "params": {
+        "masterId": "kd-scwp-2",
+        "masterState": "active",
+        "contactLabel": "DELTA INTERLOCK",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "ks-interlock-scwp-2",
+      "type": "contact-nc",
+      "tag": "MC STAR SCWP-2",
+      "x": 3920,
+      "y": 2460,
+      "params": {
+        "masterId": "ks-scwp-2",
+        "masterState": "active",
+        "contactLabel": "STAR INTERLOCK",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "mccb-7",
+      "type": "mccb-3ph",
+      "tag": "MCCB 7",
+      "x": 4260,
+      "y": 500,
+      "params": {
+        "domain": "3P380",
+        "initial": true,
+        "note": "Nhánh SCWP-3; 30 kW.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-scwp-3",
+      "type": "contactor",
+      "tag": "MC MAIN SCWP-3",
+      "x": 4200,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn contactor chính của SCWP-3.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-main-scwp-3",
+      "type": "main-3ph",
+      "tag": "MC MAIN SCWP-3",
+      "x": 4260,
+      "y": 700,
+      "params": {
+        "masterId": "km-scwp-3",
+        "masterState": "active",
+        "domain": "3P380",
+        "contactLabel": "MAIN POWER",
+        "note": "Tiếp điểm chính 3 pha đóng theo cuộn contactor.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-scwp-3",
+      "type": "overload",
+      "tag": "TH SCWP-3",
+      "x": 4260,
+      "y": 900,
+      "params": {
+        "domain": "3P380",
+        "initial": false,
+        "note": "Rơ-le quá tải; có thể đặt Trip trong thuộc tính.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "load-scwp-3",
+      "type": "pump",
+      "tag": "SCWP-3 · 30 kW",
+      "x": 4260,
+      "y": 1100,
+      "params": {
+        "domain": "3P380",
+        "commandId": "km-scwp-3",
+        "feedbackId": "",
+        "note": "Bơm nước thứ cấp SCWP-3, 3φ AC380V. Mạch sao–tam giác được biểu diễn ở phần logic điều khiển.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-nc-scwp-3",
+      "type": "contact-nc",
+      "tag": "TH SCWP-3",
+      "x": 4260,
+      "y": 1680,
+      "params": {
+        "masterId": "th-scwp-3",
+        "masterState": "tripped",
+        "contactLabel": "TRIP NC",
+        "note": "Mở mạch điều khiển khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "stop-scwp-3",
+      "type": "push-nc",
+      "tag": "STOP SCWP-3",
+      "x": 4260,
+      "y": 1810,
+      "params": {
+        "initial": false,
+        "note": "Nút dừng thường đóng; nhấn để dừng mạch.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-scwp-3",
+      "type": "push-no",
+      "tag": "START SCWP-3",
+      "x": 4200,
+      "y": 1950,
+      "params": {
+        "initial": false,
+        "note": "Nút khởi động thường mở.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-hold-scwp-3",
+      "type": "contact-no",
+      "tag": "MC MAIN SCWP-3",
+      "x": 4320,
+      "y": 1950,
+      "params": {
+        "masterId": "km-scwp-3",
+        "masterState": "active",
+        "contactLabel": "SELF HOLD",
+        "note": "Tiếp điểm tự giữ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-join-scwp-3",
+      "type": "junction",
+      "tag": "J SCWP-3",
+      "x": 4260,
+      "y": 2040,
+      "params": {
+        "drawingTag": "START/HOLD",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "run-lamp-scwp-3",
+      "type": "lamp",
+      "tag": "RUN SCWP-3",
+      "x": 4320,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "RUN",
+        "note": "Đèn sáng khi cuộn contactor chính có điện.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-fault-scwp-3",
+      "type": "contact-no",
+      "tag": "TH SCWP-3",
+      "x": 4590,
+      "y": 1940,
+      "params": {
+        "masterId": "th-scwp-3",
+        "masterState": "tripped",
+        "contactLabel": "FAULT NO",
+        "note": "Đóng khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "fault-lamp-scwp-3",
+      "type": "lamp",
+      "tag": "FAULT SCWP-3",
+      "x": 4590,
+      "y": 2120,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "FLT",
+        "note": "Đèn báo Trip của nhánh.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-scwp-3",
+      "type": "timer-on",
+      "tag": "TIMER S/D SCWP-3",
+      "x": 4410,
+      "y": 2120,
+      "params": {
+        "domain": "AC220",
+        "delayMs": 1000,
+        "note": "Giá trị 1 giây là mặc định tạm; chỉnh theo thông số thực tế.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-enable-scwp-3",
+      "type": "contact-no",
+      "tag": "MC MAIN SCWP-3",
+      "x": 4410,
+      "y": 1940,
+      "params": {
+        "masterId": "km-scwp-3",
+        "masterState": "active",
+        "contactLabel": "S/D ENABLE",
+        "note": "Tiếp điểm cấp cho timer khi contactor chính hút.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-no-scwp-3",
+      "type": "contact-no",
+      "tag": "TIMER S/D SCWP-3",
+      "x": 4340,
+      "y": 2310,
+      "params": {
+        "masterId": "kt-scwp-3",
+        "masterState": "active",
+        "contactLabel": "DELTA NO",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-nc-scwp-3",
+      "type": "contact-nc",
+      "tag": "TIMER S/D SCWP-3",
+      "x": 4480,
+      "y": 2310,
+      "params": {
+        "masterId": "kt-scwp-3",
+        "masterState": "active",
+        "contactLabel": "STAR NC",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "ks-scwp-3",
+      "type": "contactor",
+      "tag": "MC STAR SCWP-3",
+      "x": 4480,
+      "y": 2620,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn STAR; chỉ biểu diễn trình tự trạng thái, không chuyển 6 đầu dây động cơ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kd-scwp-3",
+      "type": "contactor",
+      "tag": "MC DELTA SCWP-3",
+      "x": 4340,
+      "y": 2620,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn DELTA; chỉ biểu diễn trình tự trạng thái, không chuyển 6 đầu dây động cơ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kd-interlock-scwp-3",
+      "type": "contact-nc",
+      "tag": "MC DELTA SCWP-3",
+      "x": 4480,
+      "y": 2460,
+      "params": {
+        "masterId": "kd-scwp-3",
+        "masterState": "active",
+        "contactLabel": "DELTA INTERLOCK",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "ks-interlock-scwp-3",
+      "type": "contact-nc",
+      "tag": "MC STAR SCWP-3",
+      "x": 4340,
+      "y": 2460,
+      "params": {
+        "masterId": "ks-scwp-3",
+        "masterState": "active",
+        "contactLabel": "STAR INTERLOCK",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "mccb-8",
+      "type": "mccb-3ph",
+      "tag": "MCCB 8",
+      "x": 4680,
+      "y": 500,
+      "params": {
+        "domain": "3P380",
+        "initial": true,
+        "note": "Nhánh SCWP-4; 30 kW.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-scwp-4",
+      "type": "contactor",
+      "tag": "MC MAIN SCWP-4",
+      "x": 4620,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn contactor chính của SCWP-4.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-main-scwp-4",
+      "type": "main-3ph",
+      "tag": "MC MAIN SCWP-4",
+      "x": 4680,
+      "y": 700,
+      "params": {
+        "masterId": "km-scwp-4",
+        "masterState": "active",
+        "domain": "3P380",
+        "contactLabel": "MAIN POWER",
+        "note": "Tiếp điểm chính 3 pha đóng theo cuộn contactor.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-scwp-4",
+      "type": "overload",
+      "tag": "TH SCWP-4",
+      "x": 4680,
+      "y": 900,
+      "params": {
+        "domain": "3P380",
+        "initial": false,
+        "note": "Rơ-le quá tải; có thể đặt Trip trong thuộc tính.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "load-scwp-4",
+      "type": "pump",
+      "tag": "SCWP-4 · 30 kW",
+      "x": 4680,
+      "y": 1100,
+      "params": {
+        "domain": "3P380",
+        "commandId": "km-scwp-4",
+        "feedbackId": "",
+        "note": "Bơm nước thứ cấp SCWP-4, 3φ AC380V. Mạch sao–tam giác được biểu diễn ở phần logic điều khiển.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-nc-scwp-4",
+      "type": "contact-nc",
+      "tag": "TH SCWP-4",
+      "x": 4680,
+      "y": 1680,
+      "params": {
+        "masterId": "th-scwp-4",
+        "masterState": "tripped",
+        "contactLabel": "TRIP NC",
+        "note": "Mở mạch điều khiển khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "stop-scwp-4",
+      "type": "push-nc",
+      "tag": "STOP SCWP-4",
+      "x": 4680,
+      "y": 1810,
+      "params": {
+        "initial": false,
+        "note": "Nút dừng thường đóng; nhấn để dừng mạch.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-scwp-4",
+      "type": "push-no",
+      "tag": "START SCWP-4",
+      "x": 4620,
+      "y": 1950,
+      "params": {
+        "initial": false,
+        "note": "Nút khởi động thường mở.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-hold-scwp-4",
+      "type": "contact-no",
+      "tag": "MC MAIN SCWP-4",
+      "x": 4740,
+      "y": 1950,
+      "params": {
+        "masterId": "km-scwp-4",
+        "masterState": "active",
+        "contactLabel": "SELF HOLD",
+        "note": "Tiếp điểm tự giữ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "start-join-scwp-4",
+      "type": "junction",
+      "tag": "J SCWP-4",
+      "x": 4680,
+      "y": 2040,
+      "params": {
+        "drawingTag": "START/HOLD",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "run-lamp-scwp-4",
+      "type": "lamp",
+      "tag": "RUN SCWP-4",
+      "x": 4740,
+      "y": 2180,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "RUN",
+        "note": "Đèn sáng khi cuộn contactor chính có điện.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "th-fault-scwp-4",
+      "type": "contact-no",
+      "tag": "TH SCWP-4",
+      "x": 5010,
+      "y": 1940,
+      "params": {
+        "masterId": "th-scwp-4",
+        "masterState": "tripped",
+        "contactLabel": "FAULT NO",
+        "note": "Đóng khi rơ-le quá tải Trip.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "fault-lamp-scwp-4",
+      "type": "lamp",
+      "tag": "FAULT SCWP-4",
+      "x": 5010,
+      "y": 2120,
+      "params": {
+        "domain": "AC220",
+        "blink": false,
+        "lampMark": "FLT",
+        "note": "Đèn báo Trip của nhánh.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-scwp-4",
+      "type": "timer-on",
+      "tag": "TIMER S/D SCWP-4",
+      "x": 4830,
+      "y": 2120,
+      "params": {
+        "domain": "AC220",
+        "delayMs": 1000,
+        "note": "Giá trị 1 giây là mặc định tạm; chỉnh theo thông số thực tế.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "km-enable-scwp-4",
+      "type": "contact-no",
+      "tag": "MC MAIN SCWP-4",
+      "x": 4830,
+      "y": 1940,
+      "params": {
+        "masterId": "km-scwp-4",
+        "masterState": "active",
+        "contactLabel": "S/D ENABLE",
+        "note": "Tiếp điểm cấp cho timer khi contactor chính hút.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-no-scwp-4",
+      "type": "contact-no",
+      "tag": "TIMER S/D SCWP-4",
+      "x": 4760,
+      "y": 2310,
+      "params": {
+        "masterId": "kt-scwp-4",
+        "masterState": "active",
+        "contactLabel": "DELTA NO",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kt-nc-scwp-4",
+      "type": "contact-nc",
+      "tag": "TIMER S/D SCWP-4",
+      "x": 4900,
+      "y": 2310,
+      "params": {
+        "masterId": "kt-scwp-4",
+        "masterState": "active",
+        "contactLabel": "STAR NC",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "ks-scwp-4",
+      "type": "contactor",
+      "tag": "MC STAR SCWP-4",
+      "x": 4900,
+      "y": 2620,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn STAR; chỉ biểu diễn trình tự trạng thái, không chuyển 6 đầu dây động cơ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kd-scwp-4",
+      "type": "contactor",
+      "tag": "MC DELTA SCWP-4",
+      "x": 4760,
+      "y": 2620,
+      "params": {
+        "domain": "AC220",
+        "note": "Cuộn DELTA; chỉ biểu diễn trình tự trạng thái, không chuyển 6 đầu dây động cơ.",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "kd-interlock-scwp-4",
+      "type": "contact-nc",
+      "tag": "MC DELTA SCWP-4",
+      "x": 4900,
+      "y": 2460,
+      "params": {
+        "masterId": "kd-scwp-4",
+        "masterState": "active",
+        "contactLabel": "DELTA INTERLOCK",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "ks-interlock-scwp-4",
+      "type": "contact-nc",
+      "tag": "MC STAR SCWP-4",
+      "x": 4760,
+      "y": 2460,
+      "params": {
+        "masterId": "ks-scwp-4",
+        "masterState": "active",
+        "contactLabel": "STAR INTERLOCK",
+        "orientation": "vertical"
+      }
+    },
+    {
+      "id": "ps-24v",
+      "type": "power-supply-dc",
+      "tag": "PS · 220VAC/24VDC",
+      "x": 600,
+      "y": 3050,
+      "params": {
+        "inputDomain": "AC220",
+        "domain": "DC24",
+        "note": "Bộ nguồn 24 VDC cho vòng cảm biến áp suất.",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "pt-pressure",
+      "type": "pressure-sensys",
+      "tag": "PRESSURE SENSOR",
+      "x": 900,
+      "y": 3050,
+      "params": {
+        "pressureBar": 0,
+        "note": "Đầu vào áp suất 0–10 bar mặc định của thư viện mô phỏng.",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "controller-pressure",
+      "type": "controller-e5ec",
+      "tag": "CONTROLLER PRESSURE",
+      "x": 1200,
+      "y": 3050,
+      "params": {
+        "inputMode": "4–20 mA",
+        "scaleMin": 0,
+        "scaleMax": 10,
+        "action": "direct",
+        "setpoint": 5,
+        "hysteresis": 0.5,
+        "alarmHigh": 8,
+        "alarmLow": 2,
+        "note": "Ngưỡng mặc định của thư viện; cần nhập thang đo/setpoint thực tế từ hồ sơ.",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "level-cswp",
+      "type": "level-61f-g2",
+      "tag": "FLOATLESS CSWP · 61F-G2",
+      "x": 1750,
+      "y": 3050,
+      "params": {
+        "levelInput": "virtual",
+        "waterLevel": 0,
+        "note": "Mức nước ảo; ngõ ra chưa ghép vào lệnh bơm.",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": "level-pcwp",
+      "type": "level-61f-g3",
+      "tag": "FLOATLESS PCWP · 61F-G3",
+      "x": 2650,
+      "y": 3050,
+      "params": {
+        "levelInput": "virtual",
+        "waterLevel": 0,
+        "note": "Mức nước ảo; ngõ ra chưa ghép vào lệnh bơm.",
+        "orientation": "horizontal"
+      }
+    }
+  ],
+  "wires": [
+    {
+      "id": "wire-0001",
+      "from": {
+        "device": "source-380v",
+        "pin": "L1"
+      },
+      "to": {
+        "device": "mccb-1-main",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0002",
+      "from": {
+        "device": "source-380v",
+        "pin": "L2"
+      },
+      "to": {
+        "device": "mccb-1-main",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0003",
+      "from": {
+        "device": "source-380v",
+        "pin": "L3"
+      },
+      "to": {
+        "device": "mccb-1-main",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0004",
+      "from": {
+        "device": "mccb-1-main",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "bus-phase-1",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0005",
+      "from": {
+        "device": "mccb-1-main",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "bus-phase-2",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0006",
+      "from": {
+        "device": "mccb-1-main",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "bus-phase-3",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0007",
+      "from": {
+        "device": "source-control-220",
+        "pin": "L"
+      },
+      "to": {
+        "device": "control-mcb-2p",
+        "pin": "L"
+      }
+    },
+    {
+      "id": "wire-0008",
+      "from": {
+        "device": "source-control-220",
+        "pin": "N"
+      },
+      "to": {
+        "device": "control-mcb-2p",
+        "pin": "N"
+      }
+    },
+    {
+      "id": "wire-0009",
+      "from": {
+        "device": "control-mcb-2p",
+        "pin": "LC"
+      },
+      "to": {
+        "device": "control-live-bus",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0010",
+      "from": {
+        "device": "control-mcb-2p",
+        "pin": "NC"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 358,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0011",
+      "from": {
+        "device": "bus-phase-1",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-9",
+        "pin": "L1"
+      },
+      "points": [
+        {
+          "x": 884,
+          "y": 300
+        }
+      ]
+    },
+    {
+      "id": "wire-0012",
+      "from": {
+        "device": "mccb-9",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "km-main-ct-1",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0013",
+      "from": {
+        "device": "km-main-ct-1",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "th-ct-1",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0014",
+      "from": {
+        "device": "th-ct-1",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "load-ct-1",
+        "pin": "U"
+      }
+    },
+    {
+      "id": "wire-0015",
+      "from": {
+        "device": "bus-phase-2",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-9",
+        "pin": "L2"
+      },
+      "points": [
+        {
+          "x": 900,
+          "y": 350
+        }
+      ]
+    },
+    {
+      "id": "wire-0016",
+      "from": {
+        "device": "mccb-9",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "km-main-ct-1",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0017",
+      "from": {
+        "device": "km-main-ct-1",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "th-ct-1",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0018",
+      "from": {
+        "device": "th-ct-1",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "load-ct-1",
+        "pin": "V"
+      }
+    },
+    {
+      "id": "wire-0019",
+      "from": {
+        "device": "bus-phase-3",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-9",
+        "pin": "L3"
+      },
+      "points": [
+        {
+          "x": 916,
+          "y": 400
+        }
+      ]
+    },
+    {
+      "id": "wire-0020",
+      "from": {
+        "device": "mccb-9",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "km-main-ct-1",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0021",
+      "from": {
+        "device": "km-main-ct-1",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "th-ct-1",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0022",
+      "from": {
+        "device": "th-ct-1",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "load-ct-1",
+        "pin": "W"
+      }
+    },
+    {
+      "id": "wire-0023",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-nc-ct-1",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 900,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0024",
+      "from": {
+        "device": "th-nc-ct-1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "stop-ct-1",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0025",
+      "from": {
+        "device": "stop-ct-1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "start-ct-1",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0026",
+      "from": {
+        "device": "stop-ct-1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "km-hold-ct-1",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0027",
+      "from": {
+        "device": "start-ct-1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-ct-1",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0028",
+      "from": {
+        "device": "km-hold-ct-1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-ct-1",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0029",
+      "from": {
+        "device": "start-join-ct-1",
+        "pin": "J"
+      },
+      "to": {
+        "device": "km-ct-1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0030",
+      "from": {
+        "device": "start-join-ct-1",
+        "pin": "J"
+      },
+      "to": {
+        "device": "run-lamp-ct-1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0031",
+      "from": {
+        "device": "km-ct-1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 840,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0032",
+      "from": {
+        "device": "run-lamp-ct-1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 960,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0033",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-fault-ct-1",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 1050,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0034",
+      "from": {
+        "device": "th-fault-ct-1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "fault-lamp-ct-1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0035",
+      "from": {
+        "device": "fault-lamp-ct-1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 1050,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0036",
+      "from": {
+        "device": "bus-phase-1",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-10",
+        "pin": "L1"
+      },
+      "points": [
+        {
+          "x": 1304,
+          "y": 300
+        }
+      ]
+    },
+    {
+      "id": "wire-0037",
+      "from": {
+        "device": "mccb-10",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "km-main-ct-2",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0038",
+      "from": {
+        "device": "km-main-ct-2",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "th-ct-2",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0039",
+      "from": {
+        "device": "th-ct-2",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "load-ct-2",
+        "pin": "U"
+      }
+    },
+    {
+      "id": "wire-0040",
+      "from": {
+        "device": "bus-phase-2",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-10",
+        "pin": "L2"
+      },
+      "points": [
+        {
+          "x": 1320,
+          "y": 350
+        }
+      ]
+    },
+    {
+      "id": "wire-0041",
+      "from": {
+        "device": "mccb-10",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "km-main-ct-2",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0042",
+      "from": {
+        "device": "km-main-ct-2",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "th-ct-2",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0043",
+      "from": {
+        "device": "th-ct-2",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "load-ct-2",
+        "pin": "V"
+      }
+    },
+    {
+      "id": "wire-0044",
+      "from": {
+        "device": "bus-phase-3",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-10",
+        "pin": "L3"
+      },
+      "points": [
+        {
+          "x": 1336,
+          "y": 400
+        }
+      ]
+    },
+    {
+      "id": "wire-0045",
+      "from": {
+        "device": "mccb-10",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "km-main-ct-2",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0046",
+      "from": {
+        "device": "km-main-ct-2",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "th-ct-2",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0047",
+      "from": {
+        "device": "th-ct-2",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "load-ct-2",
+        "pin": "W"
+      }
+    },
+    {
+      "id": "wire-0048",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-nc-ct-2",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 1320,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0049",
+      "from": {
+        "device": "th-nc-ct-2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "stop-ct-2",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0050",
+      "from": {
+        "device": "stop-ct-2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "start-ct-2",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0051",
+      "from": {
+        "device": "stop-ct-2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "km-hold-ct-2",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0052",
+      "from": {
+        "device": "start-ct-2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-ct-2",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0053",
+      "from": {
+        "device": "km-hold-ct-2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-ct-2",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0054",
+      "from": {
+        "device": "start-join-ct-2",
+        "pin": "J"
+      },
+      "to": {
+        "device": "km-ct-2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0055",
+      "from": {
+        "device": "start-join-ct-2",
+        "pin": "J"
+      },
+      "to": {
+        "device": "run-lamp-ct-2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0056",
+      "from": {
+        "device": "km-ct-2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 1260,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0057",
+      "from": {
+        "device": "run-lamp-ct-2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 1380,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0058",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-fault-ct-2",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 1470,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0059",
+      "from": {
+        "device": "th-fault-ct-2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "fault-lamp-ct-2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0060",
+      "from": {
+        "device": "fault-lamp-ct-2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 1470,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0061",
+      "from": {
+        "device": "bus-phase-1",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-11",
+        "pin": "L1"
+      },
+      "points": [
+        {
+          "x": 1724,
+          "y": 300
+        }
+      ]
+    },
+    {
+      "id": "wire-0062",
+      "from": {
+        "device": "mccb-11",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "km-main-ct-3",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0063",
+      "from": {
+        "device": "km-main-ct-3",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "th-ct-3",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0064",
+      "from": {
+        "device": "th-ct-3",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "load-ct-3",
+        "pin": "U"
+      }
+    },
+    {
+      "id": "wire-0065",
+      "from": {
+        "device": "bus-phase-2",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-11",
+        "pin": "L2"
+      },
+      "points": [
+        {
+          "x": 1740,
+          "y": 350
+        }
+      ]
+    },
+    {
+      "id": "wire-0066",
+      "from": {
+        "device": "mccb-11",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "km-main-ct-3",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0067",
+      "from": {
+        "device": "km-main-ct-3",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "th-ct-3",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0068",
+      "from": {
+        "device": "th-ct-3",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "load-ct-3",
+        "pin": "V"
+      }
+    },
+    {
+      "id": "wire-0069",
+      "from": {
+        "device": "bus-phase-3",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-11",
+        "pin": "L3"
+      },
+      "points": [
+        {
+          "x": 1756,
+          "y": 400
+        }
+      ]
+    },
+    {
+      "id": "wire-0070",
+      "from": {
+        "device": "mccb-11",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "km-main-ct-3",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0071",
+      "from": {
+        "device": "km-main-ct-3",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "th-ct-3",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0072",
+      "from": {
+        "device": "th-ct-3",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "load-ct-3",
+        "pin": "W"
+      }
+    },
+    {
+      "id": "wire-0073",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-nc-ct-3",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 1740,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0074",
+      "from": {
+        "device": "th-nc-ct-3",
+        "pin": "22"
+      },
+      "to": {
+        "device": "stop-ct-3",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0075",
+      "from": {
+        "device": "stop-ct-3",
+        "pin": "22"
+      },
+      "to": {
+        "device": "start-ct-3",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0076",
+      "from": {
+        "device": "stop-ct-3",
+        "pin": "22"
+      },
+      "to": {
+        "device": "km-hold-ct-3",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0077",
+      "from": {
+        "device": "start-ct-3",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-ct-3",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0078",
+      "from": {
+        "device": "km-hold-ct-3",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-ct-3",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0079",
+      "from": {
+        "device": "start-join-ct-3",
+        "pin": "J"
+      },
+      "to": {
+        "device": "km-ct-3",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0080",
+      "from": {
+        "device": "start-join-ct-3",
+        "pin": "J"
+      },
+      "to": {
+        "device": "run-lamp-ct-3",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0081",
+      "from": {
+        "device": "km-ct-3",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 1680,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0082",
+      "from": {
+        "device": "run-lamp-ct-3",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 1800,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0083",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-fault-ct-3",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 1890,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0084",
+      "from": {
+        "device": "th-fault-ct-3",
+        "pin": "14"
+      },
+      "to": {
+        "device": "fault-lamp-ct-3",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0085",
+      "from": {
+        "device": "fault-lamp-ct-3",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 1890,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0086",
+      "from": {
+        "device": "bus-phase-1",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-2",
+        "pin": "L1"
+      },
+      "points": [
+        {
+          "x": 2144,
+          "y": 300
+        }
+      ]
+    },
+    {
+      "id": "wire-0087",
+      "from": {
+        "device": "mccb-2",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "km-main-pcwp-1",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0088",
+      "from": {
+        "device": "km-main-pcwp-1",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "th-pcwp-1",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0089",
+      "from": {
+        "device": "th-pcwp-1",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "load-pcwp-1",
+        "pin": "U"
+      }
+    },
+    {
+      "id": "wire-0090",
+      "from": {
+        "device": "bus-phase-2",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-2",
+        "pin": "L2"
+      },
+      "points": [
+        {
+          "x": 2160,
+          "y": 350
+        }
+      ]
+    },
+    {
+      "id": "wire-0091",
+      "from": {
+        "device": "mccb-2",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "km-main-pcwp-1",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0092",
+      "from": {
+        "device": "km-main-pcwp-1",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "th-pcwp-1",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0093",
+      "from": {
+        "device": "th-pcwp-1",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "load-pcwp-1",
+        "pin": "V"
+      }
+    },
+    {
+      "id": "wire-0094",
+      "from": {
+        "device": "bus-phase-3",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-2",
+        "pin": "L3"
+      },
+      "points": [
+        {
+          "x": 2176,
+          "y": 400
+        }
+      ]
+    },
+    {
+      "id": "wire-0095",
+      "from": {
+        "device": "mccb-2",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "km-main-pcwp-1",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0096",
+      "from": {
+        "device": "km-main-pcwp-1",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "th-pcwp-1",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0097",
+      "from": {
+        "device": "th-pcwp-1",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "load-pcwp-1",
+        "pin": "W"
+      }
+    },
+    {
+      "id": "wire-0098",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-nc-pcwp-1",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 2160,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0099",
+      "from": {
+        "device": "th-nc-pcwp-1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "stop-pcwp-1",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0100",
+      "from": {
+        "device": "stop-pcwp-1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "start-pcwp-1",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0101",
+      "from": {
+        "device": "stop-pcwp-1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "km-hold-pcwp-1",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0102",
+      "from": {
+        "device": "start-pcwp-1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-pcwp-1",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0103",
+      "from": {
+        "device": "km-hold-pcwp-1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-pcwp-1",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0104",
+      "from": {
+        "device": "start-join-pcwp-1",
+        "pin": "J"
+      },
+      "to": {
+        "device": "km-pcwp-1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0105",
+      "from": {
+        "device": "start-join-pcwp-1",
+        "pin": "J"
+      },
+      "to": {
+        "device": "run-lamp-pcwp-1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0106",
+      "from": {
+        "device": "km-pcwp-1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 2100,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0107",
+      "from": {
+        "device": "run-lamp-pcwp-1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 2220,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0108",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-fault-pcwp-1",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 2490,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0109",
+      "from": {
+        "device": "th-fault-pcwp-1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "fault-lamp-pcwp-1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0110",
+      "from": {
+        "device": "fault-lamp-pcwp-1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 2490,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0111",
+      "from": {
+        "device": "stop-pcwp-1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "km-enable-pcwp-1",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0112",
+      "from": {
+        "device": "km-enable-pcwp-1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-pcwp-1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0113",
+      "from": {
+        "device": "kt-pcwp-1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 2310,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0114",
+      "from": {
+        "device": "km-enable-pcwp-1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-no-pcwp-1",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 2240,
+          "y": 1998
+        }
+      ]
+    },
+    {
+      "id": "wire-0115",
+      "from": {
+        "device": "km-enable-pcwp-1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-nc-pcwp-1",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 2380,
+          "y": 1998
+        }
+      ]
+    },
+    {
+      "id": "wire-0116",
+      "from": {
+        "device": "kt-no-pcwp-1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "ks-interlock-pcwp-1",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0117",
+      "from": {
+        "device": "kt-nc-pcwp-1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "kd-interlock-pcwp-1",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0118",
+      "from": {
+        "device": "ks-interlock-pcwp-1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "kd-pcwp-1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0119",
+      "from": {
+        "device": "kd-interlock-pcwp-1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "ks-pcwp-1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0120",
+      "from": {
+        "device": "ks-pcwp-1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 2380,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0121",
+      "from": {
+        "device": "kd-pcwp-1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 2240,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0122",
+      "from": {
+        "device": "bus-phase-1",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-3",
+        "pin": "L1"
+      },
+      "points": [
+        {
+          "x": 2564,
+          "y": 300
+        }
+      ]
+    },
+    {
+      "id": "wire-0123",
+      "from": {
+        "device": "mccb-3",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "km-main-pcwp-2",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0124",
+      "from": {
+        "device": "km-main-pcwp-2",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "th-pcwp-2",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0125",
+      "from": {
+        "device": "th-pcwp-2",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "load-pcwp-2",
+        "pin": "U"
+      }
+    },
+    {
+      "id": "wire-0126",
+      "from": {
+        "device": "bus-phase-2",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-3",
+        "pin": "L2"
+      },
+      "points": [
+        {
+          "x": 2580,
+          "y": 350
+        }
+      ]
+    },
+    {
+      "id": "wire-0127",
+      "from": {
+        "device": "mccb-3",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "km-main-pcwp-2",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0128",
+      "from": {
+        "device": "km-main-pcwp-2",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "th-pcwp-2",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0129",
+      "from": {
+        "device": "th-pcwp-2",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "load-pcwp-2",
+        "pin": "V"
+      }
+    },
+    {
+      "id": "wire-0130",
+      "from": {
+        "device": "bus-phase-3",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-3",
+        "pin": "L3"
+      },
+      "points": [
+        {
+          "x": 2596,
+          "y": 400
+        }
+      ]
+    },
+    {
+      "id": "wire-0131",
+      "from": {
+        "device": "mccb-3",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "km-main-pcwp-2",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0132",
+      "from": {
+        "device": "km-main-pcwp-2",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "th-pcwp-2",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0133",
+      "from": {
+        "device": "th-pcwp-2",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "load-pcwp-2",
+        "pin": "W"
+      }
+    },
+    {
+      "id": "wire-0134",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-nc-pcwp-2",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 2580,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0135",
+      "from": {
+        "device": "th-nc-pcwp-2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "stop-pcwp-2",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0136",
+      "from": {
+        "device": "stop-pcwp-2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "start-pcwp-2",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0137",
+      "from": {
+        "device": "stop-pcwp-2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "km-hold-pcwp-2",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0138",
+      "from": {
+        "device": "start-pcwp-2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-pcwp-2",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0139",
+      "from": {
+        "device": "km-hold-pcwp-2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-pcwp-2",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0140",
+      "from": {
+        "device": "start-join-pcwp-2",
+        "pin": "J"
+      },
+      "to": {
+        "device": "km-pcwp-2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0141",
+      "from": {
+        "device": "start-join-pcwp-2",
+        "pin": "J"
+      },
+      "to": {
+        "device": "run-lamp-pcwp-2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0142",
+      "from": {
+        "device": "km-pcwp-2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 2520,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0143",
+      "from": {
+        "device": "run-lamp-pcwp-2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 2640,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0144",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-fault-pcwp-2",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 2910,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0145",
+      "from": {
+        "device": "th-fault-pcwp-2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "fault-lamp-pcwp-2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0146",
+      "from": {
+        "device": "fault-lamp-pcwp-2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 2910,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0147",
+      "from": {
+        "device": "stop-pcwp-2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "km-enable-pcwp-2",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0148",
+      "from": {
+        "device": "km-enable-pcwp-2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-pcwp-2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0149",
+      "from": {
+        "device": "kt-pcwp-2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 2730,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0150",
+      "from": {
+        "device": "km-enable-pcwp-2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-no-pcwp-2",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 2660,
+          "y": 1998
+        }
+      ]
+    },
+    {
+      "id": "wire-0151",
+      "from": {
+        "device": "km-enable-pcwp-2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-nc-pcwp-2",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 2800,
+          "y": 1998
+        }
+      ]
+    },
+    {
+      "id": "wire-0152",
+      "from": {
+        "device": "kt-no-pcwp-2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "ks-interlock-pcwp-2",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0153",
+      "from": {
+        "device": "kt-nc-pcwp-2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "kd-interlock-pcwp-2",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0154",
+      "from": {
+        "device": "ks-interlock-pcwp-2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "kd-pcwp-2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0155",
+      "from": {
+        "device": "kd-interlock-pcwp-2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "ks-pcwp-2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0156",
+      "from": {
+        "device": "ks-pcwp-2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 2800,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0157",
+      "from": {
+        "device": "kd-pcwp-2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 2660,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0158",
+      "from": {
+        "device": "bus-phase-1",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-4",
+        "pin": "L1"
+      },
+      "points": [
+        {
+          "x": 2984,
+          "y": 300
+        }
+      ]
+    },
+    {
+      "id": "wire-0159",
+      "from": {
+        "device": "mccb-4",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "km-main-pcwp-3",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0160",
+      "from": {
+        "device": "km-main-pcwp-3",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "th-pcwp-3",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0161",
+      "from": {
+        "device": "th-pcwp-3",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "load-pcwp-3",
+        "pin": "U"
+      }
+    },
+    {
+      "id": "wire-0162",
+      "from": {
+        "device": "bus-phase-2",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-4",
+        "pin": "L2"
+      },
+      "points": [
+        {
+          "x": 3000,
+          "y": 350
+        }
+      ]
+    },
+    {
+      "id": "wire-0163",
+      "from": {
+        "device": "mccb-4",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "km-main-pcwp-3",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0164",
+      "from": {
+        "device": "km-main-pcwp-3",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "th-pcwp-3",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0165",
+      "from": {
+        "device": "th-pcwp-3",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "load-pcwp-3",
+        "pin": "V"
+      }
+    },
+    {
+      "id": "wire-0166",
+      "from": {
+        "device": "bus-phase-3",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-4",
+        "pin": "L3"
+      },
+      "points": [
+        {
+          "x": 3016,
+          "y": 400
+        }
+      ]
+    },
+    {
+      "id": "wire-0167",
+      "from": {
+        "device": "mccb-4",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "km-main-pcwp-3",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0168",
+      "from": {
+        "device": "km-main-pcwp-3",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "th-pcwp-3",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0169",
+      "from": {
+        "device": "th-pcwp-3",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "load-pcwp-3",
+        "pin": "W"
+      }
+    },
+    {
+      "id": "wire-0170",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-nc-pcwp-3",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 3000,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0171",
+      "from": {
+        "device": "th-nc-pcwp-3",
+        "pin": "22"
+      },
+      "to": {
+        "device": "stop-pcwp-3",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0172",
+      "from": {
+        "device": "stop-pcwp-3",
+        "pin": "22"
+      },
+      "to": {
+        "device": "start-pcwp-3",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0173",
+      "from": {
+        "device": "stop-pcwp-3",
+        "pin": "22"
+      },
+      "to": {
+        "device": "km-hold-pcwp-3",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0174",
+      "from": {
+        "device": "start-pcwp-3",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-pcwp-3",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0175",
+      "from": {
+        "device": "km-hold-pcwp-3",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-pcwp-3",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0176",
+      "from": {
+        "device": "start-join-pcwp-3",
+        "pin": "J"
+      },
+      "to": {
+        "device": "km-pcwp-3",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0177",
+      "from": {
+        "device": "start-join-pcwp-3",
+        "pin": "J"
+      },
+      "to": {
+        "device": "run-lamp-pcwp-3",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0178",
+      "from": {
+        "device": "km-pcwp-3",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 2940,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0179",
+      "from": {
+        "device": "run-lamp-pcwp-3",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 3060,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0180",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-fault-pcwp-3",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 3330,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0181",
+      "from": {
+        "device": "th-fault-pcwp-3",
+        "pin": "14"
+      },
+      "to": {
+        "device": "fault-lamp-pcwp-3",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0182",
+      "from": {
+        "device": "fault-lamp-pcwp-3",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 3330,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0183",
+      "from": {
+        "device": "stop-pcwp-3",
+        "pin": "22"
+      },
+      "to": {
+        "device": "km-enable-pcwp-3",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0184",
+      "from": {
+        "device": "km-enable-pcwp-3",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-pcwp-3",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0185",
+      "from": {
+        "device": "kt-pcwp-3",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 3150,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0186",
+      "from": {
+        "device": "km-enable-pcwp-3",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-no-pcwp-3",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 3080,
+          "y": 1998
+        }
+      ]
+    },
+    {
+      "id": "wire-0187",
+      "from": {
+        "device": "km-enable-pcwp-3",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-nc-pcwp-3",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 3220,
+          "y": 1998
+        }
+      ]
+    },
+    {
+      "id": "wire-0188",
+      "from": {
+        "device": "kt-no-pcwp-3",
+        "pin": "14"
+      },
+      "to": {
+        "device": "ks-interlock-pcwp-3",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0189",
+      "from": {
+        "device": "kt-nc-pcwp-3",
+        "pin": "22"
+      },
+      "to": {
+        "device": "kd-interlock-pcwp-3",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0190",
+      "from": {
+        "device": "ks-interlock-pcwp-3",
+        "pin": "22"
+      },
+      "to": {
+        "device": "kd-pcwp-3",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0191",
+      "from": {
+        "device": "kd-interlock-pcwp-3",
+        "pin": "22"
+      },
+      "to": {
+        "device": "ks-pcwp-3",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0192",
+      "from": {
+        "device": "ks-pcwp-3",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 3220,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0193",
+      "from": {
+        "device": "kd-pcwp-3",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 3080,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0194",
+      "from": {
+        "device": "bus-phase-1",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-5",
+        "pin": "L1"
+      },
+      "points": [
+        {
+          "x": 3404,
+          "y": 300
+        }
+      ]
+    },
+    {
+      "id": "wire-0195",
+      "from": {
+        "device": "mccb-5",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "km-main-scwp-1",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0196",
+      "from": {
+        "device": "km-main-scwp-1",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "th-scwp-1",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0197",
+      "from": {
+        "device": "th-scwp-1",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "load-scwp-1",
+        "pin": "U"
+      }
+    },
+    {
+      "id": "wire-0198",
+      "from": {
+        "device": "bus-phase-2",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-5",
+        "pin": "L2"
+      },
+      "points": [
+        {
+          "x": 3420,
+          "y": 350
+        }
+      ]
+    },
+    {
+      "id": "wire-0199",
+      "from": {
+        "device": "mccb-5",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "km-main-scwp-1",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0200",
+      "from": {
+        "device": "km-main-scwp-1",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "th-scwp-1",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0201",
+      "from": {
+        "device": "th-scwp-1",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "load-scwp-1",
+        "pin": "V"
+      }
+    },
+    {
+      "id": "wire-0202",
+      "from": {
+        "device": "bus-phase-3",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-5",
+        "pin": "L3"
+      },
+      "points": [
+        {
+          "x": 3436,
+          "y": 400
+        }
+      ]
+    },
+    {
+      "id": "wire-0203",
+      "from": {
+        "device": "mccb-5",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "km-main-scwp-1",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0204",
+      "from": {
+        "device": "km-main-scwp-1",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "th-scwp-1",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0205",
+      "from": {
+        "device": "th-scwp-1",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "load-scwp-1",
+        "pin": "W"
+      }
+    },
+    {
+      "id": "wire-0206",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-nc-scwp-1",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 3420,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0207",
+      "from": {
+        "device": "th-nc-scwp-1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "stop-scwp-1",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0208",
+      "from": {
+        "device": "stop-scwp-1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "start-scwp-1",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0209",
+      "from": {
+        "device": "stop-scwp-1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "km-hold-scwp-1",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0210",
+      "from": {
+        "device": "start-scwp-1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-scwp-1",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0211",
+      "from": {
+        "device": "km-hold-scwp-1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-scwp-1",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0212",
+      "from": {
+        "device": "start-join-scwp-1",
+        "pin": "J"
+      },
+      "to": {
+        "device": "km-scwp-1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0213",
+      "from": {
+        "device": "start-join-scwp-1",
+        "pin": "J"
+      },
+      "to": {
+        "device": "run-lamp-scwp-1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0214",
+      "from": {
+        "device": "km-scwp-1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 3360,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0215",
+      "from": {
+        "device": "run-lamp-scwp-1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 3480,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0216",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-fault-scwp-1",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 3750,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0217",
+      "from": {
+        "device": "th-fault-scwp-1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "fault-lamp-scwp-1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0218",
+      "from": {
+        "device": "fault-lamp-scwp-1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 3750,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0219",
+      "from": {
+        "device": "stop-scwp-1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "km-enable-scwp-1",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0220",
+      "from": {
+        "device": "km-enable-scwp-1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-scwp-1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0221",
+      "from": {
+        "device": "kt-scwp-1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 3570,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0222",
+      "from": {
+        "device": "km-enable-scwp-1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-no-scwp-1",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 3500,
+          "y": 1998
+        }
+      ]
+    },
+    {
+      "id": "wire-0223",
+      "from": {
+        "device": "km-enable-scwp-1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-nc-scwp-1",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 3640,
+          "y": 1998
+        }
+      ]
+    },
+    {
+      "id": "wire-0224",
+      "from": {
+        "device": "kt-no-scwp-1",
+        "pin": "14"
+      },
+      "to": {
+        "device": "ks-interlock-scwp-1",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0225",
+      "from": {
+        "device": "kt-nc-scwp-1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "kd-interlock-scwp-1",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0226",
+      "from": {
+        "device": "ks-interlock-scwp-1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "kd-scwp-1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0227",
+      "from": {
+        "device": "kd-interlock-scwp-1",
+        "pin": "22"
+      },
+      "to": {
+        "device": "ks-scwp-1",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0228",
+      "from": {
+        "device": "ks-scwp-1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 3640,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0229",
+      "from": {
+        "device": "kd-scwp-1",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 3500,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0230",
+      "from": {
+        "device": "bus-phase-1",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-6",
+        "pin": "L1"
+      },
+      "points": [
+        {
+          "x": 3824,
+          "y": 300
+        }
+      ]
+    },
+    {
+      "id": "wire-0231",
+      "from": {
+        "device": "mccb-6",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "km-main-scwp-2",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0232",
+      "from": {
+        "device": "km-main-scwp-2",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "th-scwp-2",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0233",
+      "from": {
+        "device": "th-scwp-2",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "load-scwp-2",
+        "pin": "U"
+      }
+    },
+    {
+      "id": "wire-0234",
+      "from": {
+        "device": "bus-phase-2",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-6",
+        "pin": "L2"
+      },
+      "points": [
+        {
+          "x": 3840,
+          "y": 350
+        }
+      ]
+    },
+    {
+      "id": "wire-0235",
+      "from": {
+        "device": "mccb-6",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "km-main-scwp-2",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0236",
+      "from": {
+        "device": "km-main-scwp-2",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "th-scwp-2",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0237",
+      "from": {
+        "device": "th-scwp-2",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "load-scwp-2",
+        "pin": "V"
+      }
+    },
+    {
+      "id": "wire-0238",
+      "from": {
+        "device": "bus-phase-3",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-6",
+        "pin": "L3"
+      },
+      "points": [
+        {
+          "x": 3856,
+          "y": 400
+        }
+      ]
+    },
+    {
+      "id": "wire-0239",
+      "from": {
+        "device": "mccb-6",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "km-main-scwp-2",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0240",
+      "from": {
+        "device": "km-main-scwp-2",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "th-scwp-2",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0241",
+      "from": {
+        "device": "th-scwp-2",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "load-scwp-2",
+        "pin": "W"
+      }
+    },
+    {
+      "id": "wire-0242",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-nc-scwp-2",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 3840,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0243",
+      "from": {
+        "device": "th-nc-scwp-2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "stop-scwp-2",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0244",
+      "from": {
+        "device": "stop-scwp-2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "start-scwp-2",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0245",
+      "from": {
+        "device": "stop-scwp-2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "km-hold-scwp-2",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0246",
+      "from": {
+        "device": "start-scwp-2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-scwp-2",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0247",
+      "from": {
+        "device": "km-hold-scwp-2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-scwp-2",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0248",
+      "from": {
+        "device": "start-join-scwp-2",
+        "pin": "J"
+      },
+      "to": {
+        "device": "km-scwp-2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0249",
+      "from": {
+        "device": "start-join-scwp-2",
+        "pin": "J"
+      },
+      "to": {
+        "device": "run-lamp-scwp-2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0250",
+      "from": {
+        "device": "km-scwp-2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 3780,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0251",
+      "from": {
+        "device": "run-lamp-scwp-2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 3900,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0252",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-fault-scwp-2",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 4170,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0253",
+      "from": {
+        "device": "th-fault-scwp-2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "fault-lamp-scwp-2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0254",
+      "from": {
+        "device": "fault-lamp-scwp-2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 4170,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0255",
+      "from": {
+        "device": "stop-scwp-2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "km-enable-scwp-2",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0256",
+      "from": {
+        "device": "km-enable-scwp-2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-scwp-2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0257",
+      "from": {
+        "device": "kt-scwp-2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 3990,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0258",
+      "from": {
+        "device": "km-enable-scwp-2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-no-scwp-2",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 3920,
+          "y": 1998
+        }
+      ]
+    },
+    {
+      "id": "wire-0259",
+      "from": {
+        "device": "km-enable-scwp-2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-nc-scwp-2",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 4060,
+          "y": 1998
+        }
+      ]
+    },
+    {
+      "id": "wire-0260",
+      "from": {
+        "device": "kt-no-scwp-2",
+        "pin": "14"
+      },
+      "to": {
+        "device": "ks-interlock-scwp-2",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0261",
+      "from": {
+        "device": "kt-nc-scwp-2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "kd-interlock-scwp-2",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0262",
+      "from": {
+        "device": "ks-interlock-scwp-2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "kd-scwp-2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0263",
+      "from": {
+        "device": "kd-interlock-scwp-2",
+        "pin": "22"
+      },
+      "to": {
+        "device": "ks-scwp-2",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0264",
+      "from": {
+        "device": "ks-scwp-2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 4060,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0265",
+      "from": {
+        "device": "kd-scwp-2",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 3920,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0266",
+      "from": {
+        "device": "bus-phase-1",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-7",
+        "pin": "L1"
+      },
+      "points": [
+        {
+          "x": 4244,
+          "y": 300
+        }
+      ]
+    },
+    {
+      "id": "wire-0267",
+      "from": {
+        "device": "mccb-7",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "km-main-scwp-3",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0268",
+      "from": {
+        "device": "km-main-scwp-3",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "th-scwp-3",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0269",
+      "from": {
+        "device": "th-scwp-3",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "load-scwp-3",
+        "pin": "U"
+      }
+    },
+    {
+      "id": "wire-0270",
+      "from": {
+        "device": "bus-phase-2",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-7",
+        "pin": "L2"
+      },
+      "points": [
+        {
+          "x": 4260,
+          "y": 350
+        }
+      ]
+    },
+    {
+      "id": "wire-0271",
+      "from": {
+        "device": "mccb-7",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "km-main-scwp-3",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0272",
+      "from": {
+        "device": "km-main-scwp-3",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "th-scwp-3",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0273",
+      "from": {
+        "device": "th-scwp-3",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "load-scwp-3",
+        "pin": "V"
+      }
+    },
+    {
+      "id": "wire-0274",
+      "from": {
+        "device": "bus-phase-3",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-7",
+        "pin": "L3"
+      },
+      "points": [
+        {
+          "x": 4276,
+          "y": 400
+        }
+      ]
+    },
+    {
+      "id": "wire-0275",
+      "from": {
+        "device": "mccb-7",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "km-main-scwp-3",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0276",
+      "from": {
+        "device": "km-main-scwp-3",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "th-scwp-3",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0277",
+      "from": {
+        "device": "th-scwp-3",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "load-scwp-3",
+        "pin": "W"
+      }
+    },
+    {
+      "id": "wire-0278",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-nc-scwp-3",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 4260,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0279",
+      "from": {
+        "device": "th-nc-scwp-3",
+        "pin": "22"
+      },
+      "to": {
+        "device": "stop-scwp-3",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0280",
+      "from": {
+        "device": "stop-scwp-3",
+        "pin": "22"
+      },
+      "to": {
+        "device": "start-scwp-3",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0281",
+      "from": {
+        "device": "stop-scwp-3",
+        "pin": "22"
+      },
+      "to": {
+        "device": "km-hold-scwp-3",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0282",
+      "from": {
+        "device": "start-scwp-3",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-scwp-3",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0283",
+      "from": {
+        "device": "km-hold-scwp-3",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-scwp-3",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0284",
+      "from": {
+        "device": "start-join-scwp-3",
+        "pin": "J"
+      },
+      "to": {
+        "device": "km-scwp-3",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0285",
+      "from": {
+        "device": "start-join-scwp-3",
+        "pin": "J"
+      },
+      "to": {
+        "device": "run-lamp-scwp-3",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0286",
+      "from": {
+        "device": "km-scwp-3",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 4200,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0287",
+      "from": {
+        "device": "run-lamp-scwp-3",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 4320,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0288",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-fault-scwp-3",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 4590,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0289",
+      "from": {
+        "device": "th-fault-scwp-3",
+        "pin": "14"
+      },
+      "to": {
+        "device": "fault-lamp-scwp-3",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0290",
+      "from": {
+        "device": "fault-lamp-scwp-3",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 4590,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0291",
+      "from": {
+        "device": "stop-scwp-3",
+        "pin": "22"
+      },
+      "to": {
+        "device": "km-enable-scwp-3",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0292",
+      "from": {
+        "device": "km-enable-scwp-3",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-scwp-3",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0293",
+      "from": {
+        "device": "kt-scwp-3",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 4410,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0294",
+      "from": {
+        "device": "km-enable-scwp-3",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-no-scwp-3",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 4340,
+          "y": 1998
+        }
+      ]
+    },
+    {
+      "id": "wire-0295",
+      "from": {
+        "device": "km-enable-scwp-3",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-nc-scwp-3",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 4480,
+          "y": 1998
+        }
+      ]
+    },
+    {
+      "id": "wire-0296",
+      "from": {
+        "device": "kt-no-scwp-3",
+        "pin": "14"
+      },
+      "to": {
+        "device": "ks-interlock-scwp-3",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0297",
+      "from": {
+        "device": "kt-nc-scwp-3",
+        "pin": "22"
+      },
+      "to": {
+        "device": "kd-interlock-scwp-3",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0298",
+      "from": {
+        "device": "ks-interlock-scwp-3",
+        "pin": "22"
+      },
+      "to": {
+        "device": "kd-scwp-3",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0299",
+      "from": {
+        "device": "kd-interlock-scwp-3",
+        "pin": "22"
+      },
+      "to": {
+        "device": "ks-scwp-3",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0300",
+      "from": {
+        "device": "ks-scwp-3",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 4480,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0301",
+      "from": {
+        "device": "kd-scwp-3",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 4340,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0302",
+      "from": {
+        "device": "bus-phase-1",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-8",
+        "pin": "L1"
+      },
+      "points": [
+        {
+          "x": 4664,
+          "y": 300
+        }
+      ]
+    },
+    {
+      "id": "wire-0303",
+      "from": {
+        "device": "mccb-8",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "km-main-scwp-4",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0304",
+      "from": {
+        "device": "km-main-scwp-4",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "th-scwp-4",
+        "pin": "L1"
+      }
+    },
+    {
+      "id": "wire-0305",
+      "from": {
+        "device": "th-scwp-4",
+        "pin": "T1"
+      },
+      "to": {
+        "device": "load-scwp-4",
+        "pin": "U"
+      }
+    },
+    {
+      "id": "wire-0306",
+      "from": {
+        "device": "bus-phase-2",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-8",
+        "pin": "L2"
+      },
+      "points": [
+        {
+          "x": 4680,
+          "y": 350
+        }
+      ]
+    },
+    {
+      "id": "wire-0307",
+      "from": {
+        "device": "mccb-8",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "km-main-scwp-4",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0308",
+      "from": {
+        "device": "km-main-scwp-4",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "th-scwp-4",
+        "pin": "L2"
+      }
+    },
+    {
+      "id": "wire-0309",
+      "from": {
+        "device": "th-scwp-4",
+        "pin": "T2"
+      },
+      "to": {
+        "device": "load-scwp-4",
+        "pin": "V"
+      }
+    },
+    {
+      "id": "wire-0310",
+      "from": {
+        "device": "bus-phase-3",
+        "pin": "J"
+      },
+      "to": {
+        "device": "mccb-8",
+        "pin": "L3"
+      },
+      "points": [
+        {
+          "x": 4696,
+          "y": 400
+        }
+      ]
+    },
+    {
+      "id": "wire-0311",
+      "from": {
+        "device": "mccb-8",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "km-main-scwp-4",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0312",
+      "from": {
+        "device": "km-main-scwp-4",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "th-scwp-4",
+        "pin": "L3"
+      }
+    },
+    {
+      "id": "wire-0313",
+      "from": {
+        "device": "th-scwp-4",
+        "pin": "T3"
+      },
+      "to": {
+        "device": "load-scwp-4",
+        "pin": "W"
+      }
+    },
+    {
+      "id": "wire-0314",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-nc-scwp-4",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 4680,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0315",
+      "from": {
+        "device": "th-nc-scwp-4",
+        "pin": "22"
+      },
+      "to": {
+        "device": "stop-scwp-4",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0316",
+      "from": {
+        "device": "stop-scwp-4",
+        "pin": "22"
+      },
+      "to": {
+        "device": "start-scwp-4",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0317",
+      "from": {
+        "device": "stop-scwp-4",
+        "pin": "22"
+      },
+      "to": {
+        "device": "km-hold-scwp-4",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0318",
+      "from": {
+        "device": "start-scwp-4",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-scwp-4",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0319",
+      "from": {
+        "device": "km-hold-scwp-4",
+        "pin": "14"
+      },
+      "to": {
+        "device": "start-join-scwp-4",
+        "pin": "J"
+      }
+    },
+    {
+      "id": "wire-0320",
+      "from": {
+        "device": "start-join-scwp-4",
+        "pin": "J"
+      },
+      "to": {
+        "device": "km-scwp-4",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0321",
+      "from": {
+        "device": "start-join-scwp-4",
+        "pin": "J"
+      },
+      "to": {
+        "device": "run-lamp-scwp-4",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0322",
+      "from": {
+        "device": "km-scwp-4",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 4620,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0323",
+      "from": {
+        "device": "run-lamp-scwp-4",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 4740,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0324",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "th-fault-scwp-4",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 5010,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0325",
+      "from": {
+        "device": "th-fault-scwp-4",
+        "pin": "14"
+      },
+      "to": {
+        "device": "fault-lamp-scwp-4",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0326",
+      "from": {
+        "device": "fault-lamp-scwp-4",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 5010,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0327",
+      "from": {
+        "device": "stop-scwp-4",
+        "pin": "22"
+      },
+      "to": {
+        "device": "km-enable-scwp-4",
+        "pin": "13"
+      }
+    },
+    {
+      "id": "wire-0328",
+      "from": {
+        "device": "km-enable-scwp-4",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-scwp-4",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0329",
+      "from": {
+        "device": "kt-scwp-4",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 4830,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0330",
+      "from": {
+        "device": "km-enable-scwp-4",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-no-scwp-4",
+        "pin": "13"
+      },
+      "points": [
+        {
+          "x": 4760,
+          "y": 1998
+        }
+      ]
+    },
+    {
+      "id": "wire-0331",
+      "from": {
+        "device": "km-enable-scwp-4",
+        "pin": "14"
+      },
+      "to": {
+        "device": "kt-nc-scwp-4",
+        "pin": "21"
+      },
+      "points": [
+        {
+          "x": 4900,
+          "y": 1998
+        }
+      ]
+    },
+    {
+      "id": "wire-0332",
+      "from": {
+        "device": "kt-no-scwp-4",
+        "pin": "14"
+      },
+      "to": {
+        "device": "ks-interlock-scwp-4",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0333",
+      "from": {
+        "device": "kt-nc-scwp-4",
+        "pin": "22"
+      },
+      "to": {
+        "device": "kd-interlock-scwp-4",
+        "pin": "21"
+      }
+    },
+    {
+      "id": "wire-0334",
+      "from": {
+        "device": "ks-interlock-scwp-4",
+        "pin": "22"
+      },
+      "to": {
+        "device": "kd-scwp-4",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0335",
+      "from": {
+        "device": "kd-interlock-scwp-4",
+        "pin": "22"
+      },
+      "to": {
+        "device": "ks-scwp-4",
+        "pin": "A1"
+      }
+    },
+    {
+      "id": "wire-0336",
+      "from": {
+        "device": "ks-scwp-4",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 4900,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0337",
+      "from": {
+        "device": "kd-scwp-4",
+        "pin": "A2"
+      },
+      "to": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "points": [
+        {
+          "x": 4760,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0338",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "ps-24v",
+        "pin": "L"
+      },
+      "points": [
+        {
+          "x": 542,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0339",
+      "from": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "ps-24v",
+        "pin": "N"
+      },
+      "points": [
+        {
+          "x": 542,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0340",
+      "from": {
+        "device": "ps-24v",
+        "pin": "+"
+      },
+      "to": {
+        "device": "pt-pressure",
+        "pin": "+"
+      }
+    },
+    {
+      "id": "wire-0341",
+      "from": {
+        "device": "pt-pressure",
+        "pin": "-"
+      },
+      "to": {
+        "device": "controller-pressure",
+        "pin": "A"
+      }
+    },
+    {
+      "id": "wire-0342",
+      "from": {
+        "device": "controller-pressure",
+        "pin": "B"
+      },
+      "to": {
+        "device": "ps-24v",
+        "pin": "-"
+      }
+    },
+    {
+      "id": "wire-0343",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "controller-pressure",
+        "pin": "L"
+      },
+      "points": [
+        {
+          "x": 1133,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0344",
+      "from": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "controller-pressure",
+        "pin": "N"
+      },
+      "points": [
+        {
+          "x": 1133,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0345",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "level-cswp",
+        "pin": "S0"
+      },
+      "points": [
+        {
+          "x": 1692,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0346",
+      "from": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "level-cswp",
+        "pin": "S2"
+      },
+      "points": [
+        {
+          "x": 1692,
+          "y": 2780
+        }
+      ]
+    },
+    {
+      "id": "wire-0347",
+      "from": {
+        "device": "control-live-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "level-pcwp",
+        "pin": "S0"
+      },
+      "points": [
+        {
+          "x": 2594,
+          "y": 1540
+        }
+      ]
+    },
+    {
+      "id": "wire-0348",
+      "from": {
+        "device": "control-neutral-bus",
+        "pin": "J"
+      },
+      "to": {
+        "device": "level-pcwp",
+        "pin": "S2"
+      },
+      "points": [
+        {
+          "x": 2594,
+          "y": 2780
+        }
+      ]
+    }
+  ],
+  "scenarios": []
+}

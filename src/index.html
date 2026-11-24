@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Mô phỏng tủ điện 2D</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.mjs" type="module"></script>
+</head>
+<body>
+  <header class="titlebar">
+    <div class="brand"><span data-icon="brand" class="brand-mark"></span><span>Mô phỏng tủ điện 2D</span></div>
+    <label class="document"><span data-icon="document"></span><input id="document-name" aria-label="Tên dự án" maxlength="160" value="Dự án mới"><span id="dirty-indicator" title="Có thay đổi chưa lưu" aria-hidden="true"></span></label>
+    <div class="app-options">
+      <span class="offline"><span data-icon="offline"></span> Cục bộ</span>
+      <select id="language-selection" aria-label="Ngôn ngữ" title="Ngôn ngữ">
+        <option value="vi" data-language-name>Tiếng Việt</option>
+        <option value="en" data-language-name>English</option>
+        <option value="ja" data-language-name>日本語</option>
+      </select>
+      <button data-action="about" class="tool" aria-label="Giới thiệu" title="Giới thiệu"><span data-icon="info"></span><span>Giới thiệu</span></button>
+    </div>
+  </header>
+  <nav class="commands" aria-label="Lệnh dự án và mô phỏng">
+    <div class="command-group">
+      <button data-action="new" title="Dự án mới (Ctrl+N)"><span data-icon="add-file"></span><span>Mới</span></button>
+      <button data-action="open" title="Mở dự án (Ctrl+O)"><span data-icon="folder"></span><span>Mở</span></button>
+      <button data-action="save" title="Lưu dự án (Ctrl+S)"><span data-icon="save"></span><span>Lưu</span></button>
+      <button data-action="save-as" title="Lưu thành tệp khác (Ctrl+Shift+S)"><span data-icon="save-as"></span><span>Lưu thành…</span></button>
+      <div>
+        <button data-action="exports" popovertarget="exports" title="Xuất toàn bộ sơ đồ"><span data-icon="export"></span>Xuất<span data-icon="chevron"></span></button>
+        <div id="exports" popover class="menu">
+          <button data-action="export-pdf"><strong>Xuất PDF…</strong><small>Bản vẽ để in và chia sẻ</small></button>
+          <button data-action="export-dwg"><strong>Xuất DWG…</strong><small>Bản vẽ CAD chỉnh sửa được</small></button>
+        </div>
+      </div>
+      <button data-action="bom" title="Bảng kê vật tư thiết bị (BOM)"><span data-icon="sheet"></span><span>BOM</span></button>
+      <div class="example-menu">
+        <button data-action="examples" popovertarget="examples" title="Mở dự án mẫu"><span data-icon="examples"></span><span>Mạch mẫu</span><span data-icon="chevron"></span></button>
+        <div id="examples" popover class="menu">
+          <div id="circuit-templates"></div>
+          <div class="menu-heading">Mẫu theo thiết bị và hồ sơ</div>
+          <button data-action="sump-pit"><strong>Sump Pit</strong><small>Mạch bơm hố thu</small></button>
+          <button data-action="smoke-exhaust"><strong>Smoke Exhaust</strong><small>Mạch quạt hút khói</small></button>
+          <button data-action="pressure-control"><strong>Điều khiển áp suất nước</strong><small>Sensys 4–20 mA · Omron E5EC</small></button>
+          <button data-action="ats-panel"><strong>Tủ chuyển nguồn tự động ATS</strong><small>2 Nguồn Lưới / Máy phát · Giám sát pha</small></button>
+        </div>
+      </div>
+    </div>
+    <div class="command-group sim-commands">
+      <button data-action="run" class="primary" title="Chạy mô phỏng"><span data-icon="play"></span><span>Chạy</span></button>
+      <button data-action="pause" title="Tạm dừng"><span data-icon="pause"></span><span>Tạm dừng</span></button>
+      <button data-action="step" title="Tiến một bước từ mô phỏng"><span data-icon="step"></span><span>Từng bước</span></button>
+      <button data-action="reset" title="Đặt lại mô phỏng"><span data-icon="reset"></span><span>Đặt lại</span></button>
+      <div class="fault-menu">
+        <button data-action="faults" popovertarget="faults-menu" title="Mô phỏng sự cố thực tế (Fault Injection)"><span data-icon="alert"></span><span>Sự cố</span><span data-icon="chevron"></span></button>
+        <div id="faults-menu" popover class="menu">
+          <button data-fault="phase-loss-L1"><strong>Mất pha L1</strong><small>Cắt pha L1 nguồn 3 pha</small></button>
+          <button data-fault="phase-loss-L2"><strong>Mất pha L2</strong><small>Cắt pha L2 nguồn 3 pha</small></button>
+          <button data-fault="phase-loss-L3"><strong>Mất pha L3</strong><small>Cắt pha L3 nguồn 3 pha</small></button>
+          <button data-fault="phase-reversal"><strong>Đảo thứ tự pha</strong><small>Đổi ngược thứ tự pha L1-L3-L2</small></button>
+          <button data-fault="undervoltage"><strong>Sụt áp nguồn (&lt; 320V)</strong><small>Kích hoạt báo động MFM</small></button>
+          <button data-fault="clear"><strong>Khôi phục bình thường</strong><small>Xóa toàn bộ sự cố</small></button>
+        </div>
+      </div>
+      <button data-action="sound" aria-label="Âm thanh còi" aria-pressed="true" title="Tắt âm thanh còi"><span data-icon="sound"></span></button>
+      <output class="virtual-time" id="virtual-time" aria-label="Đồng hồ mô phỏng">0.000 s</output>
+    </div>
+  </nav>
+  <div class="project-strip">
+    <div id="project-tabs" role="tablist" aria-label="Dự án đang mở"></div>
+    <button type="button" class="tool project-add" data-action="new" title="Dự án mới (Ctrl+N)" aria-label="Dự án mới (Ctrl+N)"><span data-icon="plus"></span></button>
+  </div>
+  <main class="workspace" id="project-workspace" role="tabpanel">
+    <aside class="palette-pane" aria-label="Thư viện thiết bị">
+      <div class="panel-heading"><h2>Thư viện thiết bị</h2><span id="library-count" class="count"></span></div>
+      <label class="search-field"><span data-icon="search"></span><input id="device-search" type="search" placeholder="Tìm thiết bị…" aria-label="Tìm thiết bị"></label>
+      <div id="palette" class="palette-list"></div>
+      <div class="panel-foot"><span data-icon="grip"></span> Kéo thả thiết bị vào sơ đồ</div>
+    </aside>
+    <section class="drawing-pane" aria-label="Bản vẽ mạch">
+      <div class="drawing-tools">
+        <div class="canvas-title"><span data-icon="sheet"></span><h2>Sơ đồ nguyên lý</h2></div>
+        <div class="command-group drawing-actions" aria-label="Công cụ sơ đồ">
+          <button data-action="select" class="tool" aria-label="Chọn (V)" title="Chọn (V)" aria-pressed="true"><span data-icon="cursor"></span></button>
+          <button data-action="wire" class="tool" aria-label="Nối dây (W)" title="Nối dây (W)" aria-pressed="false"><span data-icon="wire"></span></button>
+          <button data-action="voltmeter" class="tool" aria-label="Vôn kế" title="Vôn kế · chọn hai điểm" aria-pressed="false"><span class="meter-glyph">V</span></button>
+          <button data-action="ammeter" class="tool" aria-label="Ampe kế" title="Ampe kế · chọn đoạn dây hoặc chân" aria-pressed="false"><span class="meter-glyph">A</span></button>
+          <button data-action="pan" class="tool" aria-label="Dịch khung nhìn (H)" title="Dịch khung nhìn (H)" aria-pressed="false"><span data-icon="hand"></span></button>
+          <button data-action="rotate" class="tool" aria-label="Đổi hướng ký hiệu (R)" title="Đổi hướng ký hiệu dọc/ngang (R)"><span data-icon="rotate"></span></button>
+          <button data-action="undo" class="tool" aria-label="Hoàn tác (Ctrl+Z)" title="Hoàn tác (Ctrl+Z)"><span data-icon="undo"></span></button>
+          <button data-action="redo" class="tool" aria-label="Làm lại (Ctrl+Y)" title="Làm lại (Ctrl+Y)"><span data-icon="redo"></span></button>
+          <button data-action="copy" class="tool" aria-label="Sao chép phần tử (Ctrl+C)" title="Sao chép phần tử (Ctrl+C)"><span data-icon="duplicate"></span></button>
+          <button data-action="paste" class="tool" aria-label="Dán phần tử (Ctrl+V)" title="Dán phần tử (Ctrl+V)"><span data-icon="paste"></span></button>
+          <button data-action="duplicate" class="tool" aria-label="Nhân bản (Ctrl+D)" title="Nhân bản (Ctrl+D)"><span data-icon="duplicate"></span></button>
+          <button data-action="delete" class="tool" aria-label="Xóa phần tử (Delete)" title="Xóa phần tử (Delete)"><span data-icon="trash"></span></button>
+        </div>
+      </div>
+      <div class="drawing-view" id="drawing-view">
+        <svg id="schematic" xmlns="http://www.w3.org/2000/svg" aria-label="Canvas sơ đồ mạch" tabindex="0">
+          <defs>
+            <pattern id="small-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M 20 0 L 0 0 0 20" class="grid-minor"/>
+            </pattern>
+            <pattern id="large-grid" width="100" height="100" patternUnits="userSpaceOnUse">
+              <rect width="100" height="100" fill="url(#small-grid)"/>
+              <path d="M 100 0 L 0 0 0 100" class="grid-major"/>
+            </pattern>
+          </defs>
+          <g id="drawing-world">
+            <rect id="grid-field" x="-20000" y="-20000" width="40000" height="40000" fill="url(#large-grid)"/>
+            <g id="wires-layer"></g>
+            <g id="devices-layer"></g>
+            <g id="interaction-layer" pointer-events="none"></g>
+            <g id="probe-layer" pointer-events="none"></g>
+          </g>
+        </svg>
+        <div id="drawing-empty" class="drawing-empty">
+          <span class="empty-icon" data-icon="empty"></span>
+          <h1>Bắt đầu dựng mạch</h1>
+          <p>Kéo ký hiệu từ thư viện vào bản vẽ, rồi chọn hai chân để nối dây.</p>
+          <div><button data-action="focus-library" class="subtle">Tìm thiết bị</button><button data-action="show-examples">Mở mạch mẫu</button></div>
+        </div>
+        <section id="meter-panel" aria-live="polite" hidden>
+          <div><strong id="meter-name"></strong><output id="meter-value">—</output></div>
+          <span id="meter-note"></span>
+        </section>
+        <div class="view-controls">
+          <button data-action="grid" class="tool" aria-pressed="false" title="Hiện lưới"><span data-icon="grid"></span><span>Lưới</span></button>
+          <button data-action="snap" class="tool" aria-pressed="true" title="Bắt dính lưới"><span data-icon="snap"></span><span>Bắt dính</span></button>
+          <span class="divider"></span>
+          <button data-action="zoom-out" class="tool" aria-label="Thu nhỏ" title="Thu nhỏ"><span data-icon="minus"></span></button>
+          <output id="zoom-level" aria-label="Mức thu phóng">100%</output>
+          <button data-action="zoom-in" class="tool" aria-label="Phóng to" title="Phóng to"><span data-icon="plus"></span></button>
+          <button data-action="fit" class="tool" aria-label="Vừa khung nhìn" title="Vừa khung nhìn"><span data-icon="fit"></span></button>
+        </div>
+      </div>
+    </section>
+    <aside class="inspector-pane" aria-label="Thuộc tính và chân đấu">
+      <div class="panel-heading"><h2>Thuộc tính</h2><span data-icon="settings"></span></div>
+      <div id="inspector"></div>
+    </aside>
+    <section class="console" aria-label="Cảnh báo, nhật ký và ca kiểm thử">
+      <div class="console-bar">
+        <div class="tabs" role="tablist" aria-label="Kết quả và kiểm thử">
+          <button type="button" id="tab-warnings" role="tab" aria-controls="warnings-panel" aria-selected="true" data-tab="warnings"><span data-icon="warning"></span>Cảnh báo <span id="warnings-count" class="count">0</span></button>
+          <button type="button" id="tab-log" role="tab" aria-controls="log-panel" aria-selected="false" tabindex="-1" data-tab="log"><span data-icon="list"></span>Nhật ký <span id="log-count" class="count">0</span></button>
+          <button type="button" id="tab-tests" role="tab" aria-controls="tests-panel" aria-selected="false" tabindex="-1" data-tab="tests"><span data-icon="tests"></span>Kiểm thử <span id="tests-count" class="count">0</span></button>
+        </div>
+        <div class="console-actions"><button type="button" data-action="toggle-console" class="tool" aria-expanded="true" aria-label="Thu gọn bảng dưới" title="Thu gọn bảng dưới"><span data-icon="collapse"></span></button></div>
+      </div>
+      <div class="console-body">
+        <div id="warnings-panel" role="tabpanel" aria-labelledby="tab-warnings"></div>
+        <div id="log-panel" role="tabpanel" aria-labelledby="tab-log" hidden></div>
+        <div id="tests-panel" role="tabpanel" aria-labelledby="tab-tests" hidden>
+          <div class="scenario-actions">
+            <button data-action="run-tests" class="subtle"><span data-icon="play"></span> Chạy tất cả</button>
+            <button data-action="add-scenario"><span data-icon="plus"></span> Thêm ca</button>
+          </div>
+          <div id="scenario-list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="statusbar">
+    <span class="sim-status" id="sim-status" data-mode="idle">Đang chỉnh sửa</span>
+    <span id="status-message" role="status"></span>
+    <div class="legend" aria-label="Chú giải dây"><span class="legend-energized">Cấp</span><span class="legend-return">Về</span><span class="legend-open">Hở</span><span class="legend-fault">Lỗi</span></div>
+    <span id="drawing-totals">0 thiết bị · 0 dây</span>
+  </footer>
+  <dialog id="scenario-dialog">
+    <form id="scenario-form">
+      <div class="dialog-heading"><h2>Ca kiểm thử</h2><button type="button" class="tool" data-action="close-scenario" aria-label="Đóng cửa sổ"><span data-icon="close"></span></button></div>
+      <div class="dialog-body">
+        <label>Tên ca<input id="scenario-name" required maxlength="200"></label>
+        <label>Nguồn hoặc trang tham chiếu<input id="scenario-source" required maxlength="300"></label>
+        <label>Mô tả trạng thái đầu<input id="scenario-initial" maxlength="300" placeholder="Ví dụ: nguồn đang bật, CB đang đóng"></label>
+        <div id="scenario-initial-actions"></div>
+        <button type="button" data-action="add-initial"><span data-icon="plus"></span> Thêm đầu vào ban đầu</button>
+        <label>Đối chiếu hồ sơ<select id="scenario-verification"><option value="unverified">Chưa xác minh</option><option value="verified">Đã xác minh</option></select></label>
+        <div id="scenario-steps"></div>
+        <button type="button" data-action="add-step"><span data-icon="plus"></span> Thêm bước</button>
+        <p id="scenario-error" class="form-error" role="status"></p>
+      </div>
+      <div class="dialog-footer"><button type="button" data-action="close-scenario">Hủy</button><button type="submit" class="primary">Lưu ca</button></div>
+    </form>
+  </dialog>
+  <dialog id="recovery-dialog">
+    <div class="dialog-heading"><h2>Khôi phục dự án</h2></div>
+    <div class="dialog-body"><p id="recovery-message"></p></div>
+    <div class="dialog-footer"><button data-action="discard-recovery">Bỏ bản tự lưu</button><button data-action="restore-recovery" class="primary">Khôi phục</button></div>
+  </dialog>
+  <dialog id="paste-conflict-dialog" class="project-dialog" aria-labelledby="paste-conflict-title">
+    <form method="dialog">
+      <div class="dialog-heading"><h2 id="paste-conflict-title">Trùng tag thiết bị</h2></div>
+      <div class="dialog-body">
+        <p>Các tag dưới đây trùng trong dự án đích hoặc trong nhóm được sao chép.</p>
+        <ul id="paste-conflicts" class="paste-conflicts"></ul>
+      </div>
+      <div class="dialog-footer">
+        <button value="cancel" autofocus>Hủy</button>
+        <button value="rename" data-action="confirm-paste" class="primary">Đổi tag và dán</button>
+      </div>
+    </form>
+  </dialog>
+  <dialog id="close-project-dialog" class="project-dialog" aria-labelledby="close-project-title">
+    <form method="dialog">
+      <div class="dialog-heading"><h2 id="close-project-title">Đóng dự án</h2></div>
+      <div class="dialog-body"><p id="close-project-message"></p></div>
+      <div class="dialog-footer">
+        <button value="cancel" autofocus>Hủy</button>
+        <button value="discard">Bỏ thay đổi</button>
+        <button value="save" class="primary">Lưu</button>
+      </div>
+    </form>
+  </dialog>
+  <dialog id="bom-dialog" class="app-dialog" aria-labelledby="bom-title">
+    <div class="dialog-heading">
+      <h2 id="bom-title">Bảng kê vật tư thiết bị (BOM)</h2>
+      <button data-action="close-bom" class="tool" aria-label="Đóng cửa sổ"><span data-icon="close"></span></button>
+    </div>
+    <div class="dialog-body">
+      <p id="bom-export-status" role="status" hidden></p>
+      <div id="bom-summary" class="bom-summary"></div>
+      <div id="bom-table-container" class="bom-container"></div>
+    </div>
+    <div class="dialog-footer bom-footer">
+      <button data-action="export-bom-csv" class="primary"><span data-icon="export"></span> Xuất tệp CSV (Excel)</button>
+      <button data-action="close-bom">Đóng</button>
+    </div>
+  </dialog>
+  <dialog id="about-dialog" aria-labelledby="about-title">
+    <div class="dialog-heading"><h2 id="about-title">Giới thiệu</h2><button data-action="close-about" class="tool" aria-label="Đóng cửa sổ"><span data-icon="close"></span></button></div>
+    <div class="dialog-body about-content">
+      <strong>Mô phỏng tủ điện 2D</strong>
+      <p>v1.4.3</p>
+      <dl>
+        <dt>Tác giả</dt><dd>Nguyên Nhân Đức</dd>
+        <dt>Công tác tại</dt><dd>Công ty TNHH Takasago Vietnam</dd>
+        <dt>Mọi góp ý xin gửi về</dt><dd><span id="author-email">nhanduc.business@gmail.com</span><button data-action="copy-email" title="Sao chép email"><span data-icon="duplicate"></span><span>Sao chép</span></button></dd>
+      </dl>
+      <p id="email-copy-status" role="status"></p>
+    </div>
+  </dialog>
+  <input type="file" id="open-file" accept=".json,.td2d" hidden>
+</body>
+</html>
